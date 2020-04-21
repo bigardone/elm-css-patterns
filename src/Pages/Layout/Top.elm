@@ -35,13 +35,28 @@ view =
     { title = "Layout | Elm CSS Patterns"
     , body =
         [ Html.header
-            []
+            [ Html.class "header" ]
             [ Html.h1
                 []
                 [ Html.text "Layout" ]
             ]
-        , Html.a
-            [ Html.href <| Route.toHref Route.Layout_Card_Top ]
-            [ Html.text "Card" ]
+        , Html.ul
+            [ Html.class "list" ]
+            [ Html.li []
+                [ Html.a
+                    [ Html.href <| Route.toHref Route.Layout_Card_Top ]
+                    [ Html.text "Card" ]
+                ]
+            , Html.li []
+                [ Html.a
+                    [ Html.href <| Route.toHref Route.Layout_Sidebar_Top ]
+                    [ Html.text "Sidebar" ]
+                ]
+            , Html.li []
+                [ Html.a
+                    [ Html.href <| Route.toHref Route.Layout_SplitScreen_Top ]
+                    [ Html.text "Split screen" ]
+                ]
+            ]
         ]
     }

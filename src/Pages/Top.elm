@@ -33,8 +33,11 @@ view : Document Msg
 view =
     { title = "Elm CSS Patterns"
     , body =
-        [ Html.section
-            []
-            [ Html.text "Top" ]
+        [ Html.header
+            [ Html.class "header" ]
+            [ Html.h1
+                []
+                [ Html.text "Elm CSS patterns" ]
+            ]
         ]
     }

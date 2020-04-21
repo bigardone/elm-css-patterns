@@ -14,6 +14,8 @@ import Pages.Top
 import Pages.NotFound
 import Pages.Layout.Top
 import Pages.Layout.Card.Top
+import Pages.Layout.Sidebar.Top
+import Pages.Layout.SplitScreen.Top
 
 
 
@@ -25,6 +27,8 @@ type Model
     | NotFound_Model Pages.NotFound.Model
     | Layout_Top_Model Pages.Layout.Top.Model
     | Layout_Card_Top_Model Pages.Layout.Card.Top.Model
+    | Layout_Sidebar_Top_Model Pages.Layout.Sidebar.Top.Model
+    | Layout_SplitScreen_Top_Model Pages.Layout.SplitScreen.Top.Model
 
 
 type Msg
@@ -32,6 +36,8 @@ type Msg
     | NotFound_Msg Pages.NotFound.Msg
     | Layout_Top_Msg Pages.Layout.Top.Msg
     | Layout_Card_Top_Msg Pages.Layout.Card.Top.Msg
+    | Layout_Sidebar_Top_Msg Pages.Layout.Sidebar.Top.Msg
+    | Layout_SplitScreen_Top_Msg Pages.Layout.SplitScreen.Top.Msg
 
 
 
@@ -50,6 +56,8 @@ type alias UpgradedPages =
     , notFound : UpgradedPage Pages.NotFound.Flags Pages.NotFound.Model Pages.NotFound.Msg
     , layout_top : UpgradedPage Pages.Layout.Top.Flags Pages.Layout.Top.Model Pages.Layout.Top.Msg
     , layout_card_top : UpgradedPage Pages.Layout.Card.Top.Flags Pages.Layout.Card.Top.Model Pages.Layout.Card.Top.Msg
+    , layout_sidebar_top : UpgradedPage Pages.Layout.Sidebar.Top.Flags Pages.Layout.Sidebar.Top.Model Pages.Layout.Sidebar.Top.Msg
+    , layout_splitScreen_top : UpgradedPage Pages.Layout.SplitScreen.Top.Flags Pages.Layout.SplitScreen.Top.Model Pages.Layout.SplitScreen.Top.Msg
     }
 
 
@@ -59,6 +67,8 @@ pages =
     , notFound = Pages.NotFound.page |> Page.upgrade NotFound_Model NotFound_Msg
     , layout_top = Pages.Layout.Top.page |> Page.upgrade Layout_Top_Model Layout_Top_Msg
     , layout_card_top = Pages.Layout.Card.Top.page |> Page.upgrade Layout_Card_Top_Model Layout_Card_Top_Msg
+    , layout_sidebar_top = Pages.Layout.Sidebar.Top.page |> Page.upgrade Layout_Sidebar_Top_Model Layout_Sidebar_Top_Msg
+    , layout_splitScreen_top = Pages.Layout.SplitScreen.Top.page |> Page.upgrade Layout_SplitScreen_Top_Model Layout_SplitScreen_Top_Msg
     }
 
 
@@ -80,6 +90,12 @@ init route =
         
         Route.Layout_Card_Top ->
             pages.layout_card_top.init ()
+        
+        Route.Layout_Sidebar_Top ->
+            pages.layout_sidebar_top.init ()
+        
+        Route.Layout_SplitScreen_Top ->
+            pages.layout_splitScreen_top.init ()
 
 
 
@@ -100,6 +116,12 @@ update bigMsg bigModel =
         
         ( Layout_Card_Top_Msg msg, Layout_Card_Top_Model model ) ->
             pages.layout_card_top.update msg model
+        
+        ( Layout_Sidebar_Top_Msg msg, Layout_Sidebar_Top_Model model ) ->
+            pages.layout_sidebar_top.update msg model
+        
+        ( Layout_SplitScreen_Top_Msg msg, Layout_SplitScreen_Top_Model model ) ->
+            pages.layout_splitScreen_top.update msg model
         
         _ ->
             always ( bigModel, Cmd.none, Cmd.none )
@@ -123,6 +145,12 @@ bundle bigModel =
         
         Layout_Card_Top_Model model ->
             pages.layout_card_top.bundle model
+        
+        Layout_Sidebar_Top_Model model ->
+            pages.layout_sidebar_top.bundle model
+        
+        Layout_SplitScreen_Top_Model model ->
+            pages.layout_splitScreen_top.bundle model
 
 
 view : Model -> Global.Model -> Document Msg
