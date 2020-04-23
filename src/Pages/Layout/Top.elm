@@ -57,6 +57,11 @@ view =
                     [ Html.href <| Route.toHref Route.Layout_SplitScreen_Top ]
                     [ Html.text "Split screen" ]
                 ]
+            , Html.li []
+                [ Html.a
+                    [ Html.href <| Route.toHref Route.Layout_StickyHeader_Top ]
+                    [ Html.text "Sticky header" ]
+                ]
             ]
         ]
     }

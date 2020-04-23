@@ -22,7 +22,7 @@ type alias Model =
 
 
 type alias Msg =
-    ()
+    Never
 
 
 page : Page Flags Model Msg

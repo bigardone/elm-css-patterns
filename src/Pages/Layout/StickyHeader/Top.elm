@@ -1,4 +1,4 @@
-module Pages.Layout.SplitScreen.Top exposing (Flags, Model, Msg, page)
+module Pages.Layout.StickyHeader.Top exposing (Flags, Model, Msg, page)
 
 import Components
 import Css
@@ -6,10 +6,9 @@ import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
 import Page exposing (Document, Page)
 import Placeholders.Block exposing (Block)
-import Placeholders.Circle exposing (Circle)
 import Placeholders.Rectangle exposing (Rectangle)
 import Styles.Colors as Colors
-import Styles.Layout.SplitScreen as SplitScreenStyles
+import Styles.Layout.StickyHeader as StickyHeaderStyles
 
 
 type alias Flags =
@@ -19,7 +18,6 @@ type alias Flags =
 type alias Model =
     { code : String
     , block : Block
-    , circle : Circle
     , rectangle : Rectangle
     }
 
@@ -41,10 +39,8 @@ init : Model
 init =
     { block =
         Placeholders.Block.default
+            |> Placeholders.Block.withItems [ 1, 2, 3, 2, 3, 4, 5, 2, 1, 2, 4, 2, 5, 3 ]
             |> Placeholders.Block.withBackgroundColor Colors.grey
-    , circle =
-        Placeholders.Circle.default
-            |> Placeholders.Circle.withBackgroundColor Colors.grey
     , rectangle =
         Placeholders.Rectangle.default
             |> Placeholders.Rectangle.withHeight (Css.px 8)
@@ -56,21 +52,19 @@ import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
 
 
-splitScreen : Html msg
-splitScreen =
+stickyHeader : Html msg
+stickyHeader =
     Html.div
-        [ Html.css
-            [ Css.displayFlex ]
-        ]
-        [ Html.div
+        []
+        [ Html.header
             [ Html.css
-                [ Css.flex <| Css.int 1 ]
+                [ Css.position Css.sticky
+                , Css.top <| Css.int 0
+                ]
             ]
             []
-        , Html.div
-            [ Html.css
-                [ Css.flex <| Css.int 1 ]
-            ]
+        , Html.main_
+            []
             []
         ]
     """
@@ -84,9 +78,9 @@ update _ model =
 
 view : Model -> Document Msg
 view ({ code } as model) =
-    { title = "Split screen | Layout | Elm CSS Patterns"
+    { title = "Sticky header | Layout | Elm CSS Patterns"
     , body =
-        { header = "Split screen layout"
+        { header = "Sticky header layout"
         , content = contentView model
         , code = code
         }
@@ -95,23 +89,16 @@ view ({ code } as model) =
 
 
 contentView : Model -> Html Msg
-contentView { block, circle, rectangle } =
+contentView { block, rectangle } =
     Html.div
-        [ Html.css [ SplitScreenStyles.spliScreen ] ]
-        [ Html.div
-            []
-            [ Html.div
-                [ Html.class "inner-wrapper inner-wrapper--center" ]
-                [ Placeholders.Circle.view circle
-                , Placeholders.Rectangle.view rectangle
-                ]
-            ]
-        , Html.div
-            []
-            [ Placeholders.Rectangle.view rectangle
-            , List.range 1 6
-                |> List.map (\_ -> Placeholders.Block.view block)
-                |> Html.div
-                    [ Html.class "inner-wrapper" ]
-            ]
+        [ Html.css
+            [ StickyHeaderStyles.stickyHeader ]
         ]
+        [ Html.header
+            []
+            [ Placeholders.Rectangle.view rectangle ]
+        , List.range 1 6
+            |> List.map (\_ -> Placeholders.Block.view block)
+            |> Html.main_ []
+        ]
+

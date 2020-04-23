@@ -22,7 +22,7 @@ type alias Model =
 
 
 type alias Msg =
-    ()
+    Never
 
 
 page : Page Flags Model Msg
@@ -77,7 +77,7 @@ sidebar =
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
-update () model =
+update _ model =
     ( model, Cmd.none )
 
 
