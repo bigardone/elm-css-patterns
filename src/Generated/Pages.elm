@@ -16,6 +16,7 @@ import Pages.Layout.Top
 import Pages.Layout.Card.Top
 import Pages.Layout.Sidebar.Top
 import Pages.Layout.SplitScreen.Top
+import Pages.Layout.StickyFooter.Top
 import Pages.Layout.StickyHeader.Top
 
 
@@ -30,6 +31,7 @@ type Model
     | Layout_Card_Top_Model Pages.Layout.Card.Top.Model
     | Layout_Sidebar_Top_Model Pages.Layout.Sidebar.Top.Model
     | Layout_SplitScreen_Top_Model Pages.Layout.SplitScreen.Top.Model
+    | Layout_StickyFooter_Top_Model Pages.Layout.StickyFooter.Top.Model
     | Layout_StickyHeader_Top_Model Pages.Layout.StickyHeader.Top.Model
 
 
@@ -40,6 +42,7 @@ type Msg
     | Layout_Card_Top_Msg Pages.Layout.Card.Top.Msg
     | Layout_Sidebar_Top_Msg Pages.Layout.Sidebar.Top.Msg
     | Layout_SplitScreen_Top_Msg Pages.Layout.SplitScreen.Top.Msg
+    | Layout_StickyFooter_Top_Msg Pages.Layout.StickyFooter.Top.Msg
     | Layout_StickyHeader_Top_Msg Pages.Layout.StickyHeader.Top.Msg
 
 
@@ -61,6 +64,7 @@ type alias UpgradedPages =
     , layout_card_top : UpgradedPage Pages.Layout.Card.Top.Flags Pages.Layout.Card.Top.Model Pages.Layout.Card.Top.Msg
     , layout_sidebar_top : UpgradedPage Pages.Layout.Sidebar.Top.Flags Pages.Layout.Sidebar.Top.Model Pages.Layout.Sidebar.Top.Msg
     , layout_splitScreen_top : UpgradedPage Pages.Layout.SplitScreen.Top.Flags Pages.Layout.SplitScreen.Top.Model Pages.Layout.SplitScreen.Top.Msg
+    , layout_stickyFooter_top : UpgradedPage Pages.Layout.StickyFooter.Top.Flags Pages.Layout.StickyFooter.Top.Model Pages.Layout.StickyFooter.Top.Msg
     , layout_stickyHeader_top : UpgradedPage Pages.Layout.StickyHeader.Top.Flags Pages.Layout.StickyHeader.Top.Model Pages.Layout.StickyHeader.Top.Msg
     }
 
@@ -73,6 +77,7 @@ pages =
     , layout_card_top = Pages.Layout.Card.Top.page |> Page.upgrade Layout_Card_Top_Model Layout_Card_Top_Msg
     , layout_sidebar_top = Pages.Layout.Sidebar.Top.page |> Page.upgrade Layout_Sidebar_Top_Model Layout_Sidebar_Top_Msg
     , layout_splitScreen_top = Pages.Layout.SplitScreen.Top.page |> Page.upgrade Layout_SplitScreen_Top_Model Layout_SplitScreen_Top_Msg
+    , layout_stickyFooter_top = Pages.Layout.StickyFooter.Top.page |> Page.upgrade Layout_StickyFooter_Top_Model Layout_StickyFooter_Top_Msg
     , layout_stickyHeader_top = Pages.Layout.StickyHeader.Top.page |> Page.upgrade Layout_StickyHeader_Top_Model Layout_StickyHeader_Top_Msg
     }
 
@@ -102,6 +107,9 @@ init route =
         Route.Layout_SplitScreen_Top ->
             pages.layout_splitScreen_top.init ()
         
+        Route.Layout_StickyFooter_Top ->
+            pages.layout_stickyFooter_top.init ()
+        
         Route.Layout_StickyHeader_Top ->
             pages.layout_stickyHeader_top.init ()
 
@@ -130,6 +138,9 @@ update bigMsg bigModel =
         
         ( Layout_SplitScreen_Top_Msg msg, Layout_SplitScreen_Top_Model model ) ->
             pages.layout_splitScreen_top.update msg model
+        
+        ( Layout_StickyFooter_Top_Msg msg, Layout_StickyFooter_Top_Model model ) ->
+            pages.layout_stickyFooter_top.update msg model
         
         ( Layout_StickyHeader_Top_Msg msg, Layout_StickyHeader_Top_Model model ) ->
             pages.layout_stickyHeader_top.update msg model
@@ -162,6 +173,9 @@ bundle bigModel =
         
         Layout_SplitScreen_Top_Model model ->
             pages.layout_splitScreen_top.bundle model
+        
+        Layout_StickyFooter_Top_Model model ->
+            pages.layout_stickyFooter_top.bundle model
         
         Layout_StickyHeader_Top_Model model ->
             pages.layout_stickyHeader_top.bundle model

@@ -70,25 +70,35 @@ sidebar =
                         ]
                     , Html.ul
                         [ Html.class "list" ]
-                        [ Html.li []
+                        [ Html.li
+                            []
                             [ Html.a
                                 [ Html.href <| Route.toHref Route.Layout_Card_Top ]
                                 [ Html.text "Card" ]
                             ]
-                        , Html.li []
+                        , Html.li
+                            []
                             [ Html.a
                                 [ Html.href <| Route.toHref Route.Layout_Sidebar_Top ]
                                 [ Html.text "Sidebar" ]
                             ]
-                        , Html.li []
+                        , Html.li
+                            []
                             [ Html.a
                                 [ Html.href <| Route.toHref Route.Layout_SplitScreen_Top ]
                                 [ Html.text "Split screen" ]
                             ]
-                        , Html.li []
+                        , Html.li
+                            []
                             [ Html.a
                                 [ Html.href <| Route.toHref Route.Layout_StickyHeader_Top ]
                                 [ Html.text "Sticky header" ]
+                            ]
+                        , Html.li
+                            []
+                            [ Html.a
+                                [ Html.href <| Route.toHref Route.Layout_StickyFooter_Top ]
+                                [ Html.text "Sticky footer" ]
                             ]
                         ]
                     ]
