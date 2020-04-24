@@ -112,6 +112,7 @@ mainContentBody =
             , Css.displayFlex
             , Css.overflowY Css.auto
             , Css.borderRadius <| Css.px 4
+            , Css.fontFamilies [ "monospace" ]
             ]
         , Css.Global.selector "c-highlight"
             [ Css.flex <| Css.int 1
@@ -125,7 +126,6 @@ mainContentBody =
             ]
         , Css.Global.selector "code"
             [ Css.height <| Css.pct 100
-            , Css.padding <| Css.rem 1
             ]
         ]
     ]

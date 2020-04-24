@@ -1,8 +1,8 @@
-import hljs from 'highlight.js';
-import elm from 'highlight.js/lib/languages/elm';
-import 'highlight.js/styles/nord.css';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-elm';
+import '../../css/index.css';
+import '../../css/prism-nord.css';
 
-hljs.registerLanguage('elm', elm);
 
 export default class Highlight extends HTMLElement {
   constructor() { super(); }
@@ -15,12 +15,14 @@ export default class Highlight extends HTMLElement {
     const content = this.getAttribute('content');
 
     const pre = document.createElement('pre');
-    const code = document.createElement('code', { class: 'language-elm' });
+    const code = document.createElement('code');
+    code.setAttribute('class', 'language-elm');
     code.innerHTML = content;
 
     pre.appendChild(code);
     this.appendChild(pre);
-    hljs.highlightBlock(code);
+
+    Prism.highlightAll();
   }
 }
 
