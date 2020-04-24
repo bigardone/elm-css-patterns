@@ -5,6 +5,7 @@ module Pages.Layout.Top exposing
     , page
     )
 
+import Components
 import Generated.Route as Route
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
@@ -40,38 +41,6 @@ view =
                 []
                 [ Html.text "Layout" ]
             ]
-        , Html.ul
-            [ Html.class "list" ]
-            [ Html.li
-                []
-                [ Html.a
-                    [ Html.href <| Route.toHref Route.Layout_Card_Top ]
-                    [ Html.text "Card" ]
-                ]
-            , Html.li
-                []
-                [ Html.a
-                    [ Html.href <| Route.toHref Route.Layout_Sidebar_Top ]
-                    [ Html.text "Sidebar" ]
-                ]
-            , Html.li
-                []
-                [ Html.a
-                    [ Html.href <| Route.toHref Route.Layout_SplitScreen_Top ]
-                    [ Html.text "Split screen" ]
-                ]
-            , Html.li
-                []
-                [ Html.a
-                    [ Html.href <| Route.toHref Route.Layout_StickyHeader_Top ]
-                    [ Html.text "Sticky header" ]
-                ]
-            , Html.li
-                []
-                [ Html.a
-                    [ Html.href <| Route.toHref Route.Layout_StickyFooter_Top ]
-                    [ Html.text "Sticky footer" ]
-                ]
-            ]
+        , Components.layoutNav
         ]
     }

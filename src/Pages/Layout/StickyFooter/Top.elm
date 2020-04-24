@@ -54,9 +54,11 @@ import Html.Styled.Attributes as Html
 stickyFooter : Html msg
 stickyFooter =
     Html.div
-        [ Css.displayFlex
-        , Css.flexDirection Css.column
-        , Css.height <| Css.pct 100
+      [ Html.css
+          [ Css.displayFlex
+          , Css.flexDirection Css.column
+          , Css.height <| Css.pct 100
+          ]
         ]
         [ Html.header
             [ Html.css
