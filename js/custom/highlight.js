@@ -2,6 +2,8 @@ import hljs from 'highlight.js';
 import elm from 'highlight.js/lib/languages/elm';
 import 'highlight.js/styles/nord.css';
 
+hljs.registerLanguage('elm', elm);
+
 export default class Highlight extends HTMLElement {
   constructor() { super(); }
 
@@ -10,7 +12,6 @@ export default class Highlight extends HTMLElement {
   }
 
   connectedCallback() {
-    hljs.registerLanguage('elm', elm);
     const content = this.getAttribute('content');
 
     const pre = document.createElement('pre');

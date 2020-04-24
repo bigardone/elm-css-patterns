@@ -12,6 +12,9 @@ mainContent =
     , Css.width <| Css.px 1280
     , Css.margin2 Css.zero Css.auto
     , Css.color Colors.blackLightest
+    , Css.displayFlex
+    , Css.flexDirection Css.column
+    , Css.height <| Css.pct 100
     , Css.Global.descendants
         [ Css.Global.selector ".main-content__sidebar" mainContentSidebar
         , Css.Global.selector ".main-content__body" mainContentBody
@@ -32,6 +35,7 @@ mainContentNav =
     , Css.displayFlex
     , Css.alignItems Css.center
     , Css.borderBottom3 (Css.px 1) Css.solid Colors.greyLighter
+    , Css.flexShrink <| Css.int 0
     , Css.Global.descendants
         [ Css.Global.selector ".logo"
             [ Css.textDecoration Css.none
@@ -74,6 +78,7 @@ mainContentSidebar =
 mainContentBody : List Css.Style
 mainContentBody =
     [ Css.displayFlex
+    , Css.flexGrow <| Css.int 1
     , Css.Global.descendants
         [ Css.Global.selector ".inner"
             [ Css.flexDirection Css.column
@@ -85,8 +90,7 @@ mainContentBody =
             , Css.color Colors.black
             ]
         , Css.Global.selector ".content"
-            [ Css.flex <| Css.int 1
-            , Css.displayFlex
+            [ Css.displayFlex
             , Css.justifyContent Css.center
             ]
         , Css.Global.selector ".content__example"
@@ -131,6 +135,7 @@ mainContentFooter : List Css.Style
 mainContentFooter =
     [ Css.fontSize Css.smaller
     , Css.height <| Css.rem 5
+    , Css.flexShrink <| Css.int 0
     , Css.displayFlex
     , Css.alignItems Css.center
     , Css.justifyContent Css.center
