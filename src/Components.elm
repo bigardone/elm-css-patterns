@@ -102,7 +102,7 @@ layoutNav =
             []
             [ Html.a
                 [ Html.href <| Route.toHref Route.Layout_HolyGrail_Top ]
-                [ Html.text "Holy gail" ]
+                [ Html.text "Holy grail" ]
             ]
         , Html.li
             []
