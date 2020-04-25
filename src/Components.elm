@@ -1,5 +1,6 @@
 module Components exposing
-    ( layout
+    ( inputNavigation
+    , layout
     , layoutNav
     , navigationNav
     , pageBody
@@ -94,6 +95,16 @@ sidebar =
                     ]
                 , navigationNav
                 ]
+            , Html.div
+                [ Html.class "main-nav__section" ]
+                [ Html.header
+                    [ Html.class "main-nav__header" ]
+                    [ Html.a
+                        [ Html.href <| Route.toHref Route.Input_Top ]
+                        [ Html.text "Input" ]
+                    ]
+                , inputNavigation
+                ]
             ]
         ]
 
@@ -156,6 +167,19 @@ navigationNav =
             [ Html.a
                 [ Html.href <| Route.toHref Route.Navigation_Tab_Top ]
                 [ Html.text "Tab" ]
+            ]
+        ]
+
+
+inputNavigation : Html msg
+inputNavigation =
+    Html.ul
+        [ Html.class "list" ]
+        [ Html.li
+            []
+            [ Html.a
+                [ Html.href <| Route.toHref Route.Input_Dropdown_Top ]
+                [ Html.text "Dropdown" ]
             ]
         ]
 
