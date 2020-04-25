@@ -36,7 +36,11 @@ layout { page } =
                 ]
             , Html.footer
                 [ Html.class "main-content__footer" ]
-                [ Html.text "Crafted with ❤ and Elm by "
+                [ Html.text "Crafted with ❤ and "
+                , Html.a
+                    [ Html.href "https://elm-lang.org/" ]
+                    [ Html.text "elm" ]
+                , Html.text " by "
                 , Html.a
                     [ Html.href "https://github.com/bigardone" ]
                     [ Html.text "bigardone" ]

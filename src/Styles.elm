@@ -176,7 +176,7 @@ mainContentFooter =
     , Css.justifyContent Css.center
     , Css.Global.descendants
         [ Css.Global.selector "a"
-            [ Css.marginLeft <| Css.rem 0.3 ]
+            [ Css.margin2 Css.zero (Css.rem 0.3) ]
         ]
     ]
 
