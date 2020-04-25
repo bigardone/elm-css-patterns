@@ -21,6 +21,7 @@ import Pages.Layout.SplitScreen.Top
 import Pages.Layout.StickyFooter.Top
 import Pages.Layout.StickyHeader.Top
 import Pages.Navigation.Drawer.Top
+import Pages.Navigation.Tab.Top
 
 
 
@@ -39,6 +40,7 @@ type Model
     | Layout_StickyFooter_Top_Model Pages.Layout.StickyFooter.Top.Model
     | Layout_StickyHeader_Top_Model Pages.Layout.StickyHeader.Top.Model
     | Navigation_Drawer_Top_Model Pages.Navigation.Drawer.Top.Model
+    | Navigation_Tab_Top_Model Pages.Navigation.Tab.Top.Model
 
 
 type Msg
@@ -53,6 +55,7 @@ type Msg
     | Layout_StickyFooter_Top_Msg Pages.Layout.StickyFooter.Top.Msg
     | Layout_StickyHeader_Top_Msg Pages.Layout.StickyHeader.Top.Msg
     | Navigation_Drawer_Top_Msg Pages.Navigation.Drawer.Top.Msg
+    | Navigation_Tab_Top_Msg Pages.Navigation.Tab.Top.Msg
 
 
 
@@ -78,6 +81,7 @@ type alias UpgradedPages =
     , layout_stickyFooter_top : UpgradedPage Pages.Layout.StickyFooter.Top.Flags Pages.Layout.StickyFooter.Top.Model Pages.Layout.StickyFooter.Top.Msg
     , layout_stickyHeader_top : UpgradedPage Pages.Layout.StickyHeader.Top.Flags Pages.Layout.StickyHeader.Top.Model Pages.Layout.StickyHeader.Top.Msg
     , navigation_drawer_top : UpgradedPage Pages.Navigation.Drawer.Top.Flags Pages.Navigation.Drawer.Top.Model Pages.Navigation.Drawer.Top.Msg
+    , navigation_tab_top : UpgradedPage Pages.Navigation.Tab.Top.Flags Pages.Navigation.Tab.Top.Model Pages.Navigation.Tab.Top.Msg
     }
 
 
@@ -94,6 +98,7 @@ pages =
     , layout_stickyFooter_top = Pages.Layout.StickyFooter.Top.page |> Page.upgrade Layout_StickyFooter_Top_Model Layout_StickyFooter_Top_Msg
     , layout_stickyHeader_top = Pages.Layout.StickyHeader.Top.page |> Page.upgrade Layout_StickyHeader_Top_Model Layout_StickyHeader_Top_Msg
     , navigation_drawer_top = Pages.Navigation.Drawer.Top.page |> Page.upgrade Navigation_Drawer_Top_Model Navigation_Drawer_Top_Msg
+    , navigation_tab_top = Pages.Navigation.Tab.Top.page |> Page.upgrade Navigation_Tab_Top_Model Navigation_Tab_Top_Msg
     }
 
 
@@ -136,6 +141,9 @@ init route =
         
         Route.Navigation_Drawer_Top ->
             pages.navigation_drawer_top.init ()
+        
+        Route.Navigation_Tab_Top ->
+            pages.navigation_tab_top.init ()
 
 
 
@@ -177,6 +185,9 @@ update bigMsg bigModel =
         
         ( Navigation_Drawer_Top_Msg msg, Navigation_Drawer_Top_Model model ) ->
             pages.navigation_drawer_top.update msg model
+        
+        ( Navigation_Tab_Top_Msg msg, Navigation_Tab_Top_Model model ) ->
+            pages.navigation_tab_top.update msg model
         
         _ ->
             always ( bigModel, Cmd.none, Cmd.none )
@@ -221,6 +232,9 @@ bundle bigModel =
         
         Navigation_Drawer_Top_Model model ->
             pages.navigation_drawer_top.bundle model
+        
+        Navigation_Tab_Top_Model model ->
+            pages.navigation_tab_top.bundle model
 
 
 view : Model -> Global.Model -> Document Msg

@@ -151,6 +151,12 @@ navigationNav =
                 [ Html.href <| Route.toHref Route.Navigation_Drawer_Top ]
                 [ Html.text "Drawer" ]
             ]
+        , Html.li
+            []
+            [ Html.a
+                [ Html.href <| Route.toHref Route.Navigation_Tab_Top ]
+                [ Html.text "Tab" ]
+            ]
         ]
 
 

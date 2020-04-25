@@ -20,6 +20,7 @@ type Route
     | Layout_StickyFooter_Top
     | Layout_StickyHeader_Top
     | Navigation_Drawer_Top
+    | Navigation_Tab_Top
 
 
 fromUrl : Url -> Maybe Route
@@ -41,6 +42,7 @@ routes =
         , Parser.map Layout_StickyFooter_Top (Parser.s "layout" </> Parser.s "sticky-footer")
         , Parser.map Layout_StickyHeader_Top (Parser.s "layout" </> Parser.s "sticky-header")
         , Parser.map Navigation_Drawer_Top (Parser.s "navigation" </> Parser.s "drawer")
+        , Parser.map Navigation_Tab_Top (Parser.s "navigation" </> Parser.s "tab")
         ]
 
 
@@ -82,6 +84,9 @@ toHref route =
                 
                 Navigation_Drawer_Top ->
                     [ "navigation", "drawer" ]
+                
+                Navigation_Tab_Top ->
+                    [ "navigation", "tab" ]
     in
     segments
         |> String.join "/"

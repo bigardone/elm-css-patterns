@@ -3,7 +3,6 @@ module Pages.Navigation.Drawer.Top exposing (Flags, Model, Msg, page)
 import Components
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
-import List
 import Page exposing (Document, Page)
 import Placeholders.Block exposing (Block)
 import Styles.Colors as Colors
