@@ -78,7 +78,7 @@ update _ model =
 
 view : Model -> Document Msg
 view ({ code } as model) =
-    { title = "Sticky header | Layout | Elm CSS Patterns"
+    { title = "Sticky header | Layout"
     , body =
         { header = "Sticky header layout"
         , content = contentView model

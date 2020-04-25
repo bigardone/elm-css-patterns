@@ -75,7 +75,7 @@ update _ model =
 
 view : Model -> Document Msg
 view ({ code } as model) =
-    { title = "Card | Layout | Elm CSS Patterns"
+    { title = "Card | Layout"
     , body =
         { header = "Card layout"
         , content = contentView model

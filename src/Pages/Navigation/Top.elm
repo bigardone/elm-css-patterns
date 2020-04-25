@@ -27,7 +27,7 @@ page =
 
 view : Document Msg
 view =
-    { title = "Navigation | Elm CSS Patterns"
+    { title = "Navigation"
     , body =
         [ Html.header
             [ Html.class "header" ]

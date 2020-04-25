@@ -84,7 +84,7 @@ update _ model =
 
 view : Model -> Document Msg
 view ({ code } as model) =
-    { title = "Split screen | Layout | Elm CSS Patterns"
+    { title = "Split screen | Layout"
     , body =
         { header = "Split screen layout"
         , content = contentView model

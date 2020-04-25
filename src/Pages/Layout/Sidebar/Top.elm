@@ -80,7 +80,7 @@ update _ model =
 
 view : Model -> Document Msg
 view ({ code } as model) =
-    { title = "Sidebar | Layout | Elm CSS Patterns"
+    { title = "Sidebar | Layout"
     , body =
         { header = "Sidebar layout"
         , content = contentView model

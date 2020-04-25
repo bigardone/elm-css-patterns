@@ -16,7 +16,7 @@ import Styles
 
 layout : { page : Document msg } -> Document msg
 layout { page } =
-    { title = page.title
+    { title = page.title ++ " | elm-css patterns"
     , body =
         [ Html.main_
             [ Html.css Styles.mainContent
@@ -57,7 +57,7 @@ navbar =
                     [ Html.class "logo"
                     , Html.href (Route.toHref Route.Top)
                     ]
-                    [ Html.text "Elm CSS patterns" ]
+                    [ Html.text "elm-css patterns" ]
                 ]
             , Html.a
                 [ Html.href "https://github.com/bigardone/elm-css-patterns"

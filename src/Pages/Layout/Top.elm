@@ -32,7 +32,7 @@ page =
 
 view : Document Msg
 view =
-    { title = "Layout | Elm CSS Patterns"
+    { title = "Layout"
     , body =
         [ Html.header
             [ Html.class "header" ]

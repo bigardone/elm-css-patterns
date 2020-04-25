@@ -90,7 +90,7 @@ update _ model =
 
 view : Model -> Document Msg
 view ({ code } as model) =
-    { title = "Drawer | Navigation | Elm CSS Patterns"
+    { title = "Drawer | Navigation"
     , body =
         { header = "Drawer navigation"
         , content = contentView model

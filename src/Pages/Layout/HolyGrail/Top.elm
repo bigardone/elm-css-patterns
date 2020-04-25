@@ -111,7 +111,7 @@ update _ model =
 
 view : Model -> Document Msg
 view ({ code } as model) =
-    { title = "Holy grail | Layout | Elm CSS Patterns"
+    { title = "Holy grail | Layout"
     , body =
         { header = "Holy grail layout"
         , content = contentView model
