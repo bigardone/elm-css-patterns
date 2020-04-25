@@ -1,20 +1,3 @@
-# Elm-spa Parcel template
+# elm-css patterns
 
-Base project template using:
-
-- **elm 0.19.1-3**
-- **elm-spa 4.1.0**
-- **elm-css 16.0.1**
-- **Parcel 1.12.4**
-
-## How to use this template
-
-Just run:
-
-- `git clone git@github.com:bigardone/elm-spa-parcel.git`
-- `cd elm-spa-parcel`
-- `npm start`
-
-To build it:
-
-- `npm run build`
+[![Netlify Status](https://api.netlify.com/api/v1/badges/e783ee87-62d1-4e5f-8b83-c3f88341ff7f/deploy-status)](https://app.netlify.com/sites/elm-css-patterns/deploys)
