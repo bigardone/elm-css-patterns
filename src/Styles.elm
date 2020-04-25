@@ -21,13 +21,19 @@ mainContent =
         , Css.Global.selector ".main-content__footer" mainContentFooter
         , Css.Global.selector ".inner" inner
         , Css.Global.selector ".container"
-            [ Css.width <| Css.px 1280
+            [ Css.width <| Css.px 1024
             , Css.padding2 Css.zero (Css.rem 1)
             , Css.margin2 Css.zero Css.auto
+            , Css.displayFlex
             ]
         , Css.Global.selector "a"
             [ Css.textDecoration Css.none
             , Css.color Colors.blueDarker
+            ]
+        , Css.Global.selector "h1"
+            [ Css.fontSize <| Css.rem 1.9
+            , Css.fontWeight <| Css.int 700
+            , Css.color Colors.black
             ]
         ]
     ]
@@ -37,15 +43,23 @@ mainContentNav : List Css.Style
 mainContentNav =
     [ Css.height <| Css.rem 5
     , Css.displayFlex
+    , Css.position Css.sticky
+    , Css.top Css.zero
+    , Css.backgroundColor Colors.white
     , Css.alignItems Css.center
     , Css.borderBottom3 (Css.px 1) Css.solid Colors.greyLighter
     , Css.flexShrink <| Css.int 0
+    , Css.zIndex <| Css.int 999
     , Css.Global.descendants
         [ Css.Global.selector ".logo"
             [ Css.textDecoration Css.none
             , Css.color Colors.blueDarker
             , Css.fontWeight Css.bolder
             , Css.textTransform Css.uppercase
+            ]
+        , Css.Global.selector ".container"
+            [ Css.displayFlex
+            , Css.justifyContent Css.spaceBetween
             ]
         ]
     ]
@@ -66,7 +80,7 @@ mainContentSidebar =
             [ Css.marginTop <| Css.rem 1
             , Css.fontSize <| Css.rem 0.9
             , Css.position Css.sticky
-            , Css.top Css.zero
+            , Css.top <| Css.px 100
             , Css.Global.descendants
                 [ Css.Global.selector ".main-nav__section"
                     [ Css.marginBottom <| Css.rem 2 ]
@@ -106,6 +120,7 @@ mainContentBody =
             [ Css.flexDirection Css.column
             , Css.displayFlex
             , Css.height <| Css.pct 100
+            , Css.paddingTop <| Css.rem 2
             ]
         , Css.Global.selector ".header"
             [ Css.marginBottom <| Css.rem 3
@@ -118,7 +133,7 @@ mainContentBody =
         , Css.Global.selector ".content__example"
             [ Css.displayFlex
             , Css.justifyContent Css.center
-            , Css.width <| Css.pct 80
+            , Css.width <| Css.pct 100
             , Css.border3 (Css.px 1) Css.solid Colors.grey
             , Css.borderRadius <| Css.px 4
             , Css.boxShadow5 Css.zero (Css.px 25) (Css.px 50) (Css.px -12) Colors.grey
@@ -129,9 +144,6 @@ mainContentBody =
             [ Css.flex <| Css.int 1
             , Css.displayFlex
             , Css.marginTop <| Css.rem 5
-            , Css.marginRight <| Css.rem -1
-            , Css.marginLeft <| Css.rem -1
-            , Css.marginBottom <| Css.rem -1
             , Css.displayFlex
             , Css.overflowY Css.auto
             , Css.borderRadius <| Css.px 4
@@ -171,6 +183,4 @@ mainContentFooter =
 
 inner : List Css.Style
 inner =
-    [ Css.padding <| Css.rem 1
-    , Css.flex <| Css.int 1
-    ]
+    [ Css.flex <| Css.int 1 ]

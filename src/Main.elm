@@ -6,6 +6,8 @@ import Document
 import Generated.Pages as Pages
 import Generated.Route as Route exposing (Route)
 import Global exposing (Flags)
+import SmoothScroll
+import Task exposing (Task)
 import Url exposing (Url)
 
 
@@ -60,11 +62,15 @@ type Msg
     | UrlChanged Url
     | Global Global.Msg
     | Page Pages.Msg
+    | NoOp
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
+        NoOp ->
+            ( model, Cmd.none )
+
         LinkClicked (Browser.Internal url) ->
             ( model, Nav.pushUrl model.key (Url.toString url) )
 
@@ -80,6 +86,7 @@ update msg model =
             , Cmd.batch
                 [ Cmd.map Page pageCmd
                 , Cmd.map Global globalCmd
+                , Task.attempt (always NoOp) (SmoothScroll.scrollTo "main")
                 ]
             )
 

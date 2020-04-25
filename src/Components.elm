@@ -5,6 +5,7 @@ module Components exposing
     , pageBody
     )
 
+import Assets
 import Document exposing (Document)
 import Generated.Route as Route
 import Html.Styled as Html exposing (Html)
@@ -18,7 +19,9 @@ layout { page } =
     { title = page.title
     , body =
         [ Html.main_
-            [ Html.css Styles.mainContent ]
+            [ Html.css Styles.mainContent
+            , Html.id "main"
+            ]
             [ navbar
             , Html.div
                 [ Html.class "main-content__body" ]
@@ -56,6 +59,11 @@ navbar =
                     ]
                     [ Html.text "Elm CSS patterns" ]
                 ]
+            , Html.a
+                [ Html.href "https://github.com/bigardone/elm-css-patterns"
+                , Html.target "_blank"
+                ]
+                [ Assets.githubIcon ]
             ]
         ]
 
