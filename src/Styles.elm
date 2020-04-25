@@ -9,7 +9,6 @@ import Styles.Colors as Colors
 mainContent : List Css.Style
 mainContent =
     [ Css.fontFamilies [ "Work Sans", "sans-serif" ]
-    , Css.width <| Css.px 1280
     , Css.margin2 Css.zero Css.auto
     , Css.color Colors.blackLightest
     , Css.displayFlex
@@ -21,6 +20,11 @@ mainContent =
         , Css.Global.selector ".main-content__nav" mainContentNav
         , Css.Global.selector ".main-content__footer" mainContentFooter
         , Css.Global.selector ".inner" inner
+        , Css.Global.selector ".container"
+            [ Css.width <| Css.px 1280
+            , Css.padding2 Css.zero (Css.rem 1)
+            , Css.margin2 Css.zero Css.auto
+            ]
         , Css.Global.selector "a"
             [ Css.textDecoration Css.none
             , Css.color Colors.blueDarker
@@ -61,13 +65,29 @@ mainContentSidebar =
         , Css.Global.selector ".main-nav"
             [ Css.marginTop <| Css.rem 1
             , Css.fontSize <| Css.rem 0.9
+            , Css.position Css.sticky
+            , Css.top Css.zero
             , Css.Global.descendants
                 [ Css.Global.selector ".main-nav__section"
                     [ Css.marginBottom <| Css.rem 2 ]
                 , Css.Global.selector ".main-nav__header"
-                    [ Css.textTransform Css.uppercase
+                    [ Css.Global.descendants
+                        [ Css.Global.selector "a"
+                            [ Css.textTransform Css.uppercase
+                            , Css.color Colors.grey
+                            , Css.marginBottom <| Css.em 0.6
+                            , Css.fontSize <| Css.rem 0.8
+                            , Css.fontWeight Css.bolder
+                            ]
+                        ]
+                    ]
+                , Css.Global.selector "a"
+                    [ Css.textDecoration Css.none
                     , Css.color Colors.blackLightest
-                    , Css.marginBottom <| Css.em 0.6
+                    , Css.display Css.block
+                    , Css.padding2 (Css.rem 0.3) Css.zero
+                    , Css.hover
+                        [ Css.color Colors.blue ]
                     ]
                 ]
             ]
@@ -80,7 +100,9 @@ mainContentBody =
     [ Css.displayFlex
     , Css.flexGrow <| Css.int 1
     , Css.Global.descendants
-        [ Css.Global.selector ".inner"
+        [ Css.Global.selector ".container"
+            [ Css.displayFlex ]
+        , Css.Global.selector ".inner"
             [ Css.flexDirection Css.column
             , Css.displayFlex
             , Css.height <| Css.pct 100

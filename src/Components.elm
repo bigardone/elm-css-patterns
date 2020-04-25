@@ -22,10 +22,13 @@ layout { page } =
             [ navbar
             , Html.div
                 [ Html.class "main-content__body" ]
-                [ sidebar
-                , Html.div
-                    [ Html.class "inner" ]
-                    page.body
+                [ Html.div
+                    [ Html.class "container" ]
+                    [ sidebar
+                    , Html.div
+                        [ Html.class "inner" ]
+                        page.body
+                    ]
                 ]
             , Html.footer
                 [ Html.class "main-content__footer" ]
@@ -44,12 +47,15 @@ navbar =
     Html.nav
         [ Html.class "main-content__nav" ]
         [ Html.div
-            []
-            [ Html.a
-                [ Html.class "logo"
-                , Html.href (Route.toHref Route.Top)
+            [ Html.class "container" ]
+            [ Html.div
+                []
+                [ Html.a
+                    [ Html.class "logo"
+                    , Html.href (Route.toHref Route.Top)
+                    ]
+                    [ Html.text "Elm CSS patterns" ]
                 ]
-                [ Html.text "Elm CSS patterns" ]
             ]
         ]
 
@@ -58,30 +64,27 @@ sidebar : Html msg
 sidebar =
     Html.aside
         [ Html.class "main-content__sidebar" ]
-        [ Html.div
-            []
-            [ Html.nav
-                [ Html.class "main-nav" ]
-                [ Html.div
-                    [ Html.class "main-nav__section" ]
-                    [ Html.header
-                        [ Html.class "main-nav__header" ]
-                        [ Html.a
-                            [ Html.href <| Route.toHref Route.Layout_Top ]
-                            [ Html.text "Layout" ]
-                        ]
-                    , layoutNav
+        [ Html.nav
+            [ Html.class "main-nav" ]
+            [ Html.div
+                [ Html.class "main-nav__section" ]
+                [ Html.header
+                    [ Html.class "main-nav__header" ]
+                    [ Html.a
+                        [ Html.href <| Route.toHref Route.Layout_Top ]
+                        [ Html.text "Layout" ]
                     ]
-                , Html.div
-                    [ Html.class "main-nav__section" ]
-                    [ Html.header
-                        [ Html.class "main-nav__header" ]
-                        [ Html.a
-                            [ Html.href <| Route.toHref Route.Navigation_Top ]
-                            [ Html.text "Navigation" ]
-                        ]
-                    , navigationNav
+                , layoutNav
+                ]
+            , Html.div
+                [ Html.class "main-nav__section" ]
+                [ Html.header
+                    [ Html.class "main-nav__header" ]
+                    [ Html.a
+                        [ Html.href <| Route.toHref Route.Navigation_Top ]
+                        [ Html.text "Navigation" ]
                     ]
+                , navigationNav
                 ]
             ]
         ]
