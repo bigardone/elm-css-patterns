@@ -27,25 +27,24 @@ type alias Msg =
 
 page : Page Flags Model Msg
 page =
-    Page.element
+    Page.sandbox
         { init = init
         , update = update
-        , subscriptions = subscriptions
         , view = view
         }
 
 
-init : Flags -> ( Model, Cmd Msg )
-init _ =
-    ( { block =
-            Placeholders.Block.default
-                |> Placeholders.Block.withBackgroundColor Colors.grey
-                |> Placeholders.Block.withItems [ 1, 2, 3, 2, 3, 4, 5, 2, 1, 2, 4, 2, 5, 3 ]
-      , singleBlock =
-            Placeholders.Block.default
-                |> Placeholders.Block.withBackgroundColor Colors.grey
-                |> Placeholders.Block.withItems [ 3 ]
-      , code = """
+init : Model
+init =
+    { block =
+        Placeholders.Block.default
+            |> Placeholders.Block.withBackgroundColor Colors.grey
+            |> Placeholders.Block.withItems [ 1, 2, 3, 2, 3, 4, 5, 2, 1, 2, 4, 2, 5, 3 ]
+    , singleBlock =
+        Placeholders.Block.default
+            |> Placeholders.Block.withBackgroundColor Colors.grey
+            |> Placeholders.Block.withItems [ 3 ]
+    , code = """
 import Css
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
@@ -71,19 +70,12 @@ sidebar =
             []
         ]
       """
-      }
-    , Cmd.none
-    )
+    }
 
 
-update : Msg -> Model -> ( Model, Cmd Msg )
+update : Msg -> Model -> Model
 update _ model =
-    ( model, Cmd.none )
-
-
-subscriptions : Model -> Sub Msg
-subscriptions _ =
-    Sub.none
+    model
 
 
 view : Model -> Document Msg

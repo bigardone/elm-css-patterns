@@ -1,6 +1,7 @@
 module Components exposing
     ( layout
     , layoutNav
+    , navigationNav
     , pageBody
     )
 
@@ -71,6 +72,16 @@ sidebar =
                         ]
                     , layoutNav
                     ]
+                , Html.div
+                    [ Html.class "main-nav__section" ]
+                    [ Html.header
+                        [ Html.class "main-nav__header" ]
+                        [ Html.a
+                            [ Html.href <| Route.toHref Route.Navigation_Top ]
+                            [ Html.text "Navigation" ]
+                        ]
+                    , navigationNav
+                    ]
                 ]
             ]
         ]
@@ -115,6 +126,19 @@ layoutNav =
             [ Html.a
                 [ Html.href <| Route.toHref Route.Layout_StickyFooter_Top ]
                 [ Html.text "Sticky footer" ]
+            ]
+        ]
+
+
+navigationNav : Html msg
+navigationNav =
+    Html.ul
+        [ Html.class "list" ]
+        [ Html.li
+            []
+            [ Html.a
+                [ Html.href <| Route.toHref Route.Navigation_Drawer_Top ]
+                [ Html.text "Drawer" ]
             ]
         ]
 

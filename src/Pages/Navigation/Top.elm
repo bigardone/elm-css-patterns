@@ -1,9 +1,4 @@
-module Pages.Layout.Top exposing
-    ( Flags
-    , Model
-    , Msg
-    , page
-    )
+module Pages.Navigation.Top exposing (Flags, Model, Msg, page)
 
 import Components
 import Html.Styled as Html
@@ -32,14 +27,15 @@ page =
 
 view : Document Msg
 view =
-    { title = "Layout | Elm CSS Patterns"
+    { title = "Navigation | Elm CSS Patterns"
     , body =
         [ Html.header
             [ Html.class "header" ]
             [ Html.h1
                 []
-                [ Html.text "Layout" ]
+                [ Html.text "Navigation" ]
             ]
-        , Components.layoutNav
+        , Components.navigationNav
         ]
     }
+

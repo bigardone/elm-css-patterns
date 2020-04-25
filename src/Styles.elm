@@ -100,6 +100,7 @@ mainContentBody =
             , Css.border3 (Css.px 1) Css.solid Colors.grey
             , Css.borderRadius <| Css.px 4
             , Css.boxShadow5 Css.zero (Css.px 25) (Css.px 50) (Css.px -12) Colors.grey
+            , Css.overflow Css.hidden
             , Animations.scale
             ]
         , Css.Global.selector ".code"

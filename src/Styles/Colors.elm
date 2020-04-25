@@ -14,6 +14,7 @@ module Styles.Colors exposing
     , orange
     , purple
     , red
+    , white
     , yellow
     )
 
@@ -98,3 +99,8 @@ green =
 purple : Css.Color
 purple =
     Css.hex "b48ead"
+
+
+white : Css.Color
+white =
+    Css.hex "ffffff"
