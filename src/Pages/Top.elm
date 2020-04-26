@@ -39,5 +39,33 @@ view =
                 []
                 [ Html.text "Elm CSS patterns" ]
             ]
+        , Html.p
+            []
+            [ Html.text "Common CSS patterns done in "
+            , Html.a
+                [ Html.href "https://elm-lang.org/"
+                , Html.target "_blank"
+                ]
+                [ Html.text " elm " ]
+            , Html.text " and "
+            , Html.a
+                [ Html.href "https://github.com/rtfeldman/elm-css"
+                , Html.target "_blank"
+                ]
+                [ Html.text " elm-css" ]
+            , Html.text ". Powered by "
+            , Html.a
+                [ Html.href "https://github.com/ryannhg/elm-spa"
+                , Html.target "_blank"
+                ]
+                [ Html.text " elm-spa" ]
+            , Html.text ". Inspired by "
+            , Html.a
+                [ Html.href "https://github.com/phuoc-ng/csslayout"
+                , Html.target "_blank"
+                ]
+                [ Html.text " csslayout" ]
+            , Html.text "."
+            ]
         ]
     }
