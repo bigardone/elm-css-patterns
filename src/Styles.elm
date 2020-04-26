@@ -88,7 +88,7 @@ mainContentSidebar =
                     [ Css.Global.descendants
                         [ Css.Global.selector "a"
                             [ Css.textTransform Css.uppercase
-                            , Css.color Colors.grey
+                            , Css.color Colors.blueDark
                             , Css.marginBottom <| Css.em 0.6
                             , Css.fontSize <| Css.rem 0.8
                             , Css.fontWeight Css.bolder
@@ -101,7 +101,7 @@ mainContentSidebar =
                     , Css.display Css.block
                     , Css.padding2 (Css.rem 0.3) Css.zero
                     , Css.hover
-                        [ Css.color Colors.blue ]
+                        [ Css.color Colors.blueDarker ]
                     ]
                 ]
             ]

@@ -197,6 +197,12 @@ inputNavigation =
                 [ Html.href <| Route.toHref Route.Input_CustomRadio_Top ]
                 [ Html.text "Custom radio" ]
             ]
+        , Html.li
+            []
+            [ Html.a
+                [ Html.href <| Route.toHref Route.Input_RadioButtonGroup_Top ]
+                [ Html.text "Radio button group" ]
+            ]
         ]
 
 

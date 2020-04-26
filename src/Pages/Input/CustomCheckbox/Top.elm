@@ -92,6 +92,7 @@ customCheckbox =
                 []
             ]
         , Html.text "Some text"
+        ]
       """
     }
 

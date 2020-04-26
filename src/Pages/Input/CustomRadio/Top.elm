@@ -92,6 +92,7 @@ customRadio =
                 []
             ]
         , Html.text "Some text"
+        ]
       """
     }
 

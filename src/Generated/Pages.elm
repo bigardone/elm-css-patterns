@@ -18,6 +18,7 @@ import Pages.Navigation.Top
 import Pages.Input.CustomCheckbox.Top
 import Pages.Input.CustomRadio.Top
 import Pages.Input.Dropdown.Top
+import Pages.Input.RadioButtonGroup.Top
 import Pages.Layout.Card.Top
 import Pages.Layout.HolyGrail.Top
 import Pages.Layout.Sidebar.Top
@@ -41,6 +42,7 @@ type Model
     | Input_CustomCheckbox_Top_Model Pages.Input.CustomCheckbox.Top.Model
     | Input_CustomRadio_Top_Model Pages.Input.CustomRadio.Top.Model
     | Input_Dropdown_Top_Model Pages.Input.Dropdown.Top.Model
+    | Input_RadioButtonGroup_Top_Model Pages.Input.RadioButtonGroup.Top.Model
     | Layout_Card_Top_Model Pages.Layout.Card.Top.Model
     | Layout_HolyGrail_Top_Model Pages.Layout.HolyGrail.Top.Model
     | Layout_Sidebar_Top_Model Pages.Layout.Sidebar.Top.Model
@@ -60,6 +62,7 @@ type Msg
     | Input_CustomCheckbox_Top_Msg Pages.Input.CustomCheckbox.Top.Msg
     | Input_CustomRadio_Top_Msg Pages.Input.CustomRadio.Top.Msg
     | Input_Dropdown_Top_Msg Pages.Input.Dropdown.Top.Msg
+    | Input_RadioButtonGroup_Top_Msg Pages.Input.RadioButtonGroup.Top.Msg
     | Layout_Card_Top_Msg Pages.Layout.Card.Top.Msg
     | Layout_HolyGrail_Top_Msg Pages.Layout.HolyGrail.Top.Msg
     | Layout_Sidebar_Top_Msg Pages.Layout.Sidebar.Top.Msg
@@ -90,6 +93,7 @@ type alias UpgradedPages =
     , input_customCheckbox_top : UpgradedPage Pages.Input.CustomCheckbox.Top.Flags Pages.Input.CustomCheckbox.Top.Model Pages.Input.CustomCheckbox.Top.Msg
     , input_customRadio_top : UpgradedPage Pages.Input.CustomRadio.Top.Flags Pages.Input.CustomRadio.Top.Model Pages.Input.CustomRadio.Top.Msg
     , input_dropdown_top : UpgradedPage Pages.Input.Dropdown.Top.Flags Pages.Input.Dropdown.Top.Model Pages.Input.Dropdown.Top.Msg
+    , input_radioButtonGroup_top : UpgradedPage Pages.Input.RadioButtonGroup.Top.Flags Pages.Input.RadioButtonGroup.Top.Model Pages.Input.RadioButtonGroup.Top.Msg
     , layout_card_top : UpgradedPage Pages.Layout.Card.Top.Flags Pages.Layout.Card.Top.Model Pages.Layout.Card.Top.Msg
     , layout_holyGrail_top : UpgradedPage Pages.Layout.HolyGrail.Top.Flags Pages.Layout.HolyGrail.Top.Model Pages.Layout.HolyGrail.Top.Msg
     , layout_sidebar_top : UpgradedPage Pages.Layout.Sidebar.Top.Flags Pages.Layout.Sidebar.Top.Model Pages.Layout.Sidebar.Top.Msg
@@ -111,6 +115,7 @@ pages =
     , input_customCheckbox_top = Pages.Input.CustomCheckbox.Top.page |> Page.upgrade Input_CustomCheckbox_Top_Model Input_CustomCheckbox_Top_Msg
     , input_customRadio_top = Pages.Input.CustomRadio.Top.page |> Page.upgrade Input_CustomRadio_Top_Model Input_CustomRadio_Top_Msg
     , input_dropdown_top = Pages.Input.Dropdown.Top.page |> Page.upgrade Input_Dropdown_Top_Model Input_Dropdown_Top_Msg
+    , input_radioButtonGroup_top = Pages.Input.RadioButtonGroup.Top.page |> Page.upgrade Input_RadioButtonGroup_Top_Model Input_RadioButtonGroup_Top_Msg
     , layout_card_top = Pages.Layout.Card.Top.page |> Page.upgrade Layout_Card_Top_Model Layout_Card_Top_Msg
     , layout_holyGrail_top = Pages.Layout.HolyGrail.Top.page |> Page.upgrade Layout_HolyGrail_Top_Model Layout_HolyGrail_Top_Msg
     , layout_sidebar_top = Pages.Layout.Sidebar.Top.page |> Page.upgrade Layout_Sidebar_Top_Model Layout_Sidebar_Top_Msg
@@ -152,6 +157,9 @@ init route =
         
         Route.Input_Dropdown_Top ->
             pages.input_dropdown_top.init ()
+        
+        Route.Input_RadioButtonGroup_Top ->
+            pages.input_radioButtonGroup_top.init ()
         
         Route.Layout_Card_Top ->
             pages.layout_card_top.init ()
@@ -208,6 +216,9 @@ update bigMsg bigModel =
         
         ( Input_Dropdown_Top_Msg msg, Input_Dropdown_Top_Model model ) ->
             pages.input_dropdown_top.update msg model
+        
+        ( Input_RadioButtonGroup_Top_Msg msg, Input_RadioButtonGroup_Top_Model model ) ->
+            pages.input_radioButtonGroup_top.update msg model
         
         ( Layout_Card_Top_Msg msg, Layout_Card_Top_Model model ) ->
             pages.layout_card_top.update msg model
@@ -267,6 +278,9 @@ bundle bigModel =
         
         Input_Dropdown_Top_Model model ->
             pages.input_dropdown_top.bundle model
+        
+        Input_RadioButtonGroup_Top_Model model ->
+            pages.input_radioButtonGroup_top.bundle model
         
         Layout_Card_Top_Model model ->
             pages.layout_card_top.bundle model
