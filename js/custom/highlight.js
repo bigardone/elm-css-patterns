@@ -1,6 +1,5 @@
 import Prism from 'prismjs';
 import 'prismjs/components/prism-elm';
-import '../../css/index.css';
 import '../../css/prism-nord.css';
 
 

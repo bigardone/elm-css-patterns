@@ -118,9 +118,9 @@ mainContentBody =
             [ Css.displayFlex ]
         , Css.Global.selector ".inner"
             [ Css.flexDirection Css.column
-            , Css.displayFlex
             , Css.height <| Css.pct 100
             , Css.paddingTop <| Css.rem 2
+            , Css.flex <| Css.int 1
             ]
         , Css.Global.selector ".header"
             [ Css.marginBottom <| Css.rem 3
@@ -141,27 +141,17 @@ mainContentBody =
             , Animations.scale
             ]
         , Css.Global.selector ".code"
-            [ Css.flex <| Css.int 1
-            , Css.displayFlex
-            , Css.marginTop <| Css.rem 5
-            , Css.displayFlex
+            [ Css.marginTop <| Css.rem 5
             , Css.overflow Css.auto
             , Css.borderRadius <| Css.px 4
             , Css.fontFamilies [ "monospace" ]
             ]
         , Css.Global.selector "c-highlight"
-            [ Css.flex <| Css.int 1
-            , Css.height <| Css.pct 100
-            , Css.margin Css.zero
+            [ Css.width <| Css.pct 100
+            , Css.overflow Css.auto
             ]
         , Css.Global.selector "pre"
-            [ Css.flex <| Css.int 1
-            , Css.height <| Css.pct 100
-            , Css.margin Css.zero
-            ]
-        , Css.Global.selector "code"
-            [ Css.height <| Css.pct 100
-            ]
+            [ Css.margin Css.zero ]
         ]
     ]
 
