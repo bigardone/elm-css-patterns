@@ -1,4 +1,4 @@
-module Pages.Input.CustomCheckbox.Top exposing (Flags, Model, Msg, page)
+module Pages.Input.CustomRadio.Top exposing (Flags, Model, Msg, page)
 
 import Components
 import Css
@@ -9,7 +9,7 @@ import List
 import Page exposing (Document, Page)
 import Placeholders.Rectangle exposing (Rectangle)
 import Styles.Colors as Colors
-import Styles.Input.CustomCheckbox as CustomCheckbox
+import Styles.Input.CustomRadio as CustomRadio
 
 
 type alias Flags =
@@ -48,10 +48,10 @@ import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
 
 
-customCheckbox : Html msg
-customCheckbox =
+customRadio : Html msg
+customRadio =
     Html.label
-        [ Html.for "myCustomCheckbox"
+        [ Html.for "myCustomRadio"
         , Html.css
             [ Css.displayFlex
             , Css.alignItems Css.center
@@ -59,13 +59,13 @@ customCheckbox =
             ]
         ]
         [ Html.input
-            [ Html.type_ "checkbox"
-            , Html.id "myCustomCheckbox"
+            [ Html.type_ "radio"
+            , Html.id "myCustomRadio"
             , Html.css
                 [ Css.display Css.none
                 , Css.checked
                     [ Css.Global.generalSiblings
-                        [ Css.Global.selector ".custom-checkbox__icon > .custom-checkbox__inner-icon"
+                        [ Css.Global.selector ".custom-radio__icon > .custom-radio__inner-icon"
                             [ Css.backgroundColor <| Css.hex "333333" ]
                         ]
                     ]
@@ -73,18 +73,18 @@ customCheckbox =
             ]
             []
         , Html.div
-            [ Html.class "custom-checkbox__icon"
+            [ Html.class "custom-radio__icon"
             , Html.css
                 [ Css.border3 (Css.px 1) Css.solid (Css.hex "EFEFEF")
-                , Css.borderRadius <| Css.px 4
+                , Css.borderRadius <| Css.pct 100
                 , Css.marginRight <| Css.rem 0.4
                 , Css.padding <| Css.px 2
                 ]
             ]
             [ Html.div
-                [ Html.class "custom-checkbox__inner-icon"
+                [ Html.class "custom-radio__inner-icon"
                 , Html.css
-                    [ Css.borderRadius <| Css.px 4
+                    [ Css.borderRadius <| Css.pct 100
                     , Css.height <| Css.rem 0.8
                     , Css.width <| Css.rem 0.8
                     ]
@@ -103,9 +103,9 @@ update _ model =
 
 view : Model -> Document Msg
 view ({ code } as model) =
-    { title = "Custom checkbox | Input"
+    { title = "Custom radio | Input"
     , body =
-        { header = "Custom checkbox input"
+        { header = "Custom radio input"
         , content = contentView model
         , code = code
         }
@@ -117,35 +117,36 @@ contentView : Model -> Html Msg
 contentView { rectangle } =
     Html.div
         [ Html.css
-            [ CustomCheckbox.customCheckbox ]
+            [ CustomRadio.customRadio ]
         ]
         [ List.range 1 3
-            |> List.map (checkBoxView rectangle)
+            |> List.map (radioView rectangle)
             |> Html.Styled.Keyed.node "div" []
         ]
 
 
-checkBoxView : Rectangle -> Int -> ( String, Html msg )
-checkBoxView rectangle index =
+radioView : Rectangle -> Int -> ( String, Html msg )
+radioView rectangle index =
     let
         id =
-            "customCheckbox" ++ String.fromInt index
+            "customRadio" ++ String.fromInt index
     in
     ( id
     , Html.label
-        [ Html.class "custom-checkbox"
+        [ Html.class "custom-radio"
         , Html.for id
         ]
         [ Html.input
-            [ Html.type_ "checkbox"
+            [ Html.type_ "radio"
             , Html.id id
-            , Html.class "custom-checkbox__input"
+            , Html.class "custom-radio__input"
+            , Html.name "radio"
             ]
             []
         , Html.div
-            [ Html.class "custom-checkbox__icon" ]
+            [ Html.class "custom-radio__icon" ]
             [ Html.div
-                [ Html.class "custom-checkbox__inner-icon" ]
+                [ Html.class "custom-radio__inner-icon" ]
                 []
             ]
         , Placeholders.Rectangle.view rectangle

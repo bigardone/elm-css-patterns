@@ -191,6 +191,12 @@ inputNavigation =
                 [ Html.href <| Route.toHref Route.Input_CustomCheckbox_Top ]
                 [ Html.text "Custom checkbox" ]
             ]
+        , Html.li
+            []
+            [ Html.a
+                [ Html.href <| Route.toHref Route.Input_CustomRadio_Top ]
+                [ Html.text "Custom radio" ]
+            ]
         ]
 
 
