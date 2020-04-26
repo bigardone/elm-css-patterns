@@ -185,6 +185,12 @@ inputNavigation =
                 [ Html.href <| Route.toHref Route.Input_Dropdown_Top ]
                 [ Html.text "Dropdown" ]
             ]
+        , Html.li
+            []
+            [ Html.a
+                [ Html.href <| Route.toHref Route.Input_CustomCheckbox_Top ]
+                [ Html.text "Custom checkbox" ]
+            ]
         ]
 
 

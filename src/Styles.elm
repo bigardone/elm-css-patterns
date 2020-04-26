@@ -145,7 +145,7 @@ mainContentBody =
             , Css.displayFlex
             , Css.marginTop <| Css.rem 5
             , Css.displayFlex
-            , Css.overflowY Css.auto
+            , Css.overflow Css.auto
             , Css.borderRadius <| Css.px 4
             , Css.fontFamilies [ "monospace" ]
             ]

@@ -14,6 +14,7 @@ type Route
     | Input_Top
     | Layout_Top
     | Navigation_Top
+    | Input_CustomCheckbox_Top
     | Input_Dropdown_Top
     | Layout_Card_Top
     | Layout_HolyGrail_Top
@@ -38,6 +39,7 @@ routes =
         , Parser.map Input_Top (Parser.s "input")
         , Parser.map Layout_Top (Parser.s "layout")
         , Parser.map Navigation_Top (Parser.s "navigation")
+        , Parser.map Input_CustomCheckbox_Top (Parser.s "input" </> Parser.s "custom-checkbox")
         , Parser.map Input_Dropdown_Top (Parser.s "input" </> Parser.s "dropdown")
         , Parser.map Layout_Card_Top (Parser.s "layout" </> Parser.s "card")
         , Parser.map Layout_HolyGrail_Top (Parser.s "layout" </> Parser.s "holy-grail")
@@ -70,6 +72,9 @@ toHref route =
                 
                 Navigation_Top ->
                     [ "navigation" ]
+                
+                Input_CustomCheckbox_Top ->
+                    [ "input", "custom-checkbox" ]
                 
                 Input_Dropdown_Top ->
                     [ "input", "dropdown" ]
