@@ -1,15 +1,8 @@
 module Pages.Input.CustomCheckbox.Top exposing (Flags, Model, Msg, page)
 
 import Components
-import Css
-import Html.Styled as Html exposing (Html)
-import Html.Styled.Attributes as Html
-import Html.Styled.Keyed
-import List
+import Components.Input.CustomCheckbox as PageComponent
 import Page exposing (Document, Page)
-import Placeholders.Rectangle exposing (Rectangle)
-import Styles.Colors as Colors
-import Styles.Input.CustomCheckbox as CustomCheckbox
 
 
 type alias Flags =
@@ -18,7 +11,7 @@ type alias Flags =
 
 type alias Model =
     { code : String
-    , rectangle : Rectangle
+    , component : PageComponent.Model
     }
 
 
@@ -37,11 +30,7 @@ page =
 
 init : Model
 init =
-    { rectangle =
-        Placeholders.Rectangle.default
-            |> Placeholders.Rectangle.withBackgroundColor Colors.grey
-            |> Placeholders.Rectangle.withHeight (Css.px 4)
-            |> Placeholders.Rectangle.withWidth (Css.pct 80)
+    { component = PageComponent.init
     , code = """
 import Css
 import Html.Styled as Html exposing (Html)
@@ -103,53 +92,13 @@ update _ model =
 
 
 view : Model -> Document Msg
-view ({ code } as model) =
+view { code, component } =
     { title = "Custom checkbox | Input"
     , body =
         { header = "Custom checkbox input"
-        , content = contentView model
+        , content = PageComponent.view component
         , code = code
         }
             |> Components.pageBody
     }
-
-
-contentView : Model -> Html Msg
-contentView { rectangle } =
-    Html.div
-        [ Html.css
-            [ CustomCheckbox.customCheckbox ]
-        ]
-        [ List.range 1 3
-            |> List.map (checkBoxView rectangle)
-            |> Html.Styled.Keyed.node "div" []
-        ]
-
-
-checkBoxView : Rectangle -> Int -> ( String, Html msg )
-checkBoxView rectangle index =
-    let
-        id =
-            "customCheckbox" ++ String.fromInt index
-    in
-    ( id
-    , Html.label
-        [ Html.class "custom-checkbox"
-        , Html.for id
-        ]
-        [ Html.input
-            [ Html.type_ "checkbox"
-            , Html.id id
-            , Html.class "custom-checkbox__input"
-            ]
-            []
-        , Html.div
-            [ Html.class "custom-checkbox__icon" ]
-            [ Html.div
-                [ Html.class "custom-checkbox__inner-icon" ]
-                []
-            ]
-        , Placeholders.Rectangle.view rectangle
-        ]
-    )
 
