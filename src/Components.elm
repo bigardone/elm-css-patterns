@@ -4,7 +4,6 @@ module Components exposing
     , layoutNav
     , navigationNav
     , pageBody
-    , topLayout
     )
 
 import Assets
@@ -17,38 +16,14 @@ import Html.Styled.Keyed as HtmlKeyed
 import Styles
 
 
-topLayout : msg -> { page : Document msg } -> Document msg
-topLayout onShowSidebarClick { page } =
+layout : msg -> { page : Document msg, showSidebar : Bool, isTop : Bool } -> Document msg
+layout onShowSidebarClick { page, showSidebar, isTop } =
     { title = page.title ++ " | elm-css patterns"
     , body =
-        [ Html.main_
+        [ Html.div
             [ Html.css Styles.mainContent
             , Html.id "main"
-            , Html.class "main-top"
-            ]
-            [ navbar onShowSidebarClick
-            , Html.div
-                [ Html.class "main-content__body" ]
-                [ Html.div
-                    [ Html.class "container" ]
-                    [ Html.div
-                        [ Html.class "inner" ]
-                        page.body
-                    ]
-                ]
-            , footer
-            ]
-        ]
-    }
-
-
-layout : msg -> { page : Document msg, showSidebar : Bool } -> Document msg
-layout onShowSidebarClick { page, showSidebar } =
-    { title = page.title ++ " | elm-css patterns"
-    , body =
-        [ Html.main_
-            [ Html.css Styles.mainContent
-            , Html.id "main"
+            , Html.classList [ ( "main-top", isTop ) ]
             ]
             [ navbar onShowSidebarClick
             , Html.div

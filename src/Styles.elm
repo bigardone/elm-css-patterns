@@ -14,7 +14,7 @@ mainContent =
     , Css.color Colors.blackLightest
     , Css.displayFlex
     , Css.flexDirection Css.column
-    , Css.height <| Css.pct 100
+    , Css.minHeight <| Css.vh 100
     , Css.Global.withClass "main-top" mainTop
     , Css.Global.descendants
         [ Css.Global.selector ".main-content__sidebar" mainContentSidebar
@@ -67,12 +67,14 @@ mainContent =
 
 mainTop : List Css.Style
 mainTop =
-    [ Css.textAlign Css.center
-    , Css.Global.descendants
+    [ Css.Global.descendants
         [ Css.Global.selector ".top-header"
             [ Animations.scale
             , Css.marginBottom <| Css.rem 5
+            , Css.textAlign Css.center
             ]
+        , Css.Global.selector ".main-content__sidebar"
+            [ Css.display Css.none ]
         , Css.Global.selector "h1"
             [ Css.fontSize <| Css.rem 3.4
             , Css.marginBottom <| Css.em 1
@@ -197,7 +199,6 @@ mainContentBody =
             [ Css.displayFlex ]
         , Css.Global.selector ".inner"
             [ Css.flexDirection Css.column
-            , Css.height <| Css.pct 100
             , Css.paddingTop <| Css.rem 2
             , Css.flex <| Css.int 1
             ]
