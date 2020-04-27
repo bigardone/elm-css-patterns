@@ -2,8 +2,8 @@ module Styles exposing (mainContent)
 
 import Css
 import Css.Global
-import Css.Transitions
 import Styles.Animations as Animations
+import Styles.Breakpoints as Breakpoints
 import Styles.Colors as Colors
 
 
@@ -76,9 +76,14 @@ mainTop =
         , Css.Global.selector "h1"
             [ Css.fontSize <| Css.rem 3.4
             , Css.marginBottom <| Css.em 1
+            , Breakpoints.small
+                [ Css.fontSize <| Css.rem 2.6 ]
             ]
         , Css.Global.selector ".hero"
-            [ Css.fontSize <| Css.rem 1.8 ]
+            [ Css.fontSize <| Css.rem 1.8
+            , Breakpoints.small
+                [ Css.fontSize <| Css.rem 1.4 ]
+            ]
         , Css.Global.selector ".sections"
             [ Css.displayFlex
             , Css.width <| Css.pct 60
@@ -112,14 +117,22 @@ mainContentNav =
             [ Css.displayFlex
             , Css.justifyContent Css.spaceBetween
             ]
+        , Css.Global.selector ".burger"
+            [ Css.display Css.none
+            , Breakpoints.small
+                [ Css.display Css.inlineBlock
+                , Css.marginLeft <| Css.rem 0.3
+                , Css.cursor Css.pointer
+                ]
+            ]
         ]
     ]
 
 
 mainContentSidebar : List Css.Style
 mainContentSidebar =
-    [ Css.width <| Css.px 300
-    , Css.displayFlex
+    [ Css.displayFlex
+    , Css.width <| Css.px 300
     , Css.flexDirection Css.column
     , Css.Global.descendants
         [ Css.Global.selector ".inner"
@@ -157,6 +170,21 @@ mainContentSidebar =
                 ]
             ]
         ]
+    , Breakpoints.small
+        [ Css.display Css.none
+        , Css.Global.withClass "show"
+            [ Css.displayFlex
+            , Css.position Css.fixed
+            , Css.top <| Css.px 80
+            , Css.left Css.zero
+            , Css.width <| Css.pct 100
+            , Css.backgroundColor Colors.white
+            , Css.padding <| Css.rem 1
+            , Css.height <| Css.vh 100
+            , Css.zIndex <| Css.int 999
+            , Animations.fade
+            ]
+        ]
     ]
 
 
@@ -179,6 +207,8 @@ mainContentBody =
             , Css.displayFlex
             , Css.alignItems Css.center
             , Css.justifyContent Css.spaceBetween
+            , Breakpoints.small
+                [ Css.display Css.block ]
             ]
         , Css.Global.selector ".header svg"
             [ Css.marginLeft <| Css.rem 0.3 ]
@@ -219,9 +249,16 @@ mainContentFooter =
     , Css.flexShrink <| Css.int 0
     , Css.displayFlex
     , Css.alignItems Css.center
-    , Css.justifyContent Css.center
     , Css.Global.descendants
-        [ Css.Global.selector "a"
+        [ Css.Global.selector ".container"
+            [ Css.textAlign Css.center
+            , Css.displayFlex
+            , Css.alignItems Css.center
+            , Css.justifyContent Css.center
+            , Breakpoints.small
+                [ Css.justifyContent Css.flexStart ]
+            ]
+        , Css.Global.selector "a"
             [ Css.margin2 Css.zero (Css.rem 0.3) ]
         ]
     ]

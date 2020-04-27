@@ -7,7 +7,7 @@ import Generated.Pages as Pages
 import Generated.Route as Route exposing (Route)
 import Global exposing (Flags)
 import SmoothScroll
-import Task exposing (Task)
+import Task
 import Url exposing (Url)
 
 
@@ -85,7 +85,7 @@ update msg model =
                 ( page, pageCmd, globalCmd ) =
                     Pages.init (fromUrl url) model.global
             in
-            ( { model | url = url, page = page, global = { global | url = url } }
+            ( { model | url = url, page = page, global = { global | url = url, showSidebar = False } }
             , Cmd.batch
                 [ Cmd.map Page pageCmd
                 , Cmd.map Global globalCmd

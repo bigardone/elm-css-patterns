@@ -29,6 +29,7 @@ type alias Model =
     { flags : Flags
     , url : Url
     , key : Nav.Key
+    , showSidebar : Bool
     }
 
 
@@ -38,6 +39,7 @@ init flags url key =
         flags
         url
         key
+        False
     , Cmd.none
     )
 
@@ -48,6 +50,7 @@ init flags url key =
 
 type Msg
     = Navigate Route
+    | ShowSidebar
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -57,6 +60,9 @@ update msg model =
             ( model
             , Nav.pushUrl model.key (Route.toHref route)
             )
+
+        ShowSidebar ->
+            ( { model | showSidebar = not model.showSidebar }, Cmd.none )
 
 
 
@@ -81,12 +87,10 @@ view :
 view { page, global, toMsg } =
     case Route.fromUrl global.url of
         Just Route.Top ->
-            Components.topLayout { page = page }
+            Components.topLayout (toMsg ShowSidebar) { page = page }
 
         _ ->
-            Components.layout
-                { page = page
-                }
+            Components.layout (toMsg ShowSidebar) { page = page, showSidebar = global.showSidebar }
 
 
 

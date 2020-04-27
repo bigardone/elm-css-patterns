@@ -12,12 +12,13 @@ import Document exposing (Document)
 import Generated.Route as Route
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
+import Html.Styled.Events as Html
 import Html.Styled.Keyed as HtmlKeyed
 import Styles
 
 
-topLayout : { page : Document msg } -> Document msg
-topLayout { page } =
+topLayout : msg -> { page : Document msg } -> Document msg
+topLayout onShowSidebarClick { page } =
     { title = page.title ++ " | elm-css patterns"
     , body =
         [ Html.main_
@@ -25,7 +26,7 @@ topLayout { page } =
             , Html.id "main"
             , Html.class "main-top"
             ]
-            [ navbar
+            [ navbar onShowSidebarClick
             , Html.div
                 [ Html.class "main-content__body" ]
                 [ Html.div
@@ -41,20 +42,20 @@ topLayout { page } =
     }
 
 
-layout : { page : Document msg } -> Document msg
-layout { page } =
+layout : msg -> { page : Document msg, showSidebar : Bool } -> Document msg
+layout onShowSidebarClick { page, showSidebar } =
     { title = page.title ++ " | elm-css patterns"
     , body =
         [ Html.main_
             [ Html.css Styles.mainContent
             , Html.id "main"
             ]
-            [ navbar
+            [ navbar onShowSidebarClick
             , Html.div
                 [ Html.class "main-content__body" ]
                 [ Html.div
                     [ Html.class "container" ]
-                    [ sidebar
+                    [ sidebar showSidebar
                     , Html.div
                         [ Html.class "inner" ]
                         page.body
@@ -70,50 +71,65 @@ footer : Html msg
 footer =
     Html.footer
         [ Html.class "main-content__footer" ]
-        [ Html.text "Crafted with ❤ and "
-        , Html.a
-            [ Html.href "https://elm-lang.org/"
-            , Html.target "_blank"
-            , Html.class "cool"
+        [ Html.div
+            [ Html.class "container" ]
+            [ Html.text "Crafted with ❤ and "
+            , Html.a
+                [ Html.href "https://elm-lang.org/"
+                , Html.target "_blank"
+                , Html.class "cool"
+                ]
+                [ Html.text "elm" ]
+            , Html.text " by "
+            , Html.a
+                [ Html.href "https://github.com/bigardone"
+                , Html.target "_blank"
+                , Html.class "cool"
+                ]
+                [ Html.text "bigardone" ]
             ]
-            [ Html.text "elm" ]
-        , Html.text " by "
-        , Html.a
-            [ Html.href "https://github.com/bigardone"
-            , Html.target "_blank"
-            , Html.class "cool"
-            ]
-            [ Html.text "bigardone" ]
         ]
 
 
-navbar : Html msg
-navbar =
+navbar : msg -> Html msg
+navbar onShowSidebarClick =
     Html.nav
         [ Html.class "main-content__nav" ]
         [ Html.div
             [ Html.class "container" ]
             [ Html.div
-                []
+                [ Html.class "" ]
                 [ Html.a
                     [ Html.class "logo"
                     , Html.href (Route.toHref Route.Top)
                     ]
                     [ Html.text "elm-css patterns" ]
                 ]
-            , Html.a
-                [ Html.href "https://github.com/bigardone/elm-css-patterns"
-                , Html.target "_blank"
+            , Html.div
+                []
+                [ Html.a
+                    [ Html.href "https://github.com/bigardone/elm-css-patterns"
+                    , Html.target "_blank"
+                    ]
+                    [ Assets.githubIcon ]
+                , Html.span
+                    [ Html.class "burger"
+                    , Html.onClick onShowSidebarClick
+                    ]
+                    [ Assets.barsIcon ]
                 ]
-                [ Assets.githubIcon ]
             ]
         ]
 
 
-sidebar : Html msg
-sidebar =
+sidebar : Bool -> Html msg
+sidebar showSidebar =
     Html.aside
-        [ Html.class "main-content__sidebar" ]
+        [ Html.classList
+            [ ( "main-content__sidebar", True )
+            , ( "show", showSidebar )
+            ]
+        ]
         [ Html.nav
             [ Html.class "main-nav" ]
             [ Html.div
