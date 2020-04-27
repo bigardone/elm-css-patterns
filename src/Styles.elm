@@ -2,6 +2,7 @@ module Styles exposing (mainContent)
 
 import Css
 import Css.Global
+import Css.Transitions
 import Styles.Animations as Animations
 import Styles.Colors as Colors
 
@@ -14,6 +15,7 @@ mainContent =
     , Css.displayFlex
     , Css.flexDirection Css.column
     , Css.height <| Css.pct 100
+    , Css.Global.withClass "main-top" mainTop
     , Css.Global.descendants
         [ Css.Global.selector ".main-content__sidebar" mainContentSidebar
         , Css.Global.selector ".main-content__body" mainContentBody
@@ -29,11 +31,60 @@ mainContent =
         , Css.Global.selector "a"
             [ Css.textDecoration Css.none
             , Css.color Colors.blueDarker
+            , Css.Global.withClass "cool"
+                [ Css.position Css.relative
+                , Css.fontWeight <| Css.int 500
+                , Css.after
+                    [ Css.property "content" "\" \""
+                    , Css.backgroundColor Colors.blueLight
+                    , Css.position Css.absolute
+                    , Css.left <| Css.em 0.6
+                    , Css.bottom <| Css.em -0.1
+                    , Css.zIndex <| Css.int -1
+                    , Css.property "width" "calc(100% - .4em)"
+                    , Css.property "height" "calc(100% - .6em)"
+                    , Css.opacity <| Css.num 0.2
+                    , Css.property "transition" "0.35s cubic-bezier(0.25, 0.1, 0, 2.05)"
+                    ]
+                , Css.hover
+                    [ Css.after
+                        [ Css.left Css.zero
+                        , Css.bottom <| Css.px -2
+                        , Css.width <| Css.pct 100
+                        , Css.height <| Css.pct 100
+                        ]
+                    ]
+                ]
             ]
         , Css.Global.selector "h1"
             [ Css.fontSize <| Css.rem 1.9
             , Css.fontWeight <| Css.int 700
             , Css.color Colors.black
+            ]
+        ]
+    ]
+
+
+mainTop : List Css.Style
+mainTop =
+    [ Css.textAlign Css.center
+    , Css.Global.descendants
+        [ Css.Global.selector ".top-header"
+            [ Animations.scale
+            , Css.marginBottom <| Css.rem 5
+            ]
+        , Css.Global.selector "h1"
+            [ Css.fontSize <| Css.rem 3.4
+            , Css.marginBottom <| Css.em 1
+            ]
+        , Css.Global.selector ".hero"
+            [ Css.fontSize <| Css.rem 1.8 ]
+        , Css.Global.selector ".sections"
+            [ Css.displayFlex
+            , Css.width <| Css.pct 60
+            , Css.margin2 Css.zero Css.auto
+            , Css.justifyContent Css.spaceBetween
+            , Css.alignItems Css.center
             ]
         ]
     ]
@@ -125,7 +176,12 @@ mainContentBody =
         , Css.Global.selector ".header"
             [ Css.marginBottom <| Css.rem 3
             , Css.color Colors.black
+            , Css.displayFlex
+            , Css.alignItems Css.center
+            , Css.justifyContent Css.spaceBetween
             ]
+        , Css.Global.selector ".header svg"
+            [ Css.marginLeft <| Css.rem 0.3 ]
         , Css.Global.selector ".content"
             [ Css.displayFlex
             , Css.justifyContent Css.center
@@ -141,7 +197,7 @@ mainContentBody =
             , Animations.scale
             ]
         , Css.Global.selector ".code"
-            [ Css.marginTop <| Css.rem 5
+            [ Css.marginTop <| Css.rem 3
             , Css.overflow Css.auto
             , Css.borderRadius <| Css.px 4
             , Css.fontFamilies [ "monospace" ]

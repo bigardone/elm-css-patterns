@@ -5,6 +5,7 @@ module Pages.Top exposing
     , page
     )
 
+import Generated.Route as Route exposing (Route)
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
 import Page exposing (Document, Page)
@@ -34,38 +35,56 @@ view =
     { title = "Home"
     , body =
         [ Html.header
-            [ Html.class "header" ]
+            [ Html.class "top-header" ]
             [ Html.h1
                 []
-                [ Html.text "Elm CSS patterns" ]
+                [ Html.text "elm-css patterns" ]
+            , Html.p
+                [ Html.class "hero" ]
+                [ Html.text "Common CSS patterns done in "
+                , Html.a
+                    [ Html.href "https://elm-lang.org/"
+                    , Html.target "_blank"
+                    , Html.class "cool"
+                    ]
+                    [ Html.text " elm" ]
+                , Html.text " and "
+                , Html.a
+                    [ Html.href "https://github.com/rtfeldman/elm-css"
+                    , Html.target "_blank"
+                    , Html.class "cool"
+                    ]
+                    [ Html.text " elm-css" ]
+                , Html.text "."
+                , Html.br [] []
+                , Html.text "Powered by "
+                , Html.a
+                    [ Html.href "https://github.com/ryannhg/elm-spa"
+                    , Html.target "_blank"
+                    , Html.class "cool"
+                    ]
+                    [ Html.text " elm-spa" ]
+                , Html.text ". Inspired by "
+                , Html.a
+                    [ Html.href "https://github.com/phuoc-ng/csslayout"
+                    , Html.target "_blank"
+                    , Html.class "cool"
+                    ]
+                    [ Html.text " csslayout" ]
+                , Html.text "."
+                ]
             ]
-        , Html.p
-            []
-            [ Html.text "Common CSS patterns done in "
+        , Html.div
+            [ Html.class "sections" ]
+            [ Html.a
+                [ Html.href <| Route.toHref Route.Layout_Top ]
+                [ Html.text "Layout" ]
             , Html.a
-                [ Html.href "https://elm-lang.org/"
-                , Html.target "_blank"
-                ]
-                [ Html.text " elm " ]
-            , Html.text " and "
+                [ Html.href <| Route.toHref Route.Navigation_Top ]
+                [ Html.text "Navigation" ]
             , Html.a
-                [ Html.href "https://github.com/rtfeldman/elm-css"
-                , Html.target "_blank"
-                ]
-                [ Html.text " elm-css" ]
-            , Html.text ". Powered by "
-            , Html.a
-                [ Html.href "https://github.com/ryannhg/elm-spa"
-                , Html.target "_blank"
-                ]
-                [ Html.text " elm-spa" ]
-            , Html.text ". Inspired by "
-            , Html.a
-                [ Html.href "https://github.com/phuoc-ng/csslayout"
-                , Html.target "_blank"
-                ]
-                [ Html.text " csslayout" ]
-            , Html.text "."
+                [ Html.href <| Route.toHref Route.Input_Top ]
+                [ Html.text "Input" ]
             ]
         ]
     }

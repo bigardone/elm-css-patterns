@@ -1,15 +1,8 @@
 module Pages.Input.CustomRadio.Top exposing (Flags, Model, Msg, page)
 
 import Components
-import Css
-import Html.Styled as Html exposing (Html)
-import Html.Styled.Attributes as Html
-import Html.Styled.Keyed
-import List
+import Components.Input.CustomRadio as PageComponent
 import Page exposing (Document, Page)
-import Placeholders.Rectangle exposing (Rectangle)
-import Styles.Colors as Colors
-import Styles.Input.CustomRadio as CustomRadio
 
 
 type alias Flags =
@@ -17,8 +10,8 @@ type alias Flags =
 
 
 type alias Model =
-    { code : String
-    , rectangle : Rectangle
+    { component : PageComponent.Model
+    , code : String
     }
 
 
@@ -37,11 +30,7 @@ page =
 
 init : Model
 init =
-    { rectangle =
-        Placeholders.Rectangle.default
-            |> Placeholders.Rectangle.withBackgroundColor Colors.grey
-            |> Placeholders.Rectangle.withHeight (Css.px 4)
-            |> Placeholders.Rectangle.withWidth (Css.pct 80)
+    { component = PageComponent.init
     , code = """
 import Css
 import Html.Styled as Html exposing (Html)
@@ -103,54 +92,14 @@ update _ model =
 
 
 view : Model -> Document Msg
-view ({ code } as model) =
+view { code, component } =
     { title = "Custom radio | Input"
     , body =
         { header = "Custom radio input"
-        , content = contentView model
+        , content = PageComponent.view component
         , code = code
+        , componentUrl = "https://github.com/bigardone/elm-css-patterns/blob/master/src/Components/Input/CustomRadio.elm"
         }
             |> Components.pageBody
     }
-
-
-contentView : Model -> Html Msg
-contentView { rectangle } =
-    Html.div
-        [ Html.css
-            [ CustomRadio.customRadio ]
-        ]
-        [ List.range 1 3
-            |> List.map (radioView rectangle)
-            |> Html.Styled.Keyed.node "div" []
-        ]
-
-
-radioView : Rectangle -> Int -> ( String, Html msg )
-radioView rectangle index =
-    let
-        id =
-            "customRadio" ++ String.fromInt index
-    in
-    ( id
-    , Html.label
-        [ Html.class "custom-radio"
-        , Html.for id
-        ]
-        [ Html.input
-            [ Html.type_ "radio"
-            , Html.id id
-            , Html.class "custom-radio__input"
-            , Html.name "radio"
-            ]
-            []
-        , Html.div
-            [ Html.class "custom-radio__icon" ]
-            [ Html.div
-                [ Html.class "custom-radio__inner-icon" ]
-                []
-            ]
-        , Placeholders.Rectangle.view rectangle
-        ]
-    )
 

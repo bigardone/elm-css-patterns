@@ -98,6 +98,7 @@ view { code, component } =
         { header = "Custom checkbox input"
         , content = PageComponent.view component
         , code = code
+        , componentUrl = "https://github.com/bigardone/elm-css-patterns/blob/master/src/Components/Input/CustomCheckbox.elm"
         }
             |> Components.pageBody
     }

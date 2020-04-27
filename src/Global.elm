@@ -79,9 +79,14 @@ view :
     }
     -> Document msg
 view { page, global, toMsg } =
-    Components.layout
-        { page = page
-        }
+    case Route.fromUrl global.url of
+        Just Route.Top ->
+            Components.topLayout { page = page }
+
+        _ ->
+            Components.layout
+                { page = page
+                }
 
 
 

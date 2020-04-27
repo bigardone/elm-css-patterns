@@ -1,14 +1,8 @@
 module Pages.Layout.StickyHeader.Top exposing (Flags, Model, Msg, page)
 
 import Components
-import Css
-import Html.Styled as Html exposing (Html)
-import Html.Styled.Attributes as Html
+import Components.Layout.StickyHeader as PageComponent
 import Page exposing (Document, Page)
-import Placeholders.Block exposing (Block)
-import Placeholders.Rectangle exposing (Rectangle)
-import Styles.Colors as Colors
-import Styles.Layout.StickyHeader as StickyHeaderStyles
 
 
 type alias Flags =
@@ -17,8 +11,7 @@ type alias Flags =
 
 type alias Model =
     { code : String
-    , block : Block
-    , rectangle : Rectangle
+    , component : PageComponent.Model
     }
 
 
@@ -37,15 +30,7 @@ page =
 
 init : Model
 init =
-    { block =
-        Placeholders.Block.default
-            |> Placeholders.Block.withItems [ 1, 2, 3, 2, 3, 4, 5, 2, 1, 2, 4, 2, 5, 3 ]
-            |> Placeholders.Block.withBackgroundColor Colors.grey
-    , rectangle =
-        Placeholders.Rectangle.default
-            |> Placeholders.Rectangle.withHeight (Css.px 8)
-            |> Placeholders.Rectangle.withBackgroundColor Colors.grey
-            |> Placeholders.Rectangle.withWidth (Css.pct 80)
+    { component = PageComponent.init
     , code = """
 import Css
 import Html.Styled as Html exposing (Html)
@@ -77,28 +62,13 @@ update _ model =
 
 
 view : Model -> Document Msg
-view ({ code } as model) =
+view { code, component } =
     { title = "Sticky header | Layout"
     , body =
         { header = "Sticky header layout"
-        , content = contentView model
+        , content = PageComponent.view component
         , code = code
+        , componentUrl = "https://github.com/bigardone/elm-css-patterns/blob/master/src/Components/Layout/StickyHeader.elm"
         }
             |> Components.pageBody
     }
-
-
-contentView : Model -> Html Msg
-contentView { block, rectangle } =
-    Html.div
-        [ Html.css
-            [ StickyHeaderStyles.stickyHeader ]
-        ]
-        [ Html.header
-            []
-            [ Placeholders.Rectangle.view rectangle ]
-        , List.range 1 6
-            |> List.map (\_ -> Placeholders.Block.view block)
-            |> Html.main_ []
-        ]
-

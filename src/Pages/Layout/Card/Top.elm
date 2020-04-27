@@ -1,14 +1,8 @@
 module Pages.Layout.Card.Top exposing (Flags, Model, Msg, page)
 
 import Components
-import Css
-import Html.Styled as Html exposing (Html)
-import Html.Styled.Attributes as Html
-import List
+import Components.Layout.Card as PageComponent
 import Page exposing (Document, Page)
-import Placeholders.Square exposing (Square)
-import Styles.Colors as Colors
-import Styles.Layout.Card as CardStyles
 
 
 type alias Flags =
@@ -17,7 +11,7 @@ type alias Flags =
 
 type alias Model =
     { code : String
-    , square : Square
+    , component : PageComponent.Model
     }
 
 
@@ -36,10 +30,7 @@ page =
 
 init : Model
 init =
-    { square =
-        Placeholders.Square.default
-            |> Placeholders.Square.withBackgroundColor Colors.grey
-            |> Placeholders.Square.withSize (Css.px 112)
+    { component = PageComponent.init
     , code = """
 import Css
 import Html.Styled as Html exposing (Html)
@@ -74,27 +65,14 @@ update _ model =
 
 
 view : Model -> Document Msg
-view ({ code } as model) =
+view { code, component } =
     { title = "Card | Layout"
     , body =
         { header = "Card layout"
-        , content = contentView model
+        , content = PageComponent.view component
         , code = code
+        , componentUrl = "https://github.com/bigardone/elm-css-patterns/blob/master/src/Components/Layout/Card.elm"
         }
             |> Components.pageBody
     }
 
-
-contentView : Model -> Html Msg
-contentView { square } =
-    List.range 1 12
-        |> List.map (cardItems square)
-        |> Html.div
-            [ Html.css [ CardStyles.card ] ]
-
-
-cardItems : Square -> Int -> Html Msg
-cardItems square _ =
-    Html.div
-        []
-        [ Placeholders.Square.view square ]

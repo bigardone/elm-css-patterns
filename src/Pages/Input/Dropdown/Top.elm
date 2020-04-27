@@ -1,15 +1,8 @@
 module Pages.Input.Dropdown.Top exposing (Flags, Model, Msg, page)
 
 import Components
-import Css
-import Html.Styled as Html exposing (Html)
-import Html.Styled.Attributes as Html
+import Components.Input.Dropdown as PageComponent
 import Page exposing (Document, Page)
-import Placeholders.Block exposing (Block)
-import Placeholders.Rectangle exposing (Rectangle)
-import Placeholders.Triangle exposing (Triangle)
-import Styles.Colors as Colors
-import Styles.Input.Dropdown as DropdownStyles
 
 
 type alias Flags =
@@ -18,10 +11,7 @@ type alias Flags =
 
 type alias Model =
     { code : String
-    , rectangle : Rectangle
-    , triangle : Triangle
-    , block : Block
-    , smallBlock : Block
+    , component : PageComponent.Model
     }
 
 
@@ -40,24 +30,7 @@ page =
 
 init : Model
 init =
-    { rectangle =
-        Placeholders.Rectangle.default
-            |> Placeholders.Rectangle.withBackgroundColor Colors.grey
-            |> Placeholders.Rectangle.withHeight (Css.px 4)
-            |> Placeholders.Rectangle.withWidth (Css.pct 80)
-    , triangle =
-        Placeholders.Triangle.default
-            |> Placeholders.Triangle.withBottomCorner
-            |> Placeholders.Triangle.withBackgroundColor Colors.grey
-            |> Placeholders.Triangle.withSize (Css.px 8)
-    , block =
-        Placeholders.Block.default
-            |> Placeholders.Block.withBackgroundColor Colors.grey
-            |> Placeholders.Block.withItems [ 1, 2, 3, 2, 3, 4, 5, 2, 1, 2, 4, 2, 5, 3 ]
-    , smallBlock =
-        Placeholders.Block.default
-            |> Placeholders.Block.withBackgroundColor Colors.grey
-            |> Placeholders.Block.withItems [ 1, 2, 3, 2, 3, 2, 1, 3, 2 ]
+    { component = PageComponent.init
     , code = """
 import Css
 import Html.Styled as Html exposing (Html)
@@ -104,36 +77,14 @@ update _ model =
 
 
 view : Model -> Document Msg
-view ({ code } as model) =
+view { code, component } =
     { title = "Dropdown | Input"
     , body =
         { header = "Dropdown input"
-        , content = contentView model
+        , content = PageComponent.view component
         , code = code
+        , componentUrl = "https://github.com/bigardone/elm-css-patterns/blob/master/src/Components/Input/Dropdown.elm"
         }
             |> Components.pageBody
     }
-
-
-contentView : Model -> Html Msg
-contentView { rectangle, triangle, block, smallBlock } =
-    Html.div
-        [ Html.css
-            [ DropdownStyles.dropdown ]
-        ]
-        [ Html.div
-            [ Html.class "dropdown" ]
-            [ Html.div
-                [ Html.class "button" ]
-                [ Placeholders.Rectangle.view rectangle
-                , Placeholders.Triangle.view triangle
-                ]
-            , Html.div
-                [ Html.class "dropdown__content" ]
-                [ Placeholders.Block.view smallBlock ]
-            ]
-        , Html.div
-            [ Html.class "other-content" ]
-            [ Placeholders.Block.view block ]
-        ]
 

@@ -1,15 +1,8 @@
 module Pages.Input.RadioButtonGroup.Top exposing (Flags, Model, Msg, page)
 
 import Components
-import Css
-import Html.Styled as Html exposing (Html)
-import Html.Styled.Attributes as Html
-import Html.Styled.Keyed
-import List
+import Components.Input.RadioButtonGroup as PageComponent
 import Page exposing (Document, Page)
-import Placeholders.Rectangle exposing (Rectangle)
-import Styles.Colors as Colors
-import Styles.Input.RadioButtonGroup as RadioButtonGroup
 
 
 type alias Flags =
@@ -18,7 +11,7 @@ type alias Flags =
 
 type alias Model =
     { code : String
-    , rectangle : Rectangle
+    , component : PageComponent.Model
     }
 
 
@@ -37,11 +30,7 @@ page =
 
 init : Model
 init =
-    { rectangle =
-        Placeholders.Rectangle.default
-            |> Placeholders.Rectangle.withBackgroundColor Colors.grey
-            |> Placeholders.Rectangle.withHeight (Css.px 4)
-            |> Placeholders.Rectangle.withWidth (Css.pct 80)
+    { component = PageComponent.init
     , code = """
 import Css
 import Html.Styled as Html exposing (Html)
@@ -107,55 +96,14 @@ update _ model =
 
 
 view : Model -> Document Msg
-view ({ code } as model) =
+view { code, component } =
     { title = "Radio button group | Input"
     , body =
         { header = "Radio button group"
-        , content = contentView model
+        , content = PageComponent.view component
         , code = code
+        , componentUrl = "https://github.com/bigardone/elm-css-patterns/blob/master/src/Components/Input/RadioButtonGroup.elm"
         }
             |> Components.pageBody
     }
-
-
-contentView : Model -> Html Msg
-contentView { rectangle } =
-    Html.div
-        [ Html.css
-            [ RadioButtonGroup.radioButtonGroup ]
-        ]
-        [ List.range 1 3
-            |> List.map (radioView rectangle)
-            |> Html.Styled.Keyed.node "div"
-                [ Html.class "radio-button-group" ]
-        ]
-
-
-radioView : Rectangle -> Int -> ( String, Html msg )
-radioView rectangle index =
-    let
-        id =
-            "radioButton" ++ String.fromInt index
-
-        checked =
-            index == 1
-    in
-    ( id
-    , Html.div
-        [ Html.class "radio-button" ]
-        [ Html.input
-            [ Html.type_ "radio"
-            , Html.id id
-            , Html.class "radio-button__input"
-            , Html.name "radio"
-            , Html.checked checked
-            ]
-            []
-        , Html.label
-            [ Html.class "radio-button__label"
-            , Html.for id
-            ]
-            [ Placeholders.Rectangle.view rectangle ]
-        ]
-    )
 

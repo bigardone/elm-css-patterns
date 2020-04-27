@@ -1,13 +1,8 @@
 module Pages.Navigation.Tab.Top exposing (Flags, Model, Msg, page)
 
 import Components
-import Css
-import Html.Styled as Html exposing (Html)
-import Html.Styled.Attributes as Html
+import Components.Navigation.Tab as PageComponent
 import Page exposing (Document, Page)
-import Placeholders.Rectangle exposing (Rectangle)
-import Styles.Colors as Colors
-import Styles.Navigation.Tab as TabStyles
 
 
 type alias Flags =
@@ -16,7 +11,7 @@ type alias Flags =
 
 type alias Model =
     { code : String
-    , rectangle : Rectangle
+    , component : PageComponent.Model
     }
 
 
@@ -35,10 +30,7 @@ page =
 
 init : Model
 init =
-    { rectangle =
-        Placeholders.Rectangle.default
-            |> Placeholders.Rectangle.withBackgroundColor Colors.grey
-            |> Placeholders.Rectangle.withHeight (Css.px 4)
+    { component = PageComponent.init
     , code = """
 import Css
 import Html.Styled as Html exposing (Html)
@@ -85,34 +77,13 @@ update _ model =
 
 
 view : Model -> Document Msg
-view ({ code } as model) =
+view { code, component } =
     { title = "Tab | Navigation"
     , body =
         { header = "Tab navigation"
-        , content = contentView model
+        , content = PageComponent.view component
         , code = code
+        , componentUrl = "https://github.com/bigardone/elm-css-patterns/blob/master/src/Components/Navidation/Tab.elm"
         }
             |> Components.pageBody
     }
-
-
-contentView : Model -> Html Msg
-contentView { rectangle } =
-    Html.div
-        [ Html.css
-            [ TabStyles.tab ]
-        ]
-        [ Html.div
-            [ Html.class "tabs" ]
-            [ Html.div
-                [ Html.class "tabs__item tabs__item--active" ]
-                [ Placeholders.Rectangle.view rectangle ]
-            , Html.div
-                [ Html.class "tabs__item" ]
-                [ Placeholders.Rectangle.view rectangle ]
-            , Html.div
-                [ Html.class "tabs__item" ]
-                [ Placeholders.Rectangle.view rectangle ]
-            ]
-        ]
-

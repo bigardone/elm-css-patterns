@@ -4,6 +4,7 @@ module Components exposing
     , layoutNav
     , navigationNav
     , pageBody
+    , topLayout
     )
 
 import Assets
@@ -13,6 +14,31 @@ import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
 import Html.Styled.Keyed as HtmlKeyed
 import Styles
+
+
+topLayout : { page : Document msg } -> Document msg
+topLayout { page } =
+    { title = page.title ++ " | elm-css patterns"
+    , body =
+        [ Html.main_
+            [ Html.css Styles.mainContent
+            , Html.id "main"
+            , Html.class "main-top"
+            ]
+            [ navbar
+            , Html.div
+                [ Html.class "main-content__body" ]
+                [ Html.div
+                    [ Html.class "container" ]
+                    [ Html.div
+                        [ Html.class "inner" ]
+                        page.body
+                    ]
+                ]
+            , footer
+            ]
+        ]
+    }
 
 
 layout : { page : Document msg } -> Document msg
@@ -34,20 +60,31 @@ layout { page } =
                         page.body
                     ]
                 ]
-            , Html.footer
-                [ Html.class "main-content__footer" ]
-                [ Html.text "Crafted with ❤ and "
-                , Html.a
-                    [ Html.href "https://elm-lang.org/" ]
-                    [ Html.text "elm" ]
-                , Html.text " by "
-                , Html.a
-                    [ Html.href "https://github.com/bigardone" ]
-                    [ Html.text "bigardone" ]
-                ]
+            , footer
             ]
         ]
     }
+
+
+footer : Html msg
+footer =
+    Html.footer
+        [ Html.class "main-content__footer" ]
+        [ Html.text "Crafted with ❤ and "
+        , Html.a
+            [ Html.href "https://elm-lang.org/"
+            , Html.target "_blank"
+            , Html.class "cool"
+            ]
+            [ Html.text "elm" ]
+        , Html.text " by "
+        , Html.a
+            [ Html.href "https://github.com/bigardone"
+            , Html.target "_blank"
+            , Html.class "cool"
+            ]
+            [ Html.text "bigardone" ]
+        ]
 
 
 navbar : Html msg
@@ -206,8 +243,8 @@ inputNavigation =
         ]
 
 
-pageBody : { header : String, content : Html msg, code : String } -> List (Html msg)
-pageBody { header, content, code } =
+pageBody : { header : String, content : Html msg, code : String, componentUrl : String } -> List (Html msg)
+pageBody { header, content, code, componentUrl } =
     let
         id =
             header
@@ -220,6 +257,14 @@ pageBody { header, content, code } =
         [ Html.h1
             []
             [ Html.text header ]
+        , Html.a
+            [ Html.href componentUrl
+            , Html.target "_blank"
+            , Html.class "cool"
+            ]
+            [ Html.text "Get the code"
+            , Assets.linkIcon
+            ]
         ]
     , HtmlKeyed.node "div"
         [ Html.class "content" ]
