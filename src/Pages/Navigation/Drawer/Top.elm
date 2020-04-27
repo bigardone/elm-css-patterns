@@ -87,7 +87,7 @@ view { code, component } =
         { header = "Drawer navigation"
         , content = PageComponent.view component
         , code = code
-        , componentUrl = "https://github.com/bigardone/elm-css-patterns/blob/master/src/Components/Navidation/Drawer.elm"
+        , componentUrl = "https://github.com/bigardone/elm-css-patterns/blob/master/src/Components/Navigation/Drawer.elm"
         }
             |> Components.pageBody
     }

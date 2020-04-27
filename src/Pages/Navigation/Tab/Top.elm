@@ -83,7 +83,7 @@ view { code, component } =
         { header = "Tab navigation"
         , content = PageComponent.view component
         , code = code
-        , componentUrl = "https://github.com/bigardone/elm-css-patterns/blob/master/src/Components/Navidation/Tab.elm"
+        , componentUrl = "https://github.com/bigardone/elm-css-patterns/blob/master/src/Components/Navigation/Tab.elm"
         }
             |> Components.pageBody
     }
