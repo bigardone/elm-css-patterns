@@ -12,8 +12,8 @@ githubIcon : SS.Svg msg
 githubIcon =
     SS.svg
         [ SSA.viewBox "0 0 20 20"
-        , SSA.width "16px"
-        , SSA.height "16px"
+        , SSA.width "1.2rem"
+        , SSA.height "1.2rem"
         ]
         [ SS.path
             [ SSA.fill "currentColor"
@@ -42,8 +42,8 @@ barsIcon : SS.Svg msg
 barsIcon =
     SS.svg
         [ SSA.viewBox "0 0 448 512"
-        , SSA.width "16px"
-        , SSA.height "16px"
+        , SSA.width "1.2rem"
+        , SSA.height "1.2rem"
         ]
         [ SS.path
             [ SSA.fill "currentColor"

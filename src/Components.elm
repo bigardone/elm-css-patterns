@@ -23,7 +23,10 @@ layout onShowSidebarClick { page, showSidebar, isTop } =
         [ Html.div
             [ Html.css Styles.mainContent
             , Html.id "main"
-            , Html.classList [ ( "main-top", isTop ) ]
+            , Html.classList
+                [ ( "main-top", isTop )
+                , ( "show-sidebar", showSidebar )
+                ]
             ]
             [ navbar onShowSidebarClick
             , Html.div

@@ -16,6 +16,7 @@ mainContent =
     , Css.flexDirection Css.column
     , Css.minHeight <| Css.vh 100
     , Css.Global.withClass "main-top" mainTop
+    , Css.Global.withClass "show-sidebar" showSidebar
     , Css.Global.descendants
         [ Css.Global.selector ".main-content__sidebar" mainContentSidebar
         , Css.Global.selector ".main-content__body" mainContentBody
@@ -93,6 +94,17 @@ mainTop =
             , Css.justifyContent Css.spaceBetween
             , Css.alignItems Css.center
             ]
+        ]
+    ]
+
+
+showSidebar : List Css.Style
+showSidebar =
+    [ Css.height <| Css.vh 100
+    , Css.overflow Css.hidden
+    , Css.Global.descendants
+        [ Css.Global.selector ".main-content__sidebar"
+            [ Css.display Css.none ]
         ]
     ]
 
@@ -179,12 +191,19 @@ mainContentSidebar =
             , Css.position Css.fixed
             , Css.top <| Css.px 80
             , Css.left Css.zero
+            , Css.bottom Css.zero
             , Css.width <| Css.pct 100
             , Css.backgroundColor Colors.white
             , Css.padding <| Css.rem 1
-            , Css.height <| Css.vh 100
             , Css.zIndex <| Css.int 999
+            , Css.overflowY Css.auto
             , Animations.fade
+            ]
+        , Css.Global.descendants
+            [ Css.Global.selector ".main-nav"
+                [ Css.important <| Css.marginTop Css.zero ]
+            , Css.Global.selector "svg"
+                [ Css.fontSize <| Css.rem 1.2 ]
             ]
         ]
     ]
