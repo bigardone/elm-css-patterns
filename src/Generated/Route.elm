@@ -25,6 +25,8 @@ type Route
     | Layout_StickyFooter_Top
     | Layout_StickyHeader_Top
     | Navigation_Drawer_Top
+    | Navigation_Pagination_Top
+    | Navigation_Split_Top
     | Navigation_Tab_Top
 
 
@@ -52,6 +54,8 @@ routes =
         , Parser.map Layout_StickyFooter_Top (Parser.s "layout" </> Parser.s "sticky-footer")
         , Parser.map Layout_StickyHeader_Top (Parser.s "layout" </> Parser.s "sticky-header")
         , Parser.map Navigation_Drawer_Top (Parser.s "navigation" </> Parser.s "drawer")
+        , Parser.map Navigation_Pagination_Top (Parser.s "navigation" </> Parser.s "pagination")
+        , Parser.map Navigation_Split_Top (Parser.s "navigation" </> Parser.s "split")
         , Parser.map Navigation_Tab_Top (Parser.s "navigation" </> Parser.s "tab")
         ]
 
@@ -109,6 +113,12 @@ toHref route =
                 
                 Navigation_Drawer_Top ->
                     [ "navigation", "drawer" ]
+                
+                Navigation_Pagination_Top ->
+                    [ "navigation", "pagination" ]
+                
+                Navigation_Split_Top ->
+                    [ "navigation", "split" ]
                 
                 Navigation_Tab_Top ->
                     [ "navigation", "tab" ]

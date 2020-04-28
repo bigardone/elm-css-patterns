@@ -157,6 +157,12 @@ layoutNav =
         , Html.li
             []
             [ Html.a
+                [ Html.href <| Route.toHref Route.Layout_HolyGrail_Top ]
+                [ Html.text "Holy grail" ]
+            ]
+        , Html.li
+            []
+            [ Html.a
                 [ Html.href <| Route.toHref Route.Layout_Sidebar_Top ]
                 [ Html.text "Sidebar" ]
             ]
@@ -169,20 +175,14 @@ layoutNav =
         , Html.li
             []
             [ Html.a
-                [ Html.href <| Route.toHref Route.Layout_HolyGrail_Top ]
-                [ Html.text "Holy grail" ]
+                [ Html.href <| Route.toHref Route.Layout_StickyFooter_Top ]
+                [ Html.text "Sticky footer" ]
             ]
         , Html.li
             []
             [ Html.a
                 [ Html.href <| Route.toHref Route.Layout_StickyHeader_Top ]
                 [ Html.text "Sticky header" ]
-            ]
-        , Html.li
-            []
-            [ Html.a
-                [ Html.href <| Route.toHref Route.Layout_StickyFooter_Top ]
-                [ Html.text "Sticky footer" ]
             ]
         ]
 
@@ -200,6 +200,18 @@ navigationNav =
         , Html.li
             []
             [ Html.a
+                [ Html.href <| Route.toHref Route.Navigation_Pagination_Top ]
+                [ Html.text "Pagination" ]
+            ]
+        , Html.li
+            []
+            [ Html.a
+                [ Html.href <| Route.toHref Route.Navigation_Split_Top ]
+                [ Html.text "Split navigation" ]
+            ]
+        , Html.li
+            []
+            [ Html.a
                 [ Html.href <| Route.toHref Route.Navigation_Tab_Top ]
                 [ Html.text "Tab" ]
             ]
@@ -213,12 +225,6 @@ inputNavigation =
         [ Html.li
             []
             [ Html.a
-                [ Html.href <| Route.toHref Route.Input_Dropdown_Top ]
-                [ Html.text "Dropdown" ]
-            ]
-        , Html.li
-            []
-            [ Html.a
                 [ Html.href <| Route.toHref Route.Input_CustomCheckbox_Top ]
                 [ Html.text "Custom checkbox" ]
             ]
@@ -227,6 +233,12 @@ inputNavigation =
             [ Html.a
                 [ Html.href <| Route.toHref Route.Input_CustomRadio_Top ]
                 [ Html.text "Custom radio" ]
+            ]
+        , Html.li
+            []
+            [ Html.a
+                [ Html.href <| Route.toHref Route.Input_Dropdown_Top ]
+                [ Html.text "Dropdown" ]
             ]
         , Html.li
             []
