@@ -132,6 +132,7 @@ layoutNavItems : List ( Route, String )
 layoutNavItems =
     [ ( Route.Layout_Card_Top, "Card" )
     , ( Route.Layout_HolyGrail_Top, "Holy grail" )
+    , ( Route.Layout_SameHeightColumns_Top, "Same height columns" )
     , ( Route.Layout_Sidebar_Top, "Sidebar" )
     , ( Route.Layout_SplitScreen_Top, "Split screen" )
     , ( Route.Layout_StickyFooter_Top, "Sticky footer" )

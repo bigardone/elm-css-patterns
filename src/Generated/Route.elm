@@ -20,6 +20,7 @@ type Route
     | Input_RadioButtonGroup_Top
     | Layout_Card_Top
     | Layout_HolyGrail_Top
+    | Layout_SameHeightColumns_Top
     | Layout_Sidebar_Top
     | Layout_SplitScreen_Top
     | Layout_StickyFooter_Top
@@ -49,6 +50,7 @@ routes =
         , Parser.map Input_RadioButtonGroup_Top (Parser.s "input" </> Parser.s "radio-button-group")
         , Parser.map Layout_Card_Top (Parser.s "layout" </> Parser.s "card")
         , Parser.map Layout_HolyGrail_Top (Parser.s "layout" </> Parser.s "holy-grail")
+        , Parser.map Layout_SameHeightColumns_Top (Parser.s "layout" </> Parser.s "same-height-columns")
         , Parser.map Layout_Sidebar_Top (Parser.s "layout" </> Parser.s "sidebar")
         , Parser.map Layout_SplitScreen_Top (Parser.s "layout" </> Parser.s "split-screen")
         , Parser.map Layout_StickyFooter_Top (Parser.s "layout" </> Parser.s "sticky-footer")
@@ -98,6 +100,9 @@ toHref route =
                 
                 Layout_HolyGrail_Top ->
                     [ "layout", "holy-grail" ]
+                
+                Layout_SameHeightColumns_Top ->
+                    [ "layout", "same-height-columns" ]
                 
                 Layout_Sidebar_Top ->
                     [ "layout", "sidebar" ]

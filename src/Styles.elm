@@ -91,10 +91,16 @@ mainTop =
             ]
         , Css.Global.selector ".patterns"
             [ Css.displayFlex
-            , Css.width <| Css.pct 60
+            , Css.width <| Css.pct 80
             , Css.margin2 Css.zero Css.auto
             , Css.justifyContent Css.spaceBetween
             , Css.alignItems Css.flexStart
+            , Css.Global.descendants
+                [ Css.Global.selector ".patterns__section"
+                    [ Css.flex <| Css.int 1 ]
+                , Css.Global.selector ".patterns__header"
+                    [ Css.marginBottom <| Css.rem 1 ]
+                ]
             , Breakpoints.small
                 [ Css.width <| Css.pct 100
                 , Css.display Css.block

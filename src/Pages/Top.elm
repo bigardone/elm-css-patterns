@@ -64,27 +64,36 @@ view =
             [ Html.class "patterns" ]
             [ Html.div
                 [ Html.class "patterns__section" ]
-                [ Html.h3
-                    []
-                    [ Html.text "Layout" ]
+                [ Html.header
+                    [ Html.class "patterns__header" ]
+                    [ Html.h3
+                        []
+                        [ Html.text "Layout" ]
+                    ]
                 , Components.layoutNavItems
                     |> List.map navItem
                     |> Html.Styled.Keyed.ul [ Html.class "list" ]
                 ]
             , Html.div
                 [ Html.class "patterns__section" ]
-                [ Html.h3
-                    []
-                    [ Html.text "Navigation" ]
+                [ Html.header
+                    [ Html.class "patterns__header" ]
+                    [ Html.h3
+                        []
+                        [ Html.text "Navigation" ]
+                    ]
                 , Components.navigationNavItems
                     |> List.map navItem
                     |> Html.Styled.Keyed.ul [ Html.class "list" ]
                 ]
             , Html.div
                 [ Html.class "patterns__section" ]
-                [ Html.h3
-                    []
-                    [ Html.text "Input" ]
+                [ Html.header
+                    [ Html.class "patterns__header" ]
+                    [ Html.h3
+                        []
+                        [ Html.text "Input" ]
+                    ]
                 , Components.inputNavItems
                     |> List.map navItem
                     |> Html.Styled.Keyed.ul [ Html.class "list" ]
