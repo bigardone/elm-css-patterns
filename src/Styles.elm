@@ -37,14 +37,13 @@ mainContent =
                 , Css.fontWeight <| Css.int 500
                 , Css.after
                     [ Css.property "content" "\" \""
-                    , Css.backgroundColor Colors.blueLight
+                    , Css.backgroundColor Colors.blueLighter
                     , Css.position Css.absolute
                     , Css.left <| Css.em 0.6
                     , Css.bottom <| Css.em -0.1
                     , Css.zIndex <| Css.int -1
                     , Css.property "width" "calc(100% - .4em)"
                     , Css.property "height" "calc(100% - .6em)"
-                    , Css.opacity <| Css.num 0.2
                     , Css.property "transition" "0.35s cubic-bezier(0.25, 0.1, 0, 2.05)"
                     ]
                 , Css.hover
@@ -159,15 +158,15 @@ mainContentSidebar =
             , Css.fontSize <| Css.rem 0.9
             , Css.position Css.sticky
             , Css.top <| Css.px 100
+            , Css.paddingRight <| Css.rem 5
             , Css.Global.descendants
                 [ Css.Global.selector ".main-nav__section"
-                    [ Css.marginBottom <| Css.rem 2 ]
+                    [ Css.marginBottom <| Css.rem 1 ]
                 , Css.Global.selector ".main-nav__header"
                     [ Css.Global.descendants
                         [ Css.Global.selector "a"
                             [ Css.textTransform Css.uppercase
                             , Css.color Colors.blueDark
-                            , Css.marginBottom <| Css.em 0.6
                             , Css.fontSize <| Css.rem 0.8
                             , Css.fontWeight Css.bolder
                             ]
@@ -178,6 +177,13 @@ mainContentSidebar =
                     , Css.color Colors.blackLightest
                     , Css.display Css.block
                     , Css.padding2 (Css.rem 0.3) Css.zero
+                    , Css.Global.withClass "active"
+                        [ Css.color Colors.blueDarker
+                        , Css.backgroundColor Colors.blueLighter
+                        , Css.padding (Css.rem 0.3)
+                        , Css.margin2 Css.zero (Css.rem -0.3)
+                        , Css.borderRadius <| Css.px 2
+                        ]
                     , Css.hover
                         [ Css.color Colors.blueDarker ]
                     ]
@@ -201,7 +207,9 @@ mainContentSidebar =
             ]
         , Css.Global.descendants
             [ Css.Global.selector ".main-nav"
-                [ Css.important <| Css.marginTop Css.zero ]
+                [ Css.important <| Css.marginTop Css.zero
+                , Css.important <| Css.paddingRight Css.zero
+                ]
             , Css.Global.selector "svg"
                 [ Css.fontSize <| Css.rem 1.2 ]
             ]

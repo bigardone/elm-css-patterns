@@ -85,16 +85,12 @@ view :
     }
     -> Document msg
 view { page, global, toMsg } =
-    let
-        isTop =
-            case Route.fromUrl global.url of
-                Just Route.Top ->
-                    True
-
-                _ ->
-                    False
-    in
-    Components.layout (toMsg ShowSidebar) { page = page, showSidebar = global.showSidebar, isTop = isTop }
+    Components.layout (toMsg ShowSidebar)
+        { page = page
+        , showSidebar = global.showSidebar
+        , url =
+            global.url
+        }
 
 
 

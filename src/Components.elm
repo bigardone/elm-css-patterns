@@ -1,23 +1,33 @@
 module Components exposing
-    ( inputNavigation
+    ( inputNavItems
     , layout
-    , layoutNav
-    , navigationNav
+    , layoutNavItems
+    , navigationNavItems
     , pageBody
     )
 
 import Assets
 import Document exposing (Document)
-import Generated.Route as Route
+import Generated.Route as Route exposing (Route)
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
 import Html.Styled.Events as Html
 import Html.Styled.Keyed as HtmlKeyed
 import Styles
+import Url exposing (Url)
 
 
-layout : msg -> { page : Document msg, showSidebar : Bool, isTop : Bool } -> Document msg
-layout onShowSidebarClick { page, showSidebar, isTop } =
+layout : msg -> { page : Document msg, showSidebar : Bool, url : Url } -> Document msg
+layout onShowSidebarClick { page, showSidebar, url } =
+    let
+        isTop =
+            case Route.fromUrl url of
+                Just Route.Top ->
+                    True
+
+                _ ->
+                    False
+    in
     { title = page.title ++ " | elm-css patterns"
     , body =
         [ Html.div
@@ -33,7 +43,7 @@ layout onShowSidebarClick { page, showSidebar, isTop } =
                 [ Html.class "main-content__body" ]
                 [ Html.div
                     [ Html.class "container" ]
-                    [ sidebar showSidebar
+                    [ sidebar showSidebar url
                     , Html.div
                         [ Html.class "inner" ]
                         page.body
@@ -100,8 +110,37 @@ navbar onShowSidebarClick =
         ]
 
 
-sidebar : Bool -> Html msg
-sidebar showSidebar =
+layoutNavItems : List ( Route, String )
+layoutNavItems =
+    [ ( Route.Layout_Card_Top, "Card" )
+    , ( Route.Layout_HolyGrail_Top, "Holy grail" )
+    , ( Route.Layout_Sidebar_Top, "Sidebar" )
+    , ( Route.Layout_SplitScreen_Top, "Split screen" )
+    , ( Route.Layout_StickyFooter_Top, "Sticky footer" )
+    , ( Route.Layout_StickyHeader_Top, "Sticky header" )
+    ]
+
+
+navigationNavItems : List ( Route, String )
+navigationNavItems =
+    [ ( Route.Navigation_Drawer_Top, "Drawer" )
+    , ( Route.Navigation_Pagination_Top, "Pagination" )
+    , ( Route.Navigation_Split_Top, "Split navigation" )
+    , ( Route.Navigation_Tab_Top, "Tab" )
+    ]
+
+
+inputNavItems : List ( Route, String )
+inputNavItems =
+    [ ( Route.Input_CustomCheckbox_Top, "Custom checkbox" )
+    , ( Route.Input_CustomRadio_Top, "Custom radio" )
+    , ( Route.Input_Dropdown_Top, "Dropdown" )
+    , ( Route.Input_RadioButtonGroup_Top, "Radio button group" )
+    ]
+
+
+sidebar : Bool -> Url -> Html msg
+sidebar showSidebar url =
     Html.aside
         [ Html.classList
             [ ( "main-content__sidebar", True )
@@ -118,7 +157,7 @@ sidebar showSidebar =
                         [ Html.href <| Route.toHref Route.Layout_Top ]
                         [ Html.text "Layout" ]
                     ]
-                , layoutNav
+                , nav layoutNavItems url
                 ]
             , Html.div
                 [ Html.class "main-nav__section" ]
@@ -128,7 +167,7 @@ sidebar showSidebar =
                         [ Html.href <| Route.toHref Route.Navigation_Top ]
                         [ Html.text "Navigation" ]
                     ]
-                , navigationNav
+                , nav navigationNavItems url
                 ]
             , Html.div
                 [ Html.class "main-nav__section" ]
@@ -138,115 +177,35 @@ sidebar showSidebar =
                         [ Html.href <| Route.toHref Route.Input_Top ]
                         [ Html.text "Input" ]
                     ]
-                , inputNavigation
+                , nav inputNavItems url
                 ]
             ]
         ]
 
 
-layoutNav : Html msg
-layoutNav =
-    Html.ul
-        [ Html.class "list" ]
-        [ Html.li
-            []
-            [ Html.a
-                [ Html.href <| Route.toHref Route.Layout_Card_Top ]
-                [ Html.text "Card" ]
+nav : List ( Route, String ) -> Url -> Html msg
+nav items url =
+    items
+        |> List.map (navItem url)
+        |> HtmlKeyed.ul [ Html.class "list" ]
+
+
+navItem : Url -> ( Route, String ) -> ( String, Html msg )
+navItem url ( route, text ) =
+    let
+        active =
+            Route.fromUrl url == Just route
+    in
+    ( text
+    , Html.li
+        []
+        [ Html.a
+            [ Html.href <| Route.toHref route
+            , Html.classList [ ( "active", active ) ]
             ]
-        , Html.li
-            []
-            [ Html.a
-                [ Html.href <| Route.toHref Route.Layout_HolyGrail_Top ]
-                [ Html.text "Holy grail" ]
-            ]
-        , Html.li
-            []
-            [ Html.a
-                [ Html.href <| Route.toHref Route.Layout_Sidebar_Top ]
-                [ Html.text "Sidebar" ]
-            ]
-        , Html.li
-            []
-            [ Html.a
-                [ Html.href <| Route.toHref Route.Layout_SplitScreen_Top ]
-                [ Html.text "Split screen" ]
-            ]
-        , Html.li
-            []
-            [ Html.a
-                [ Html.href <| Route.toHref Route.Layout_StickyFooter_Top ]
-                [ Html.text "Sticky footer" ]
-            ]
-        , Html.li
-            []
-            [ Html.a
-                [ Html.href <| Route.toHref Route.Layout_StickyHeader_Top ]
-                [ Html.text "Sticky header" ]
-            ]
+            [ Html.text text ]
         ]
-
-
-navigationNav : Html msg
-navigationNav =
-    Html.ul
-        [ Html.class "list" ]
-        [ Html.li
-            []
-            [ Html.a
-                [ Html.href <| Route.toHref Route.Navigation_Drawer_Top ]
-                [ Html.text "Drawer" ]
-            ]
-        , Html.li
-            []
-            [ Html.a
-                [ Html.href <| Route.toHref Route.Navigation_Pagination_Top ]
-                [ Html.text "Pagination" ]
-            ]
-        , Html.li
-            []
-            [ Html.a
-                [ Html.href <| Route.toHref Route.Navigation_Split_Top ]
-                [ Html.text "Split navigation" ]
-            ]
-        , Html.li
-            []
-            [ Html.a
-                [ Html.href <| Route.toHref Route.Navigation_Tab_Top ]
-                [ Html.text "Tab" ]
-            ]
-        ]
-
-
-inputNavigation : Html msg
-inputNavigation =
-    Html.ul
-        [ Html.class "list" ]
-        [ Html.li
-            []
-            [ Html.a
-                [ Html.href <| Route.toHref Route.Input_CustomCheckbox_Top ]
-                [ Html.text "Custom checkbox" ]
-            ]
-        , Html.li
-            []
-            [ Html.a
-                [ Html.href <| Route.toHref Route.Input_CustomRadio_Top ]
-                [ Html.text "Custom radio" ]
-            ]
-        , Html.li
-            []
-            [ Html.a
-                [ Html.href <| Route.toHref Route.Input_Dropdown_Top ]
-                [ Html.text "Dropdown" ]
-            ]
-        , Html.li
-            []
-            [ Html.a
-                [ Html.href <| Route.toHref Route.Input_RadioButtonGroup_Top ]
-                [ Html.text "Radio button group" ]
-            ]
-        ]
+    )
 
 
 pageBody : { header : String, content : Html msg, code : String, componentUrl : String } -> List (Html msg)

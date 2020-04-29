@@ -7,6 +7,7 @@ module Styles.Colors exposing
     , blueDark
     , blueDarker
     , blueLight
+    , blueLighter
     , green
     , grey
     , greyLight
@@ -64,6 +65,11 @@ blue =
 blueLight : Css.Color
 blueLight =
     Css.hex "8fbcbb"
+
+
+blueLighter : Css.Color
+blueLighter =
+    Css.hex "e8f1f1"
 
 
 blueDark : Css.Color
