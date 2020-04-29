@@ -5,9 +5,11 @@ module Pages.Top exposing
     , page
     )
 
+import Components
 import Generated.Route as Route exposing (Route)
-import Html.Styled as Html
+import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
+import Html.Styled.Keyed
 import Page exposing (Document, Page)
 
 
@@ -56,35 +58,49 @@ view =
                     ]
                     [ Html.text " elm-css" ]
                 , Html.text "."
-                , Html.br [] []
-                , Html.text "Powered by "
-                , Html.a
-                    [ Html.href "https://github.com/ryannhg/elm-spa"
-                    , Html.target "_blank"
-                    , Html.class "cool"
-                    ]
-                    [ Html.text " elm-spa" ]
-                , Html.text ". Inspired by "
-                , Html.a
-                    [ Html.href "https://github.com/phuoc-ng/csslayout"
-                    , Html.target "_blank"
-                    , Html.class "cool"
-                    ]
-                    [ Html.text " csslayout" ]
-                , Html.text "."
                 ]
             ]
         , Html.div
-            [ Html.class "sections" ]
-            [ Html.a
-                [ Html.href <| Route.toHref Route.Layout_Top ]
-                [ Html.text "Layout" ]
-            , Html.a
-                [ Html.href <| Route.toHref Route.Navigation_Top ]
-                [ Html.text "Navigation" ]
-            , Html.a
-                [ Html.href <| Route.toHref Route.Input_Top ]
-                [ Html.text "Input" ]
+            [ Html.class "patterns" ]
+            [ Html.div
+                [ Html.class "patterns__section" ]
+                [ Html.h3
+                    []
+                    [ Html.text "Layout" ]
+                , Components.layoutNavItems
+                    |> List.map navItem
+                    |> Html.Styled.Keyed.ul [ Html.class "list" ]
+                ]
+            , Html.div
+                [ Html.class "patterns__section" ]
+                [ Html.h3
+                    []
+                    [ Html.text "Navigation" ]
+                , Components.navigationNavItems
+                    |> List.map navItem
+                    |> Html.Styled.Keyed.ul [ Html.class "list" ]
+                ]
+            , Html.div
+                [ Html.class "patterns__section" ]
+                [ Html.h3
+                    []
+                    [ Html.text "Input" ]
+                , Components.inputNavItems
+                    |> List.map navItem
+                    |> Html.Styled.Keyed.ul [ Html.class "list" ]
+                ]
             ]
         ]
     }
+
+
+navItem : ( Route, String ) -> ( String, Html msg )
+navItem ( route, text ) =
+    ( text
+    , Html.li
+        []
+        [ Html.a
+            [ Html.href <| Route.toHref route ]
+            [ Html.text text ]
+        ]
+    )

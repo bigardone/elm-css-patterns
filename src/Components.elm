@@ -61,20 +61,38 @@ footer =
         [ Html.class "main-content__footer" ]
         [ Html.div
             [ Html.class "container" ]
-            [ Html.text "Crafted with ❤ and "
-            , Html.a
-                [ Html.href "https://elm-lang.org/"
-                , Html.target "_blank"
-                , Html.class "cool"
+            [ Html.p
+                []
+                [ Html.text "Crafted with ❤ and "
+                , Html.a
+                    [ Html.href "https://elm-lang.org/"
+                    , Html.target "_blank"
+                    , Html.class "cool"
+                    ]
+                    [ Html.text "elm" ]
+                , Html.text " by "
+                , Html.a
+                    [ Html.href "https://github.com/bigardone"
+                    , Html.target "_blank"
+                    , Html.class "cool"
+                    ]
+                    [ Html.text "bigardone" ]
+                , Html.text ". Powered by "
+                , Html.a
+                    [ Html.href "https://github.com/ryannhg/elm-spa"
+                    , Html.target "_blank"
+                    , Html.class "cool"
+                    ]
+                    [ Html.text " elm-spa" ]
+                , Html.text ". Inspired by "
+                , Html.a
+                    [ Html.href "https://github.com/phuoc-ng/csslayout"
+                    , Html.target "_blank"
+                    , Html.class "cool"
+                    ]
+                    [ Html.text " csslayout" ]
+                , Html.text "."
                 ]
-                [ Html.text "elm" ]
-            , Html.text " by "
-            , Html.a
-                [ Html.href "https://github.com/bigardone"
-                , Html.target "_blank"
-                , Html.class "cool"
-                ]
-                [ Html.text "bigardone" ]
             ]
         ]
 

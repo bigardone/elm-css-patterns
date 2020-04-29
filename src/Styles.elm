@@ -72,6 +72,9 @@ mainTop =
             [ Animations.scale
             , Css.marginBottom <| Css.rem 5
             , Css.textAlign Css.center
+            , Css.padding2 (Css.rem 5) Css.zero
+            , Breakpoints.small
+                [ Css.padding Css.zero ]
             ]
         , Css.Global.selector ".main-content__sidebar"
             [ Css.display Css.none ]
@@ -86,12 +89,22 @@ mainTop =
             , Breakpoints.small
                 [ Css.fontSize <| Css.rem 1.4 ]
             ]
-        , Css.Global.selector ".sections"
+        , Css.Global.selector ".patterns"
             [ Css.displayFlex
             , Css.width <| Css.pct 60
             , Css.margin2 Css.zero Css.auto
             , Css.justifyContent Css.spaceBetween
-            , Css.alignItems Css.center
+            , Css.alignItems Css.flexStart
+            , Breakpoints.small
+                [ Css.width <| Css.pct 100
+                , Css.display Css.block
+                , Css.Global.descendants
+                    [ Css.Global.selector ".patterns__section"
+                        [ Css.marginBottom <| Css.rem 2
+                        , Css.textAlign Css.center
+                        ]
+                    ]
+                ]
             ]
         ]
     ]
@@ -188,6 +201,9 @@ mainContentSidebar =
                         [ Css.color Colors.blueDarker ]
                     ]
                 ]
+            , Breakpoints.small
+                [ Css.position Css.static
+                ]
             ]
         ]
     , Breakpoints.small
@@ -283,11 +299,7 @@ mainContentFooter =
             , Css.displayFlex
             , Css.alignItems Css.center
             , Css.justifyContent Css.center
-            , Breakpoints.small
-                [ Css.justifyContent Css.flexStart ]
             ]
-        , Css.Global.selector "a"
-            [ Css.margin2 Css.zero (Css.rem 0.3) ]
         ]
     ]
 
