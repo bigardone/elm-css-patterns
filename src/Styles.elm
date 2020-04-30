@@ -143,7 +143,8 @@ mainContentNav =
             [ Css.textDecoration Css.none
             , Css.color Colors.blueDarker
             , Css.fontWeight Css.bolder
-            , Css.textTransform Css.uppercase
+            , Css.textTransform Css.lowercase
+            , Css.fontSize <| Css.rem 1.1
             ]
         , Css.Global.selector ".container"
             [ Css.displayFlex
