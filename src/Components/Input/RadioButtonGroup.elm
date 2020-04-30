@@ -10,6 +10,7 @@ import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
 import Html.Styled.Keyed
 import Placeholders.Rectangle exposing (Rectangle)
+import Styles.Breakpoints as Breakpoints
 import Styles.Colors as Colors
 
 
@@ -105,6 +106,8 @@ css =
             , Css.padding <| Css.rem 0.8
             , Css.width <| Css.px 150
             , Css.cursor Css.pointer
+            , Breakpoints.small
+                [ Css.width <| Css.px 80 ]
             ]
         , Css.Global.selector ".radio-button:not(:last-of-type)"
             [ Css.borderRight3 (Css.px 1) Css.solid Colors.grey ]

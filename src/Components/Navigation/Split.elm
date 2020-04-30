@@ -9,6 +9,7 @@ import Css.Global
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
 import Placeholders.Rectangle exposing (Rectangle)
+import Styles.Breakpoints as Breakpoints
 import Styles.Colors as Colors
 
 
@@ -80,9 +81,14 @@ css =
                     [ Css.padding <| Css.rem 0.7
                     , Css.lastOfType
                         [ Css.marginLeft Css.auto ]
+                    , Breakpoints.small
+                        [ Css.padding <| Css.rem 0.3 ]
                     ]
                 , Css.Global.selector ".placeholder-rectangle"
-                    [ Css.width <| Css.rem 5 ]
+                    [ Css.width <| Css.rem 5
+                    , Breakpoints.small
+                        [ Css.width <| Css.rem 3 ]
+                    ]
                 ]
             ]
         ]

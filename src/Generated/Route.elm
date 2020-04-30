@@ -25,6 +25,7 @@ type Route
     | Layout_SplitScreen_Top
     | Layout_StickyFooter_Top
     | Layout_StickyHeader_Top
+    | Navigation_Breadcrumb_Top
     | Navigation_Drawer_Top
     | Navigation_Pagination_Top
     | Navigation_Split_Top
@@ -55,6 +56,7 @@ routes =
         , Parser.map Layout_SplitScreen_Top (Parser.s "layout" </> Parser.s "split-screen")
         , Parser.map Layout_StickyFooter_Top (Parser.s "layout" </> Parser.s "sticky-footer")
         , Parser.map Layout_StickyHeader_Top (Parser.s "layout" </> Parser.s "sticky-header")
+        , Parser.map Navigation_Breadcrumb_Top (Parser.s "navigation" </> Parser.s "breadcrumb")
         , Parser.map Navigation_Drawer_Top (Parser.s "navigation" </> Parser.s "drawer")
         , Parser.map Navigation_Pagination_Top (Parser.s "navigation" </> Parser.s "pagination")
         , Parser.map Navigation_Split_Top (Parser.s "navigation" </> Parser.s "split")
@@ -115,6 +117,9 @@ toHref route =
                 
                 Layout_StickyHeader_Top ->
                     [ "layout", "sticky-header" ]
+                
+                Navigation_Breadcrumb_Top ->
+                    [ "navigation", "breadcrumb" ]
                 
                 Navigation_Drawer_Top ->
                     [ "navigation", "drawer" ]

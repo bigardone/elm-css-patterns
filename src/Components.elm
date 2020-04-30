@@ -142,7 +142,8 @@ layoutNavItems =
 
 navigationNavItems : List ( Route, String )
 navigationNavItems =
-    [ ( Route.Navigation_Drawer_Top, "Drawer" )
+    [ ( Route.Navigation_Breadcrumb_Top, "Breadcrumb" )
+    , ( Route.Navigation_Drawer_Top, "Drawer" )
     , ( Route.Navigation_Pagination_Top, "Pagination" )
     , ( Route.Navigation_Split_Top, "Split navigation" )
     , ( Route.Navigation_Tab_Top, "Tab" )

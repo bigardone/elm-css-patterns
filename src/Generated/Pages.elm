@@ -26,6 +26,7 @@ import Pages.Layout.Sidebar.Top
 import Pages.Layout.SplitScreen.Top
 import Pages.Layout.StickyFooter.Top
 import Pages.Layout.StickyHeader.Top
+import Pages.Navigation.Breadcrumb.Top
 import Pages.Navigation.Drawer.Top
 import Pages.Navigation.Pagination.Top
 import Pages.Navigation.Split.Top
@@ -53,6 +54,7 @@ type Model
     | Layout_SplitScreen_Top_Model Pages.Layout.SplitScreen.Top.Model
     | Layout_StickyFooter_Top_Model Pages.Layout.StickyFooter.Top.Model
     | Layout_StickyHeader_Top_Model Pages.Layout.StickyHeader.Top.Model
+    | Navigation_Breadcrumb_Top_Model Pages.Navigation.Breadcrumb.Top.Model
     | Navigation_Drawer_Top_Model Pages.Navigation.Drawer.Top.Model
     | Navigation_Pagination_Top_Model Pages.Navigation.Pagination.Top.Model
     | Navigation_Split_Top_Model Pages.Navigation.Split.Top.Model
@@ -76,6 +78,7 @@ type Msg
     | Layout_SplitScreen_Top_Msg Pages.Layout.SplitScreen.Top.Msg
     | Layout_StickyFooter_Top_Msg Pages.Layout.StickyFooter.Top.Msg
     | Layout_StickyHeader_Top_Msg Pages.Layout.StickyHeader.Top.Msg
+    | Navigation_Breadcrumb_Top_Msg Pages.Navigation.Breadcrumb.Top.Msg
     | Navigation_Drawer_Top_Msg Pages.Navigation.Drawer.Top.Msg
     | Navigation_Pagination_Top_Msg Pages.Navigation.Pagination.Top.Msg
     | Navigation_Split_Top_Msg Pages.Navigation.Split.Top.Msg
@@ -110,6 +113,7 @@ type alias UpgradedPages =
     , layout_splitScreen_top : UpgradedPage Pages.Layout.SplitScreen.Top.Flags Pages.Layout.SplitScreen.Top.Model Pages.Layout.SplitScreen.Top.Msg
     , layout_stickyFooter_top : UpgradedPage Pages.Layout.StickyFooter.Top.Flags Pages.Layout.StickyFooter.Top.Model Pages.Layout.StickyFooter.Top.Msg
     , layout_stickyHeader_top : UpgradedPage Pages.Layout.StickyHeader.Top.Flags Pages.Layout.StickyHeader.Top.Model Pages.Layout.StickyHeader.Top.Msg
+    , navigation_breadcrumb_top : UpgradedPage Pages.Navigation.Breadcrumb.Top.Flags Pages.Navigation.Breadcrumb.Top.Model Pages.Navigation.Breadcrumb.Top.Msg
     , navigation_drawer_top : UpgradedPage Pages.Navigation.Drawer.Top.Flags Pages.Navigation.Drawer.Top.Model Pages.Navigation.Drawer.Top.Msg
     , navigation_pagination_top : UpgradedPage Pages.Navigation.Pagination.Top.Flags Pages.Navigation.Pagination.Top.Model Pages.Navigation.Pagination.Top.Msg
     , navigation_split_top : UpgradedPage Pages.Navigation.Split.Top.Flags Pages.Navigation.Split.Top.Model Pages.Navigation.Split.Top.Msg
@@ -135,6 +139,7 @@ pages =
     , layout_splitScreen_top = Pages.Layout.SplitScreen.Top.page |> Page.upgrade Layout_SplitScreen_Top_Model Layout_SplitScreen_Top_Msg
     , layout_stickyFooter_top = Pages.Layout.StickyFooter.Top.page |> Page.upgrade Layout_StickyFooter_Top_Model Layout_StickyFooter_Top_Msg
     , layout_stickyHeader_top = Pages.Layout.StickyHeader.Top.page |> Page.upgrade Layout_StickyHeader_Top_Model Layout_StickyHeader_Top_Msg
+    , navigation_breadcrumb_top = Pages.Navigation.Breadcrumb.Top.page |> Page.upgrade Navigation_Breadcrumb_Top_Model Navigation_Breadcrumb_Top_Msg
     , navigation_drawer_top = Pages.Navigation.Drawer.Top.page |> Page.upgrade Navigation_Drawer_Top_Model Navigation_Drawer_Top_Msg
     , navigation_pagination_top = Pages.Navigation.Pagination.Top.page |> Page.upgrade Navigation_Pagination_Top_Model Navigation_Pagination_Top_Msg
     , navigation_split_top = Pages.Navigation.Split.Top.page |> Page.upgrade Navigation_Split_Top_Model Navigation_Split_Top_Msg
@@ -196,6 +201,9 @@ init route =
         
         Route.Layout_StickyHeader_Top ->
             pages.layout_stickyHeader_top.init ()
+        
+        Route.Navigation_Breadcrumb_Top ->
+            pages.navigation_breadcrumb_top.init ()
         
         Route.Navigation_Drawer_Top ->
             pages.navigation_drawer_top.init ()
@@ -264,6 +272,9 @@ update bigMsg bigModel =
         
         ( Layout_StickyHeader_Top_Msg msg, Layout_StickyHeader_Top_Model model ) ->
             pages.layout_stickyHeader_top.update msg model
+        
+        ( Navigation_Breadcrumb_Top_Msg msg, Navigation_Breadcrumb_Top_Model model ) ->
+            pages.navigation_breadcrumb_top.update msg model
         
         ( Navigation_Drawer_Top_Msg msg, Navigation_Drawer_Top_Model model ) ->
             pages.navigation_drawer_top.update msg model
@@ -335,6 +346,9 @@ bundle bigModel =
         
         Layout_StickyHeader_Top_Model model ->
             pages.layout_stickyHeader_top.bundle model
+        
+        Navigation_Breadcrumb_Top_Model model ->
+            pages.navigation_breadcrumb_top.bundle model
         
         Navigation_Drawer_Top_Model model ->
             pages.navigation_drawer_top.bundle model

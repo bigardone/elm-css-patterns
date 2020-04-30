@@ -9,6 +9,7 @@ import Css.Global
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
 import Placeholders.Block exposing (Block)
+import Styles.Breakpoints as Breakpoints
 import Styles.Colors as Colors
 
 
@@ -73,9 +74,14 @@ css =
             , Css.top Css.zero
             , Css.padding <| Css.rem 1
             , Css.Global.descendants
-                [ Css.Global.selector "> div"
-                    [ Css.marginBottom <| Css.rem 1 ]
+                [ Css.Global.selector ".placeholder-block"
+                    [ Css.marginBottom <| Css.rem 1
+                    , Breakpoints.small
+                        [ Css.marginBottom <| Css.rem 0.5 ]
+                    ]
                 ]
+            , Breakpoints.small
+                [ Css.width <| Css.pct 25 ]
             ]
         ]
     ]
