@@ -11,9 +11,11 @@ import Url.Parser as Parser exposing ((</>), Parser)
 type Route
     = Top
     | NotFound
+    | Feedback_Top
     | Input_Top
     | Layout_Top
     | Navigation_Top
+    | Feedback_Tooltip_Top
     | Input_CustomCheckbox_Top
     | Input_CustomRadio_Top
     | Input_Dropdown_Top
@@ -42,9 +44,11 @@ routes =
     Parser.oneOf
         [ Parser.map Top Parser.top
         , Parser.map NotFound (Parser.s "not-found")
+        , Parser.map Feedback_Top (Parser.s "feedback")
         , Parser.map Input_Top (Parser.s "input")
         , Parser.map Layout_Top (Parser.s "layout")
         , Parser.map Navigation_Top (Parser.s "navigation")
+        , Parser.map Feedback_Tooltip_Top (Parser.s "feedback" </> Parser.s "tooltip")
         , Parser.map Input_CustomCheckbox_Top (Parser.s "input" </> Parser.s "custom-checkbox")
         , Parser.map Input_CustomRadio_Top (Parser.s "input" </> Parser.s "custom-radio")
         , Parser.map Input_Dropdown_Top (Parser.s "input" </> Parser.s "dropdown")
@@ -76,6 +80,9 @@ toHref route =
                 NotFound ->
                     [ "not-found" ]
                 
+                Feedback_Top ->
+                    [ "feedback" ]
+                
                 Input_Top ->
                     [ "input" ]
                 
@@ -84,6 +91,9 @@ toHref route =
                 
                 Navigation_Top ->
                     [ "navigation" ]
+                
+                Feedback_Tooltip_Top ->
+                    [ "feedback", "tooltip" ]
                 
                 Input_CustomCheckbox_Top ->
                     [ "input", "custom-checkbox" ]

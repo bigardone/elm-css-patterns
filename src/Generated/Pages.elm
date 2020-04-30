@@ -12,9 +12,11 @@ import Global
 import Page exposing (Bundle, Document)
 import Pages.Top
 import Pages.NotFound
+import Pages.Feedback.Top
 import Pages.Input.Top
 import Pages.Layout.Top
 import Pages.Navigation.Top
+import Pages.Feedback.Tooltip.Top
 import Pages.Input.CustomCheckbox.Top
 import Pages.Input.CustomRadio.Top
 import Pages.Input.Dropdown.Top
@@ -40,9 +42,11 @@ import Pages.Navigation.Tab.Top
 type Model
     = Top_Model Pages.Top.Model
     | NotFound_Model Pages.NotFound.Model
+    | Feedback_Top_Model Pages.Feedback.Top.Model
     | Input_Top_Model Pages.Input.Top.Model
     | Layout_Top_Model Pages.Layout.Top.Model
     | Navigation_Top_Model Pages.Navigation.Top.Model
+    | Feedback_Tooltip_Top_Model Pages.Feedback.Tooltip.Top.Model
     | Input_CustomCheckbox_Top_Model Pages.Input.CustomCheckbox.Top.Model
     | Input_CustomRadio_Top_Model Pages.Input.CustomRadio.Top.Model
     | Input_Dropdown_Top_Model Pages.Input.Dropdown.Top.Model
@@ -64,9 +68,11 @@ type Model
 type Msg
     = Top_Msg Pages.Top.Msg
     | NotFound_Msg Pages.NotFound.Msg
+    | Feedback_Top_Msg Pages.Feedback.Top.Msg
     | Input_Top_Msg Pages.Input.Top.Msg
     | Layout_Top_Msg Pages.Layout.Top.Msg
     | Navigation_Top_Msg Pages.Navigation.Top.Msg
+    | Feedback_Tooltip_Top_Msg Pages.Feedback.Tooltip.Top.Msg
     | Input_CustomCheckbox_Top_Msg Pages.Input.CustomCheckbox.Top.Msg
     | Input_CustomRadio_Top_Msg Pages.Input.CustomRadio.Top.Msg
     | Input_Dropdown_Top_Msg Pages.Input.Dropdown.Top.Msg
@@ -99,9 +105,11 @@ type alias UpgradedPage flags model msg =
 type alias UpgradedPages =
     { top : UpgradedPage Pages.Top.Flags Pages.Top.Model Pages.Top.Msg
     , notFound : UpgradedPage Pages.NotFound.Flags Pages.NotFound.Model Pages.NotFound.Msg
+    , feedback_top : UpgradedPage Pages.Feedback.Top.Flags Pages.Feedback.Top.Model Pages.Feedback.Top.Msg
     , input_top : UpgradedPage Pages.Input.Top.Flags Pages.Input.Top.Model Pages.Input.Top.Msg
     , layout_top : UpgradedPage Pages.Layout.Top.Flags Pages.Layout.Top.Model Pages.Layout.Top.Msg
     , navigation_top : UpgradedPage Pages.Navigation.Top.Flags Pages.Navigation.Top.Model Pages.Navigation.Top.Msg
+    , feedback_tooltip_top : UpgradedPage Pages.Feedback.Tooltip.Top.Flags Pages.Feedback.Tooltip.Top.Model Pages.Feedback.Tooltip.Top.Msg
     , input_customCheckbox_top : UpgradedPage Pages.Input.CustomCheckbox.Top.Flags Pages.Input.CustomCheckbox.Top.Model Pages.Input.CustomCheckbox.Top.Msg
     , input_customRadio_top : UpgradedPage Pages.Input.CustomRadio.Top.Flags Pages.Input.CustomRadio.Top.Model Pages.Input.CustomRadio.Top.Msg
     , input_dropdown_top : UpgradedPage Pages.Input.Dropdown.Top.Flags Pages.Input.Dropdown.Top.Model Pages.Input.Dropdown.Top.Msg
@@ -125,9 +133,11 @@ pages : UpgradedPages
 pages =
     { top = Pages.Top.page |> Page.upgrade Top_Model Top_Msg
     , notFound = Pages.NotFound.page |> Page.upgrade NotFound_Model NotFound_Msg
+    , feedback_top = Pages.Feedback.Top.page |> Page.upgrade Feedback_Top_Model Feedback_Top_Msg
     , input_top = Pages.Input.Top.page |> Page.upgrade Input_Top_Model Input_Top_Msg
     , layout_top = Pages.Layout.Top.page |> Page.upgrade Layout_Top_Model Layout_Top_Msg
     , navigation_top = Pages.Navigation.Top.page |> Page.upgrade Navigation_Top_Model Navigation_Top_Msg
+    , feedback_tooltip_top = Pages.Feedback.Tooltip.Top.page |> Page.upgrade Feedback_Tooltip_Top_Model Feedback_Tooltip_Top_Msg
     , input_customCheckbox_top = Pages.Input.CustomCheckbox.Top.page |> Page.upgrade Input_CustomCheckbox_Top_Model Input_CustomCheckbox_Top_Msg
     , input_customRadio_top = Pages.Input.CustomRadio.Top.page |> Page.upgrade Input_CustomRadio_Top_Model Input_CustomRadio_Top_Msg
     , input_dropdown_top = Pages.Input.Dropdown.Top.page |> Page.upgrade Input_Dropdown_Top_Model Input_Dropdown_Top_Msg
@@ -160,6 +170,9 @@ init route =
         Route.NotFound ->
             pages.notFound.init ()
         
+        Route.Feedback_Top ->
+            pages.feedback_top.init ()
+        
         Route.Input_Top ->
             pages.input_top.init ()
         
@@ -168,6 +181,9 @@ init route =
         
         Route.Navigation_Top ->
             pages.navigation_top.init ()
+        
+        Route.Feedback_Tooltip_Top ->
+            pages.feedback_tooltip_top.init ()
         
         Route.Input_CustomCheckbox_Top ->
             pages.input_customCheckbox_top.init ()
@@ -231,6 +247,9 @@ update bigMsg bigModel =
         ( NotFound_Msg msg, NotFound_Model model ) ->
             pages.notFound.update msg model
         
+        ( Feedback_Top_Msg msg, Feedback_Top_Model model ) ->
+            pages.feedback_top.update msg model
+        
         ( Input_Top_Msg msg, Input_Top_Model model ) ->
             pages.input_top.update msg model
         
@@ -239,6 +258,9 @@ update bigMsg bigModel =
         
         ( Navigation_Top_Msg msg, Navigation_Top_Model model ) ->
             pages.navigation_top.update msg model
+        
+        ( Feedback_Tooltip_Top_Msg msg, Feedback_Tooltip_Top_Model model ) ->
+            pages.feedback_tooltip_top.update msg model
         
         ( Input_CustomCheckbox_Top_Msg msg, Input_CustomCheckbox_Top_Model model ) ->
             pages.input_customCheckbox_top.update msg model
@@ -305,6 +327,9 @@ bundle bigModel =
         NotFound_Model model ->
             pages.notFound.bundle model
         
+        Feedback_Top_Model model ->
+            pages.feedback_top.bundle model
+        
         Input_Top_Model model ->
             pages.input_top.bundle model
         
@@ -313,6 +338,9 @@ bundle bigModel =
         
         Navigation_Top_Model model ->
             pages.navigation_top.bundle model
+        
+        Feedback_Tooltip_Top_Model model ->
+            pages.feedback_tooltip_top.bundle model
         
         Input_CustomCheckbox_Top_Model model ->
             pages.input_customCheckbox_top.bundle model

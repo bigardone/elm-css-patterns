@@ -62,45 +62,29 @@ view =
             ]
         , Html.div
             [ Html.class "patterns" ]
-            [ Html.div
-                [ Html.class "patterns__section" ]
-                [ Html.header
-                    [ Html.class "patterns__header" ]
-                    [ Html.h3
-                        []
-                        [ Html.text "Layout" ]
-                    ]
-                , Components.layoutNavItems
-                    |> List.map navItem
-                    |> Html.Styled.Keyed.ul [ Html.class "list" ]
-                ]
-            , Html.div
-                [ Html.class "patterns__section" ]
-                [ Html.header
-                    [ Html.class "patterns__header" ]
-                    [ Html.h3
-                        []
-                        [ Html.text "Navigation" ]
-                    ]
-                , Components.navigationNavItems
-                    |> List.map navItem
-                    |> Html.Styled.Keyed.ul [ Html.class "list" ]
-                ]
-            , Html.div
-                [ Html.class "patterns__section" ]
-                [ Html.header
-                    [ Html.class "patterns__header" ]
-                    [ Html.h3
-                        []
-                        [ Html.text "Input" ]
-                    ]
-                , Components.inputNavItems
-                    |> List.map navItem
-                    |> Html.Styled.Keyed.ul [ Html.class "list" ]
-                ]
+            [ patternSection "Layout" Components.layoutNavItems
+            , patternSection "Navigation" Components.navigationNavItems
+            , patternSection "Input" Components.inputNavItems
+            , patternSection "Feedback" Components.feedbackNavItems
             ]
         ]
     }
+
+
+patternSection : String -> List ( Route, String ) -> Html msg
+patternSection title items =
+    Html.div
+        [ Html.class "patterns__section" ]
+        [ Html.header
+            [ Html.class "patterns__header" ]
+            [ Html.h3
+                []
+                [ Html.text title ]
+            ]
+        , items
+            |> List.map navItem
+            |> Html.Styled.Keyed.ul [ Html.class "list" ]
+        ]
 
 
 navItem : ( Route, String ) -> ( String, Html msg )

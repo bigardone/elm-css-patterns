@@ -1,5 +1,6 @@
 module Components exposing
-    ( inputNavItems
+    ( feedbackNavItems
+    , inputNavItems
     , layout
     , layoutNavItems
     , navigationNavItems
@@ -159,6 +160,11 @@ inputNavItems =
     ]
 
 
+feedbackNavItems : List ( Route, String )
+feedbackNavItems =
+    [ ( Route.Feedback_Tooltip_Top, "Tooltip" ) ]
+
+
 sidebar : Bool -> Url -> Html msg
 sidebar showSidebar url =
     Html.aside
@@ -169,37 +175,25 @@ sidebar showSidebar url =
         ]
         [ Html.nav
             [ Html.class "main-nav" ]
-            [ Html.div
-                [ Html.class "main-nav__section" ]
-                [ Html.header
-                    [ Html.class "main-nav__header" ]
-                    [ Html.a
-                        [ Html.href <| Route.toHref Route.Layout_Top ]
-                        [ Html.text "Layout" ]
-                    ]
-                , nav layoutNavItems url
-                ]
-            , Html.div
-                [ Html.class "main-nav__section" ]
-                [ Html.header
-                    [ Html.class "main-nav__header" ]
-                    [ Html.a
-                        [ Html.href <| Route.toHref Route.Navigation_Top ]
-                        [ Html.text "Navigation" ]
-                    ]
-                , nav navigationNavItems url
-                ]
-            , Html.div
-                [ Html.class "main-nav__section" ]
-                [ Html.header
-                    [ Html.class "main-nav__header" ]
-                    [ Html.a
-                        [ Html.href <| Route.toHref Route.Input_Top ]
-                        [ Html.text "Input" ]
-                    ]
-                , nav inputNavItems url
-                ]
+            [ mainNavSection "Layout" layoutNavItems Route.Layout_Top url
+            , mainNavSection "Navigation" navigationNavItems Route.Navigation_Top url
+            , mainNavSection "Input" inputNavItems Route.Input_Top url
+            , mainNavSection "Feedback" feedbackNavItems Route.Feedback_Top url
             ]
+        ]
+
+
+mainNavSection : String -> List ( Route, String ) -> Route -> Url -> Html msg
+mainNavSection title navItems route url =
+    Html.div
+        [ Html.class "main-nav__section" ]
+        [ Html.header
+            [ Html.class "main-nav__header" ]
+            [ Html.a
+                [ Html.href <| Route.toHref route ]
+                [ Html.text title ]
+            ]
+        , nav navItems url
         ]
 
 
