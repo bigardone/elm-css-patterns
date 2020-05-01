@@ -156,6 +156,7 @@ inputNavItems =
     [ ( Route.Input_CustomCheckbox_Top, "Custom checkbox" )
     , ( Route.Input_CustomRadio_Top, "Custom radio" )
     , ( Route.Input_Dropdown_Top, "Dropdown" )
+    , ( Route.Input_FloatingLabel_Top, "Floating label" )
     , ( Route.Input_RadioButtonGroup_Top, "Radio button group" )
     ]
 
