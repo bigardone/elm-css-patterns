@@ -55,7 +55,7 @@ customCheckbox =
                 , Css.checked
                     [ Css.Global.generalSiblings
                         [ Css.Global.selector ".custom-checkbox__icon > .custom-checkbox__inner-icon"
-                            [ Css.backgroundColor <| Css.hex "333333" ]
+                            [ Css.backgroundColor <| Css.hex "88c0d0" ]
                         ]
                     ]
                 ]

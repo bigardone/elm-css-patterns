@@ -42,11 +42,11 @@ radioButtonGroup =
     Html.div
         [ Html.css
             [ Css.displayFlex
-            , Css.border3 (Css.px 1) Css.solid Colors.grey
+            , Css.border3 (Css.px 1) Css.solid (Css.hex "efefef")
             , Css.borderRadius <| Css.px 4
             , Css.Global.descendants
                 [ Css.Global.selector ".radio-button:not(:last-of-type)"
-                    [ Css.borderRight3 (Css.px 1) Css.solid Colors.grey ]
+                    [ Css.borderRight3 (Css.px 1) Css.solid (Css.hex "efefef") ]
                 ]
             ]
         ]
@@ -65,7 +65,7 @@ radioButtonGroup =
                     , Css.checked
                         [ Css.Global.generalSiblings
                             [ Css.Global.selector ".radio-button__label"
-                                [ Css.backgroundColor Colors.blue ]
+                                [ Css.backgroundColor <| Css.hex "88c0d0" ]
                             ]
                         ]
                     ]

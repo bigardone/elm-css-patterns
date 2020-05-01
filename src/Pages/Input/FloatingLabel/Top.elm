@@ -44,7 +44,7 @@ floatingLabel =
             [ Css.position Css.relative
             , Css.Global.descendants
                 [ Css.Global.selector ".floating-label__input:not(:placeholder-shown) + label"
-                    [ Css.backgroundColor Colors.white
+                    [ Css.backgroundColor <| Css.hex "ffffff"
                     , Css.transform <| Css.translate2 Css.zero (Css.pct -50)
                     , Css.opacity <| Css.num 1
                     ]
@@ -57,7 +57,7 @@ floatingLabel =
             , Html.css
                 [ Css.padding <| Css.px 8
                 , Css.borderRadius <| Css.px 4
-                , Css.border3 (Css.px 1) Css.solid Colors.grey
+                , Css.border3 (Css.px 1) Css.solid (Css.hex "efefef")
                 ]
             ]
             []

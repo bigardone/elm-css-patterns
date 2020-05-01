@@ -57,7 +57,7 @@ tooltip =
             , Html.css
                 [ Css.opacity Css.zero
                 , Css.position Css.absolute
-                , Css.backgroundColor Colors.blackLight
+                , Css.backgroundColor <| Css.hex "333333"
                 , Css.width <| Css.px 200
                 , Css.color Colors.white
                 , Css.bottom <| Css.pct 100
@@ -67,7 +67,7 @@ tooltip =
                     [ Css.property "content" " "
                     , Css.position Css.absolute
                     , Css.border3 (Css.px 8) Css.solid Css.transparent
-                    , Css.borderTopColor Colors.blackLight
+                    , Css.borderTopColor <| Css.hex "333333"
                     , Css.bottom Css.zero
                     , Css.left <| Css.pct 50
                     , Css.transform <| Css.translate2 (Css.pct -50) (Css.px 16)

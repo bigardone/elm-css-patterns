@@ -55,7 +55,7 @@ customRadio =
                 , Css.checked
                     [ Css.Global.generalSiblings
                         [ Css.Global.selector ".custom-radio__icon > .custom-radio__inner-icon"
-                            [ Css.backgroundColor <| Css.hex "333333" ]
+                            [ Css.backgroundColor <| Css.hex "88c0d0" ]
                         ]
                     ]
                 ]

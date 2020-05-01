@@ -51,7 +51,7 @@ tab =
 
         [ Html.div
             [ Html.css
-                [ Css.border3 (Css.px 1) Css.solid Colors.grey
+                [ Css.border3 (Css.px 1) Css.solid (Css.hex "efefef")
                 , Css.borderBottomColor Css.transparent
                 , Css.borderTopLeftRadius <| Css.px 2
                 , Css.borderTopRightRadius <| Css.px 2
@@ -63,7 +63,7 @@ tab =
 
         , Html.div
             [ Html.css
-                [ Css.borderBottom3 (Css.px 1) Css.solid Colors.grey ]
+                [ Css.borderBottom3 (Css.px 1) Css.solid (Css.hex "efefef") ]
             ]
             []
         ]
