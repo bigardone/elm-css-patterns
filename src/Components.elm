@@ -163,7 +163,9 @@ inputNavItems =
 
 feedbackNavItems : List ( Route, String )
 feedbackNavItems =
-    [ ( Route.Feedback_Tooltip_Top, "Tooltip" ) ]
+    [ ( Route.Feedback_Tooltip_Top, "Tooltip" )
+    , ( Route.Feedback_ProgressBar_Top, "Progress bar" )
+    ]
 
 
 sidebar : Bool -> Url -> Html msg

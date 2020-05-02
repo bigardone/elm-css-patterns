@@ -10,7 +10,6 @@ import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
 import Placeholders.Block exposing (Block)
 import Placeholders.Rectangle exposing (Rectangle)
-import Placeholders.Triangle exposing (Triangle)
 import Styles.Colors as Colors
 
 

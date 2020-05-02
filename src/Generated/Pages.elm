@@ -16,6 +16,7 @@ import Pages.Feedback.Top
 import Pages.Input.Top
 import Pages.Layout.Top
 import Pages.Navigation.Top
+import Pages.Feedback.ProgressBar.Top
 import Pages.Feedback.Tooltip.Top
 import Pages.Input.CustomCheckbox.Top
 import Pages.Input.CustomRadio.Top
@@ -47,6 +48,7 @@ type Model
     | Input_Top_Model Pages.Input.Top.Model
     | Layout_Top_Model Pages.Layout.Top.Model
     | Navigation_Top_Model Pages.Navigation.Top.Model
+    | Feedback_ProgressBar_Top_Model Pages.Feedback.ProgressBar.Top.Model
     | Feedback_Tooltip_Top_Model Pages.Feedback.Tooltip.Top.Model
     | Input_CustomCheckbox_Top_Model Pages.Input.CustomCheckbox.Top.Model
     | Input_CustomRadio_Top_Model Pages.Input.CustomRadio.Top.Model
@@ -74,6 +76,7 @@ type Msg
     | Input_Top_Msg Pages.Input.Top.Msg
     | Layout_Top_Msg Pages.Layout.Top.Msg
     | Navigation_Top_Msg Pages.Navigation.Top.Msg
+    | Feedback_ProgressBar_Top_Msg Pages.Feedback.ProgressBar.Top.Msg
     | Feedback_Tooltip_Top_Msg Pages.Feedback.Tooltip.Top.Msg
     | Input_CustomCheckbox_Top_Msg Pages.Input.CustomCheckbox.Top.Msg
     | Input_CustomRadio_Top_Msg Pages.Input.CustomRadio.Top.Msg
@@ -112,6 +115,7 @@ type alias UpgradedPages =
     , input_top : UpgradedPage Pages.Input.Top.Flags Pages.Input.Top.Model Pages.Input.Top.Msg
     , layout_top : UpgradedPage Pages.Layout.Top.Flags Pages.Layout.Top.Model Pages.Layout.Top.Msg
     , navigation_top : UpgradedPage Pages.Navigation.Top.Flags Pages.Navigation.Top.Model Pages.Navigation.Top.Msg
+    , feedback_progressBar_top : UpgradedPage Pages.Feedback.ProgressBar.Top.Flags Pages.Feedback.ProgressBar.Top.Model Pages.Feedback.ProgressBar.Top.Msg
     , feedback_tooltip_top : UpgradedPage Pages.Feedback.Tooltip.Top.Flags Pages.Feedback.Tooltip.Top.Model Pages.Feedback.Tooltip.Top.Msg
     , input_customCheckbox_top : UpgradedPage Pages.Input.CustomCheckbox.Top.Flags Pages.Input.CustomCheckbox.Top.Model Pages.Input.CustomCheckbox.Top.Msg
     , input_customRadio_top : UpgradedPage Pages.Input.CustomRadio.Top.Flags Pages.Input.CustomRadio.Top.Model Pages.Input.CustomRadio.Top.Msg
@@ -141,6 +145,7 @@ pages =
     , input_top = Pages.Input.Top.page |> Page.upgrade Input_Top_Model Input_Top_Msg
     , layout_top = Pages.Layout.Top.page |> Page.upgrade Layout_Top_Model Layout_Top_Msg
     , navigation_top = Pages.Navigation.Top.page |> Page.upgrade Navigation_Top_Model Navigation_Top_Msg
+    , feedback_progressBar_top = Pages.Feedback.ProgressBar.Top.page |> Page.upgrade Feedback_ProgressBar_Top_Model Feedback_ProgressBar_Top_Msg
     , feedback_tooltip_top = Pages.Feedback.Tooltip.Top.page |> Page.upgrade Feedback_Tooltip_Top_Model Feedback_Tooltip_Top_Msg
     , input_customCheckbox_top = Pages.Input.CustomCheckbox.Top.page |> Page.upgrade Input_CustomCheckbox_Top_Model Input_CustomCheckbox_Top_Msg
     , input_customRadio_top = Pages.Input.CustomRadio.Top.page |> Page.upgrade Input_CustomRadio_Top_Model Input_CustomRadio_Top_Msg
@@ -186,6 +191,9 @@ init route =
         
         Route.Navigation_Top ->
             pages.navigation_top.init ()
+        
+        Route.Feedback_ProgressBar_Top ->
+            pages.feedback_progressBar_top.init ()
         
         Route.Feedback_Tooltip_Top ->
             pages.feedback_tooltip_top.init ()
@@ -266,6 +274,9 @@ update bigMsg bigModel =
         
         ( Navigation_Top_Msg msg, Navigation_Top_Model model ) ->
             pages.navigation_top.update msg model
+        
+        ( Feedback_ProgressBar_Top_Msg msg, Feedback_ProgressBar_Top_Model model ) ->
+            pages.feedback_progressBar_top.update msg model
         
         ( Feedback_Tooltip_Top_Msg msg, Feedback_Tooltip_Top_Model model ) ->
             pages.feedback_tooltip_top.update msg model
@@ -349,6 +360,9 @@ bundle bigModel =
         
         Navigation_Top_Model model ->
             pages.navigation_top.bundle model
+        
+        Feedback_ProgressBar_Top_Model model ->
+            pages.feedback_progressBar_top.bundle model
         
         Feedback_Tooltip_Top_Model model ->
             pages.feedback_tooltip_top.bundle model
