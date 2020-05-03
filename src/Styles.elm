@@ -152,6 +152,7 @@ mainContentNav =
             ]
         , Css.Global.selector ".burger"
             [ Css.display Css.none
+            , Css.color Colors.blueDarker
             , Breakpoints.small
                 [ Css.display Css.inlineBlock
                 , Css.marginLeft <| Css.rem 0.3
@@ -207,9 +208,23 @@ mainContentSidebar =
                     , Css.hover
                         [ Css.color Colors.blueDarker ]
                     ]
+                , Css.Global.selector ".close"
+                    [ Css.display Css.none
+                    , Css.position Css.fixed
+                    , Css.zIndex <| Css.int 99999
+                    , Css.top <| Css.rem 1.5
+                    , Css.right <| Css.rem 0.8
+                    , Css.color Colors.blueDarker
+                    ]
                 ]
             , Breakpoints.small
-                [ Css.position Css.static
+                [ Css.position Css.relative
+                , Css.top Css.zero
+                , Css.Global.descendants
+                    [ Css.Global.selector ".close"
+                        [ Css.important <| Css.display Css.block
+                        ]
+                    ]
                 ]
             ]
         ]
@@ -218,7 +233,7 @@ mainContentSidebar =
         , Css.Global.withClass "show"
             [ Css.displayFlex
             , Css.position Css.fixed
-            , Css.top <| Css.px 80
+            , Css.top Css.zero
             , Css.left Css.zero
             , Css.bottom Css.zero
             , Css.width <| Css.pct 100

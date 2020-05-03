@@ -44,7 +44,7 @@ layout onShowSidebarClick { page, showSidebar, url } =
                 [ Html.class "main-content__body" ]
                 [ Html.div
                     [ Html.class "container" ]
-                    [ sidebar showSidebar url
+                    [ sidebar onShowSidebarClick showSidebar url
                     , Html.div
                         [ Html.class "inner" ]
                         page.body
@@ -129,48 +129,8 @@ navbar onShowSidebarClick =
         ]
 
 
-layoutNavItems : List ( Route, String )
-layoutNavItems =
-    [ ( Route.Layout_Card_Top, "Card" )
-    , ( Route.Layout_HolyGrail_Top, "Holy grail" )
-    , ( Route.Layout_SameHeightColumns_Top, "Same height columns" )
-    , ( Route.Layout_Sidebar_Top, "Sidebar" )
-    , ( Route.Layout_SplitScreen_Top, "Split screen" )
-    , ( Route.Layout_StickyFooter_Top, "Sticky footer" )
-    , ( Route.Layout_StickyHeader_Top, "Sticky header" )
-    ]
-
-
-navigationNavItems : List ( Route, String )
-navigationNavItems =
-    [ ( Route.Navigation_Breadcrumb_Top, "Breadcrumb" )
-    , ( Route.Navigation_Drawer_Top, "Drawer" )
-    , ( Route.Navigation_Pagination_Top, "Pagination" )
-    , ( Route.Navigation_Split_Top, "Split navigation" )
-    , ( Route.Navigation_Tab_Top, "Tab" )
-    ]
-
-
-inputNavItems : List ( Route, String )
-inputNavItems =
-    [ ( Route.Input_CustomCheckbox_Top, "Custom checkbox" )
-    , ( Route.Input_CustomRadio_Top, "Custom radio" )
-    , ( Route.Input_Dropdown_Top, "Dropdown" )
-    , ( Route.Input_FloatingLabel_Top, "Floating label" )
-    , ( Route.Input_RadioButtonGroup_Top, "Radio button group" )
-    ]
-
-
-feedbackNavItems : List ( Route, String )
-feedbackNavItems =
-    [ ( Route.Feedback_Loader_Top, "Loader" )
-    , ( Route.Feedback_Tooltip_Top, "Tooltip" )
-    , ( Route.Feedback_ProgressBar_Top, "Progress bar" )
-    ]
-
-
-sidebar : Bool -> Url -> Html msg
-sidebar showSidebar url =
+sidebar : msg -> Bool -> Url -> Html msg
+sidebar onShowSidebarClick showSidebar url =
     Html.aside
         [ Html.classList
             [ ( "main-content__sidebar", True )
@@ -179,7 +139,12 @@ sidebar showSidebar url =
         ]
         [ Html.nav
             [ Html.class "main-nav" ]
-            [ mainNavSection "Layout" layoutNavItems Route.Layout_Top url
+            [ Html.span
+                [ Html.class "close"
+                , Html.onClick onShowSidebarClick
+                ]
+                [ Assets.closeIcon ]
+            , mainNavSection "Layout" layoutNavItems Route.Layout_Top url
             , mainNavSection "Navigation" navigationNavItems Route.Navigation_Top url
             , mainNavSection "Input" inputNavItems Route.Input_Top url
             , mainNavSection "Feedback" feedbackNavItems Route.Feedback_Top url
@@ -265,4 +230,44 @@ pageBody { header, content, code, componentUrl } =
                 []
           )
         ]
+    ]
+
+
+layoutNavItems : List ( Route, String )
+layoutNavItems =
+    [ ( Route.Layout_Card_Top, "Card" )
+    , ( Route.Layout_HolyGrail_Top, "Holy grail" )
+    , ( Route.Layout_SameHeightColumns_Top, "Same height columns" )
+    , ( Route.Layout_Sidebar_Top, "Sidebar" )
+    , ( Route.Layout_SplitScreen_Top, "Split screen" )
+    , ( Route.Layout_StickyFooter_Top, "Sticky footer" )
+    , ( Route.Layout_StickyHeader_Top, "Sticky header" )
+    ]
+
+
+navigationNavItems : List ( Route, String )
+navigationNavItems =
+    [ ( Route.Navigation_Breadcrumb_Top, "Breadcrumb" )
+    , ( Route.Navigation_Drawer_Top, "Drawer" )
+    , ( Route.Navigation_Pagination_Top, "Pagination" )
+    , ( Route.Navigation_Split_Top, "Split navigation" )
+    , ( Route.Navigation_Tab_Top, "Tab" )
+    ]
+
+
+inputNavItems : List ( Route, String )
+inputNavItems =
+    [ ( Route.Input_CustomCheckbox_Top, "Custom checkbox" )
+    , ( Route.Input_CustomRadio_Top, "Custom radio" )
+    , ( Route.Input_Dropdown_Top, "Dropdown" )
+    , ( Route.Input_FloatingLabel_Top, "Floating label" )
+    , ( Route.Input_RadioButtonGroup_Top, "Radio button group" )
+    ]
+
+
+feedbackNavItems : List ( Route, String )
+feedbackNavItems =
+    [ ( Route.Feedback_Loader_Top, "Loader" )
+    , ( Route.Feedback_Tooltip_Top, "Tooltip" )
+    , ( Route.Feedback_ProgressBar_Top, "Progress bar" )
     ]
