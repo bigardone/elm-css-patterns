@@ -24,6 +24,7 @@ import Pages.Input.CustomRadio.Top
 import Pages.Input.Dropdown.Top
 import Pages.Input.FloatingLabel.Top
 import Pages.Input.RadioButtonGroup.Top
+import Pages.Input.SearchBox.Top
 import Pages.Layout.Card.Top
 import Pages.Layout.HolyGrail.Top
 import Pages.Layout.SameHeightColumns.Top
@@ -57,6 +58,7 @@ type Model
     | Input_Dropdown_Top_Model Pages.Input.Dropdown.Top.Model
     | Input_FloatingLabel_Top_Model Pages.Input.FloatingLabel.Top.Model
     | Input_RadioButtonGroup_Top_Model Pages.Input.RadioButtonGroup.Top.Model
+    | Input_SearchBox_Top_Model Pages.Input.SearchBox.Top.Model
     | Layout_Card_Top_Model Pages.Layout.Card.Top.Model
     | Layout_HolyGrail_Top_Model Pages.Layout.HolyGrail.Top.Model
     | Layout_SameHeightColumns_Top_Model Pages.Layout.SameHeightColumns.Top.Model
@@ -86,6 +88,7 @@ type Msg
     | Input_Dropdown_Top_Msg Pages.Input.Dropdown.Top.Msg
     | Input_FloatingLabel_Top_Msg Pages.Input.FloatingLabel.Top.Msg
     | Input_RadioButtonGroup_Top_Msg Pages.Input.RadioButtonGroup.Top.Msg
+    | Input_SearchBox_Top_Msg Pages.Input.SearchBox.Top.Msg
     | Layout_Card_Top_Msg Pages.Layout.Card.Top.Msg
     | Layout_HolyGrail_Top_Msg Pages.Layout.HolyGrail.Top.Msg
     | Layout_SameHeightColumns_Top_Msg Pages.Layout.SameHeightColumns.Top.Msg
@@ -126,6 +129,7 @@ type alias UpgradedPages =
     , input_dropdown_top : UpgradedPage Pages.Input.Dropdown.Top.Flags Pages.Input.Dropdown.Top.Model Pages.Input.Dropdown.Top.Msg
     , input_floatingLabel_top : UpgradedPage Pages.Input.FloatingLabel.Top.Flags Pages.Input.FloatingLabel.Top.Model Pages.Input.FloatingLabel.Top.Msg
     , input_radioButtonGroup_top : UpgradedPage Pages.Input.RadioButtonGroup.Top.Flags Pages.Input.RadioButtonGroup.Top.Model Pages.Input.RadioButtonGroup.Top.Msg
+    , input_searchBox_top : UpgradedPage Pages.Input.SearchBox.Top.Flags Pages.Input.SearchBox.Top.Model Pages.Input.SearchBox.Top.Msg
     , layout_card_top : UpgradedPage Pages.Layout.Card.Top.Flags Pages.Layout.Card.Top.Model Pages.Layout.Card.Top.Msg
     , layout_holyGrail_top : UpgradedPage Pages.Layout.HolyGrail.Top.Flags Pages.Layout.HolyGrail.Top.Model Pages.Layout.HolyGrail.Top.Msg
     , layout_sameHeightColumns_top : UpgradedPage Pages.Layout.SameHeightColumns.Top.Flags Pages.Layout.SameHeightColumns.Top.Model Pages.Layout.SameHeightColumns.Top.Msg
@@ -157,6 +161,7 @@ pages =
     , input_dropdown_top = Pages.Input.Dropdown.Top.page |> Page.upgrade Input_Dropdown_Top_Model Input_Dropdown_Top_Msg
     , input_floatingLabel_top = Pages.Input.FloatingLabel.Top.page |> Page.upgrade Input_FloatingLabel_Top_Model Input_FloatingLabel_Top_Msg
     , input_radioButtonGroup_top = Pages.Input.RadioButtonGroup.Top.page |> Page.upgrade Input_RadioButtonGroup_Top_Model Input_RadioButtonGroup_Top_Msg
+    , input_searchBox_top = Pages.Input.SearchBox.Top.page |> Page.upgrade Input_SearchBox_Top_Model Input_SearchBox_Top_Msg
     , layout_card_top = Pages.Layout.Card.Top.page |> Page.upgrade Layout_Card_Top_Model Layout_Card_Top_Msg
     , layout_holyGrail_top = Pages.Layout.HolyGrail.Top.page |> Page.upgrade Layout_HolyGrail_Top_Model Layout_HolyGrail_Top_Msg
     , layout_sameHeightColumns_top = Pages.Layout.SameHeightColumns.Top.page |> Page.upgrade Layout_SameHeightColumns_Top_Model Layout_SameHeightColumns_Top_Msg
@@ -220,6 +225,9 @@ init route =
         
         Route.Input_RadioButtonGroup_Top ->
             pages.input_radioButtonGroup_top.init ()
+        
+        Route.Input_SearchBox_Top ->
+            pages.input_searchBox_top.init ()
         
         Route.Layout_Card_Top ->
             pages.layout_card_top.init ()
@@ -306,6 +314,9 @@ update bigMsg bigModel =
         
         ( Input_RadioButtonGroup_Top_Msg msg, Input_RadioButtonGroup_Top_Model model ) ->
             pages.input_radioButtonGroup_top.update msg model
+        
+        ( Input_SearchBox_Top_Msg msg, Input_SearchBox_Top_Model model ) ->
+            pages.input_searchBox_top.update msg model
         
         ( Layout_Card_Top_Msg msg, Layout_Card_Top_Model model ) ->
             pages.layout_card_top.update msg model
@@ -395,6 +406,9 @@ bundle bigModel =
         
         Input_RadioButtonGroup_Top_Model model ->
             pages.input_radioButtonGroup_top.bundle model
+        
+        Input_SearchBox_Top_Model model ->
+            pages.input_searchBox_top.bundle model
         
         Layout_Card_Top_Model model ->
             pages.layout_card_top.bundle model

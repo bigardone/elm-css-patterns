@@ -262,6 +262,7 @@ inputNavItems =
     , ( Route.Input_Dropdown_Top, "Dropdown" )
     , ( Route.Input_FloatingLabel_Top, "Floating label" )
     , ( Route.Input_RadioButtonGroup_Top, "Radio button group" )
+    , ( Route.Input_SearchBox_Top, "Search box" )
     ]
 
 
