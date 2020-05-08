@@ -1,6 +1,7 @@
 module Pages.NotFound exposing (Flags, Model, Msg, page)
 
 import Html.Styled as Html
+import Html.Styled.Attributes as Html
 import Page exposing (Document, Page)
 
 
@@ -25,6 +26,16 @@ page =
 
 view : Document Msg
 view =
-    { title = "NotFound"
-    , body = [ Html.text "NotFound" ]
+    { title = "Page not found"
+    , body =
+        [ Html.section
+            [ Html.class "not-found" ]
+            [ Html.h1
+                []
+                [ Html.text "404: Page not found" ]
+            , Html.p
+                [ Html.class "hero" ]
+                [ Html.text "The pattern that you are looking for does not exist." ]
+            ]
+        ]
     }
