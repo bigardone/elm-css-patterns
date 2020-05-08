@@ -2,6 +2,7 @@ module Pages.Navigation.Tab.Top exposing (Flags, Model, Msg, page)
 
 import Components
 import Components.Navigation.Tab as PageComponent
+import Html.Styled as Html
 import Page exposing (Document, Page)
 
 
@@ -15,8 +16,8 @@ type alias Model =
     }
 
 
-type alias Msg =
-    Never
+type Msg
+    = ComponentMsg PageComponent.Msg
 
 
 page : Page Flags Model Msg
@@ -72,8 +73,14 @@ tab =
 
 
 update : Msg -> Model -> Model
-update _ model =
-    model
+update msg ({ component } as model) =
+    case msg of
+        ComponentMsg subMsg ->
+            let
+                newComponent =
+                    PageComponent.update subMsg component
+            in
+            { model | component = newComponent }
 
 
 view : Model -> Document Msg
@@ -81,7 +88,7 @@ view { code, component } =
     { title = "Tab | Navigation"
     , body =
         { header = "Tab navigation"
-        , content = PageComponent.view component
+        , content = Html.map ComponentMsg <| PageComponent.view component
         , code = code
         , componentUrl = "https://github.com/bigardone/elm-css-patterns/blob/master/src/Components/Navigation/Tab.elm"
         }
