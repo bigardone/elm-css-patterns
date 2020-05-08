@@ -33,6 +33,8 @@ init =
     { component = PageComponent.init
     , code = """
 import Css
+import Css.Global
+import Css.Transitions
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
 
@@ -63,6 +65,8 @@ tooltip =
                 , Css.bottom <| Css.pct 100
                 , Css.left <| Css.pct 50
                 , Css.transform <| Css.translate2 (Css.pct -50) (Css.px -8)
+                , Css.Transitions.transition
+                    [ Css.Transitions.opacity 200 ]
                 , Css.after
                     [ Css.property "content" " "
                     , Css.position Css.absolute
@@ -73,6 +77,8 @@ tooltip =
                     , Css.transform <| Css.translate2 (Css.pct -50) (Css.px 16)
                     , Css.height Css.zero
                     , Css.width Css.zero
+                    , Css.Transitions.transition
+                        [ Css.Transitions.opacity 200 ]
                     ]
                 ]
             ]

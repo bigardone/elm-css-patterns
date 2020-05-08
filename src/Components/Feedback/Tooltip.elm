@@ -6,6 +6,7 @@ module Components.Feedback.Tooltip exposing
 
 import Css
 import Css.Global
+import Css.Transitions
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
 import Placeholders.Block exposing (Block)
@@ -93,6 +94,8 @@ css =
             , Css.pointerEvents Css.none
             , Css.padding <| Css.rem 1
             , Css.borderRadius <| Css.px 4
+            , Css.Transitions.transition
+                [ Css.Transitions.opacity 200 ]
             , Css.after
                 [ Css.property "content" "\" \""
                 , Css.position Css.absolute
@@ -103,6 +106,8 @@ css =
                 , Css.transform <| Css.translate2 (Css.pct -50) (Css.px 16)
                 , Css.height Css.zero
                 , Css.width Css.zero
+                , Css.Transitions.transition
+                    [ Css.Transitions.opacity 200 ]
                 ]
             ]
         , Css.Global.selector ".tooltip__trigger"
@@ -114,4 +119,3 @@ css =
             ]
         ]
     ]
-
