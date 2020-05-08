@@ -33,6 +33,7 @@ init =
     { component = PageComponent.init
     , code = """
 import Css
+import Css.Global
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
 
