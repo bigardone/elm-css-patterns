@@ -131,8 +131,6 @@ mainContentNav : List Css.Style
 mainContentNav =
     [ Css.height <| Css.rem 5
     , Css.displayFlex
-    , Css.position Css.sticky
-    , Css.top Css.zero
     , Css.backgroundColor Colors.white
     , Css.alignItems Css.center
     , Css.borderBottom3 (Css.px 1) Css.solid Colors.greyLighter
@@ -160,6 +158,10 @@ mainContentNav =
                 ]
             ]
         ]
+    , Breakpoints.small
+        [ Css.position Css.sticky
+        , Css.top Css.zero
+        ]
     ]
 
 
@@ -168,6 +170,7 @@ mainContentSidebar =
     [ Css.displayFlex
     , Css.width <| Css.px 300
     , Css.flexDirection Css.column
+    , Css.paddingRight <| Css.rem 2
     , Css.Global.descendants
         [ Css.Global.selector ".inner"
             [ Css.justifyContent Css.spaceBetween
@@ -178,8 +181,10 @@ mainContentSidebar =
             [ Css.marginTop <| Css.rem 1
             , Css.fontSize <| Css.rem 0.9
             , Css.position Css.sticky
-            , Css.top <| Css.px 100
-            , Css.paddingRight <| Css.rem 5
+            , Css.top Css.zero
+            , Css.property "height" "calc(100vh - 70px)"
+            , Css.overflowY Css.auto
+            , Css.padding4 (Css.rem 1) (Css.rem 3) (Css.rem 2) Css.zero
             , Css.Global.descendants
                 [ Css.Global.selector ".main-nav__section"
                     [ Css.marginBottom <| Css.rem 1 ]
@@ -220,6 +225,8 @@ mainContentSidebar =
             , Breakpoints.small
                 [ Css.position Css.relative
                 , Css.top Css.zero
+                , Css.height Css.auto
+                , Css.overflowY Css.visible
                 , Css.Global.descendants
                     [ Css.Global.selector ".close"
                         [ Css.important <| Css.display Css.block
