@@ -9,7 +9,6 @@ import Css.Global
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
 import Placeholders.Block exposing (Block)
-import Placeholders.Circle exposing (Circle)
 import Placeholders.Rectangle exposing (Rectangle)
 import Styles.Colors as Colors
 
@@ -29,6 +28,7 @@ init =
     { block =
         Placeholders.Block.default
             |> Placeholders.Block.withBackgroundColor Colors.grey
+            |> Placeholders.Block.withItems [ 3, 2, 1, 4, 5, 4, 3, 1, 3, 4, 5, 3, 2, 1, 2, 1, 4, 5 ]
     , rectangle =
         Placeholders.Rectangle.default
             |> Placeholders.Rectangle.withHeight (Css.px 8)

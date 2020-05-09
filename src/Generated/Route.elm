@@ -23,6 +23,7 @@ type Route
     | Input_Dropdown_Top
     | Input_FloatingLabel_Top
     | Input_RadioButtonGroup_Top
+    | Input_Rating_Top
     | Input_SearchBox_Top
     | Layout_Card_Top
     | Layout_HolyGrail_Top
@@ -60,6 +61,7 @@ routes =
         , Parser.map Input_Dropdown_Top (Parser.s "input" </> Parser.s "dropdown")
         , Parser.map Input_FloatingLabel_Top (Parser.s "input" </> Parser.s "floating-label")
         , Parser.map Input_RadioButtonGroup_Top (Parser.s "input" </> Parser.s "radio-button-group")
+        , Parser.map Input_Rating_Top (Parser.s "input" </> Parser.s "rating")
         , Parser.map Input_SearchBox_Top (Parser.s "input" </> Parser.s "search-box")
         , Parser.map Layout_Card_Top (Parser.s "layout" </> Parser.s "card")
         , Parser.map Layout_HolyGrail_Top (Parser.s "layout" </> Parser.s "holy-grail")
@@ -123,6 +125,9 @@ toHref route =
                 
                 Input_RadioButtonGroup_Top ->
                     [ "input", "radio-button-group" ]
+                
+                Input_Rating_Top ->
+                    [ "input", "rating" ]
                 
                 Input_SearchBox_Top ->
                     [ "input", "search-box" ]
