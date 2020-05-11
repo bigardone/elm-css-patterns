@@ -202,12 +202,10 @@ mainContentSidebar =
                     [ Css.textDecoration Css.none
                     , Css.color Colors.blackLightest
                     , Css.display Css.block
-                    , Css.padding2 (Css.rem 0.3) Css.zero
+                    , Css.padding (Css.rem 0.3)
                     , Css.Global.withClass "active"
                         [ Css.color Colors.blueDarker
                         , Css.backgroundColor Colors.blueLighter
-                        , Css.padding (Css.rem 0.3)
-                        , Css.margin2 Css.zero (Css.rem -0.3)
                         , Css.borderRadius <| Css.px 2
                         ]
                     , Css.hover
