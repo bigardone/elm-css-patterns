@@ -18,6 +18,7 @@ import Pages.Layout.Top
 import Pages.Navigation.Top
 import Pages.Feedback.Loader.Top
 import Pages.Feedback.ProgressBar.Top
+import Pages.Feedback.RadialProgressBar.Top
 import Pages.Feedback.Tooltip.Top
 import Pages.Input.CustomCheckbox.Top
 import Pages.Input.CustomRadio.Top
@@ -53,6 +54,7 @@ type Model
     | Navigation_Top_Model Pages.Navigation.Top.Model
     | Feedback_Loader_Top_Model Pages.Feedback.Loader.Top.Model
     | Feedback_ProgressBar_Top_Model Pages.Feedback.ProgressBar.Top.Model
+    | Feedback_RadialProgressBar_Top_Model Pages.Feedback.RadialProgressBar.Top.Model
     | Feedback_Tooltip_Top_Model Pages.Feedback.Tooltip.Top.Model
     | Input_CustomCheckbox_Top_Model Pages.Input.CustomCheckbox.Top.Model
     | Input_CustomRadio_Top_Model Pages.Input.CustomRadio.Top.Model
@@ -84,6 +86,7 @@ type Msg
     | Navigation_Top_Msg Pages.Navigation.Top.Msg
     | Feedback_Loader_Top_Msg Pages.Feedback.Loader.Top.Msg
     | Feedback_ProgressBar_Top_Msg Pages.Feedback.ProgressBar.Top.Msg
+    | Feedback_RadialProgressBar_Top_Msg Pages.Feedback.RadialProgressBar.Top.Msg
     | Feedback_Tooltip_Top_Msg Pages.Feedback.Tooltip.Top.Msg
     | Input_CustomCheckbox_Top_Msg Pages.Input.CustomCheckbox.Top.Msg
     | Input_CustomRadio_Top_Msg Pages.Input.CustomRadio.Top.Msg
@@ -126,6 +129,7 @@ type alias UpgradedPages =
     , navigation_top : UpgradedPage Pages.Navigation.Top.Flags Pages.Navigation.Top.Model Pages.Navigation.Top.Msg
     , feedback_loader_top : UpgradedPage Pages.Feedback.Loader.Top.Flags Pages.Feedback.Loader.Top.Model Pages.Feedback.Loader.Top.Msg
     , feedback_progressBar_top : UpgradedPage Pages.Feedback.ProgressBar.Top.Flags Pages.Feedback.ProgressBar.Top.Model Pages.Feedback.ProgressBar.Top.Msg
+    , feedback_radialProgressBar_top : UpgradedPage Pages.Feedback.RadialProgressBar.Top.Flags Pages.Feedback.RadialProgressBar.Top.Model Pages.Feedback.RadialProgressBar.Top.Msg
     , feedback_tooltip_top : UpgradedPage Pages.Feedback.Tooltip.Top.Flags Pages.Feedback.Tooltip.Top.Model Pages.Feedback.Tooltip.Top.Msg
     , input_customCheckbox_top : UpgradedPage Pages.Input.CustomCheckbox.Top.Flags Pages.Input.CustomCheckbox.Top.Model Pages.Input.CustomCheckbox.Top.Msg
     , input_customRadio_top : UpgradedPage Pages.Input.CustomRadio.Top.Flags Pages.Input.CustomRadio.Top.Model Pages.Input.CustomRadio.Top.Msg
@@ -159,6 +163,7 @@ pages =
     , navigation_top = Pages.Navigation.Top.page |> Page.upgrade Navigation_Top_Model Navigation_Top_Msg
     , feedback_loader_top = Pages.Feedback.Loader.Top.page |> Page.upgrade Feedback_Loader_Top_Model Feedback_Loader_Top_Msg
     , feedback_progressBar_top = Pages.Feedback.ProgressBar.Top.page |> Page.upgrade Feedback_ProgressBar_Top_Model Feedback_ProgressBar_Top_Msg
+    , feedback_radialProgressBar_top = Pages.Feedback.RadialProgressBar.Top.page |> Page.upgrade Feedback_RadialProgressBar_Top_Model Feedback_RadialProgressBar_Top_Msg
     , feedback_tooltip_top = Pages.Feedback.Tooltip.Top.page |> Page.upgrade Feedback_Tooltip_Top_Model Feedback_Tooltip_Top_Msg
     , input_customCheckbox_top = Pages.Input.CustomCheckbox.Top.page |> Page.upgrade Input_CustomCheckbox_Top_Model Input_CustomCheckbox_Top_Msg
     , input_customRadio_top = Pages.Input.CustomRadio.Top.page |> Page.upgrade Input_CustomRadio_Top_Model Input_CustomRadio_Top_Msg
@@ -212,6 +217,9 @@ init route =
         
         Route.Feedback_ProgressBar_Top ->
             pages.feedback_progressBar_top.init ()
+        
+        Route.Feedback_RadialProgressBar_Top ->
+            pages.feedback_radialProgressBar_top.init ()
         
         Route.Feedback_Tooltip_Top ->
             pages.feedback_tooltip_top.init ()
@@ -304,6 +312,9 @@ update bigMsg bigModel =
         
         ( Feedback_ProgressBar_Top_Msg msg, Feedback_ProgressBar_Top_Model model ) ->
             pages.feedback_progressBar_top.update msg model
+        
+        ( Feedback_RadialProgressBar_Top_Msg msg, Feedback_RadialProgressBar_Top_Model model ) ->
+            pages.feedback_radialProgressBar_top.update msg model
         
         ( Feedback_Tooltip_Top_Msg msg, Feedback_Tooltip_Top_Model model ) ->
             pages.feedback_tooltip_top.update msg model
@@ -399,6 +410,9 @@ bundle bigModel =
         
         Feedback_ProgressBar_Top_Model model ->
             pages.feedback_progressBar_top.bundle model
+        
+        Feedback_RadialProgressBar_Top_Model model ->
+            pages.feedback_radialProgressBar_top.bundle model
         
         Feedback_Tooltip_Top_Model model ->
             pages.feedback_tooltip_top.bundle model

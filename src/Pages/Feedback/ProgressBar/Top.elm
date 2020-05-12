@@ -52,7 +52,7 @@ progressBar =
                 [ Css.displayFlex
                 , Css.alignItems Css.center
                 , Css.justifyContent Css.center
-                , Css.backgroundColor Colors.blueLight
+                , Css.backgroundColor <| Css.hex "8fbcbb"
                 , Css.color Colors.white
                 , Css.borderRadius <| Css.px 9999
                 , Css.overflow Css.hidden
@@ -98,4 +98,3 @@ view { code, component } =
         }
             |> Components.pageBody
     }
-

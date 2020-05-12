@@ -17,6 +17,7 @@ type Route
     | Navigation_Top
     | Feedback_Loader_Top
     | Feedback_ProgressBar_Top
+    | Feedback_RadialProgressBar_Top
     | Feedback_Tooltip_Top
     | Input_CustomCheckbox_Top
     | Input_CustomRadio_Top
@@ -55,6 +56,7 @@ routes =
         , Parser.map Navigation_Top (Parser.s "navigation")
         , Parser.map Feedback_Loader_Top (Parser.s "feedback" </> Parser.s "loader")
         , Parser.map Feedback_ProgressBar_Top (Parser.s "feedback" </> Parser.s "progress-bar")
+        , Parser.map Feedback_RadialProgressBar_Top (Parser.s "feedback" </> Parser.s "radial-progress-bar")
         , Parser.map Feedback_Tooltip_Top (Parser.s "feedback" </> Parser.s "tooltip")
         , Parser.map Input_CustomCheckbox_Top (Parser.s "input" </> Parser.s "custom-checkbox")
         , Parser.map Input_CustomRadio_Top (Parser.s "input" </> Parser.s "custom-radio")
@@ -107,6 +109,9 @@ toHref route =
                 
                 Feedback_ProgressBar_Top ->
                     [ "feedback", "progress-bar" ]
+                
+                Feedback_RadialProgressBar_Top ->
+                    [ "feedback", "radial-progress-bar" ]
                 
                 Feedback_Tooltip_Top ->
                     [ "feedback", "tooltip" ]
