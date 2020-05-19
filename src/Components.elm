@@ -3,6 +3,7 @@ module Components exposing
     , inputNavItems
     , layout
     , layoutNavItems
+    , miscNavItems
     , navigationNavItems
     , pageBody
     )
@@ -148,6 +149,7 @@ sidebar onShowSidebarClick showSidebar url =
             , mainNavSection "Navigation" navigationNavItems Route.Navigation_Top url
             , mainNavSection "Input" inputNavItems Route.Input_Top url
             , mainNavSection "Feedback" feedbackNavItems Route.Feedback_Top url
+            , mainNavSection "Misc" miscNavItems Route.Misc_Top url
             ]
         ]
 
@@ -273,4 +275,11 @@ feedbackNavItems =
     , ( Route.Feedback_Tooltip_Top, "Tooltip" )
     , ( Route.Feedback_ProgressBar_Top, "Progress bar" )
     , ( Route.Feedback_RadialProgressBar_Top, "Radial progress bar" )
+    ]
+
+
+miscNavItems : List ( Route, String )
+miscNavItems =
+    [ ( Route.Misc_StickyColumnsTable_Top, "Sticky columns table" )
+    , ( Route.Misc_StickyHeadersTable_Top, "Sticky headers table" )
     ]

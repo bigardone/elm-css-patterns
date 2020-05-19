@@ -91,7 +91,7 @@ mainTop =
             ]
         , Css.Global.selector ".patterns"
             [ Css.displayFlex
-            , Css.width <| Css.pct 80
+            , Css.width <| Css.pct 85
             , Css.margin2 Css.zero Css.auto
             , Css.justifyContent Css.spaceBetween
             , Css.alignItems Css.flexStart

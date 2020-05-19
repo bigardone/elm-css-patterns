@@ -66,6 +66,7 @@ view =
             , patternSection "Navigation" Components.navigationNavItems
             , patternSection "Input" Components.inputNavItems
             , patternSection "Feedback" Components.feedbackNavItems
+            , patternSection "Misc" Components.miscNavItems
             ]
         ]
     }

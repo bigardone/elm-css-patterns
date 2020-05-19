@@ -15,6 +15,7 @@ import Pages.NotFound
 import Pages.Feedback.Top
 import Pages.Input.Top
 import Pages.Layout.Top
+import Pages.Misc.Top
 import Pages.Navigation.Top
 import Pages.Feedback.Loader.Top
 import Pages.Feedback.ProgressBar.Top
@@ -34,6 +35,8 @@ import Pages.Layout.Sidebar.Top
 import Pages.Layout.SplitScreen.Top
 import Pages.Layout.StickyFooter.Top
 import Pages.Layout.StickyHeader.Top
+import Pages.Misc.StickyColumnsTable.Top
+import Pages.Misc.StickyHeadersTable.Top
 import Pages.Navigation.Breadcrumb.Top
 import Pages.Navigation.Drawer.Top
 import Pages.Navigation.Pagination.Top
@@ -51,6 +54,7 @@ type Model
     | Feedback_Top_Model Pages.Feedback.Top.Model
     | Input_Top_Model Pages.Input.Top.Model
     | Layout_Top_Model Pages.Layout.Top.Model
+    | Misc_Top_Model Pages.Misc.Top.Model
     | Navigation_Top_Model Pages.Navigation.Top.Model
     | Feedback_Loader_Top_Model Pages.Feedback.Loader.Top.Model
     | Feedback_ProgressBar_Top_Model Pages.Feedback.ProgressBar.Top.Model
@@ -70,6 +74,8 @@ type Model
     | Layout_SplitScreen_Top_Model Pages.Layout.SplitScreen.Top.Model
     | Layout_StickyFooter_Top_Model Pages.Layout.StickyFooter.Top.Model
     | Layout_StickyHeader_Top_Model Pages.Layout.StickyHeader.Top.Model
+    | Misc_StickyColumnsTable_Top_Model Pages.Misc.StickyColumnsTable.Top.Model
+    | Misc_StickyHeadersTable_Top_Model Pages.Misc.StickyHeadersTable.Top.Model
     | Navigation_Breadcrumb_Top_Model Pages.Navigation.Breadcrumb.Top.Model
     | Navigation_Drawer_Top_Model Pages.Navigation.Drawer.Top.Model
     | Navigation_Pagination_Top_Model Pages.Navigation.Pagination.Top.Model
@@ -83,6 +89,7 @@ type Msg
     | Feedback_Top_Msg Pages.Feedback.Top.Msg
     | Input_Top_Msg Pages.Input.Top.Msg
     | Layout_Top_Msg Pages.Layout.Top.Msg
+    | Misc_Top_Msg Pages.Misc.Top.Msg
     | Navigation_Top_Msg Pages.Navigation.Top.Msg
     | Feedback_Loader_Top_Msg Pages.Feedback.Loader.Top.Msg
     | Feedback_ProgressBar_Top_Msg Pages.Feedback.ProgressBar.Top.Msg
@@ -102,6 +109,8 @@ type Msg
     | Layout_SplitScreen_Top_Msg Pages.Layout.SplitScreen.Top.Msg
     | Layout_StickyFooter_Top_Msg Pages.Layout.StickyFooter.Top.Msg
     | Layout_StickyHeader_Top_Msg Pages.Layout.StickyHeader.Top.Msg
+    | Misc_StickyColumnsTable_Top_Msg Pages.Misc.StickyColumnsTable.Top.Msg
+    | Misc_StickyHeadersTable_Top_Msg Pages.Misc.StickyHeadersTable.Top.Msg
     | Navigation_Breadcrumb_Top_Msg Pages.Navigation.Breadcrumb.Top.Msg
     | Navigation_Drawer_Top_Msg Pages.Navigation.Drawer.Top.Msg
     | Navigation_Pagination_Top_Msg Pages.Navigation.Pagination.Top.Msg
@@ -126,6 +135,7 @@ type alias UpgradedPages =
     , feedback_top : UpgradedPage Pages.Feedback.Top.Flags Pages.Feedback.Top.Model Pages.Feedback.Top.Msg
     , input_top : UpgradedPage Pages.Input.Top.Flags Pages.Input.Top.Model Pages.Input.Top.Msg
     , layout_top : UpgradedPage Pages.Layout.Top.Flags Pages.Layout.Top.Model Pages.Layout.Top.Msg
+    , misc_top : UpgradedPage Pages.Misc.Top.Flags Pages.Misc.Top.Model Pages.Misc.Top.Msg
     , navigation_top : UpgradedPage Pages.Navigation.Top.Flags Pages.Navigation.Top.Model Pages.Navigation.Top.Msg
     , feedback_loader_top : UpgradedPage Pages.Feedback.Loader.Top.Flags Pages.Feedback.Loader.Top.Model Pages.Feedback.Loader.Top.Msg
     , feedback_progressBar_top : UpgradedPage Pages.Feedback.ProgressBar.Top.Flags Pages.Feedback.ProgressBar.Top.Model Pages.Feedback.ProgressBar.Top.Msg
@@ -145,6 +155,8 @@ type alias UpgradedPages =
     , layout_splitScreen_top : UpgradedPage Pages.Layout.SplitScreen.Top.Flags Pages.Layout.SplitScreen.Top.Model Pages.Layout.SplitScreen.Top.Msg
     , layout_stickyFooter_top : UpgradedPage Pages.Layout.StickyFooter.Top.Flags Pages.Layout.StickyFooter.Top.Model Pages.Layout.StickyFooter.Top.Msg
     , layout_stickyHeader_top : UpgradedPage Pages.Layout.StickyHeader.Top.Flags Pages.Layout.StickyHeader.Top.Model Pages.Layout.StickyHeader.Top.Msg
+    , misc_stickyColumnsTable_top : UpgradedPage Pages.Misc.StickyColumnsTable.Top.Flags Pages.Misc.StickyColumnsTable.Top.Model Pages.Misc.StickyColumnsTable.Top.Msg
+    , misc_stickyHeadersTable_top : UpgradedPage Pages.Misc.StickyHeadersTable.Top.Flags Pages.Misc.StickyHeadersTable.Top.Model Pages.Misc.StickyHeadersTable.Top.Msg
     , navigation_breadcrumb_top : UpgradedPage Pages.Navigation.Breadcrumb.Top.Flags Pages.Navigation.Breadcrumb.Top.Model Pages.Navigation.Breadcrumb.Top.Msg
     , navigation_drawer_top : UpgradedPage Pages.Navigation.Drawer.Top.Flags Pages.Navigation.Drawer.Top.Model Pages.Navigation.Drawer.Top.Msg
     , navigation_pagination_top : UpgradedPage Pages.Navigation.Pagination.Top.Flags Pages.Navigation.Pagination.Top.Model Pages.Navigation.Pagination.Top.Msg
@@ -160,6 +172,7 @@ pages =
     , feedback_top = Pages.Feedback.Top.page |> Page.upgrade Feedback_Top_Model Feedback_Top_Msg
     , input_top = Pages.Input.Top.page |> Page.upgrade Input_Top_Model Input_Top_Msg
     , layout_top = Pages.Layout.Top.page |> Page.upgrade Layout_Top_Model Layout_Top_Msg
+    , misc_top = Pages.Misc.Top.page |> Page.upgrade Misc_Top_Model Misc_Top_Msg
     , navigation_top = Pages.Navigation.Top.page |> Page.upgrade Navigation_Top_Model Navigation_Top_Msg
     , feedback_loader_top = Pages.Feedback.Loader.Top.page |> Page.upgrade Feedback_Loader_Top_Model Feedback_Loader_Top_Msg
     , feedback_progressBar_top = Pages.Feedback.ProgressBar.Top.page |> Page.upgrade Feedback_ProgressBar_Top_Model Feedback_ProgressBar_Top_Msg
@@ -179,6 +192,8 @@ pages =
     , layout_splitScreen_top = Pages.Layout.SplitScreen.Top.page |> Page.upgrade Layout_SplitScreen_Top_Model Layout_SplitScreen_Top_Msg
     , layout_stickyFooter_top = Pages.Layout.StickyFooter.Top.page |> Page.upgrade Layout_StickyFooter_Top_Model Layout_StickyFooter_Top_Msg
     , layout_stickyHeader_top = Pages.Layout.StickyHeader.Top.page |> Page.upgrade Layout_StickyHeader_Top_Model Layout_StickyHeader_Top_Msg
+    , misc_stickyColumnsTable_top = Pages.Misc.StickyColumnsTable.Top.page |> Page.upgrade Misc_StickyColumnsTable_Top_Model Misc_StickyColumnsTable_Top_Msg
+    , misc_stickyHeadersTable_top = Pages.Misc.StickyHeadersTable.Top.page |> Page.upgrade Misc_StickyHeadersTable_Top_Model Misc_StickyHeadersTable_Top_Msg
     , navigation_breadcrumb_top = Pages.Navigation.Breadcrumb.Top.page |> Page.upgrade Navigation_Breadcrumb_Top_Model Navigation_Breadcrumb_Top_Msg
     , navigation_drawer_top = Pages.Navigation.Drawer.Top.page |> Page.upgrade Navigation_Drawer_Top_Model Navigation_Drawer_Top_Msg
     , navigation_pagination_top = Pages.Navigation.Pagination.Top.page |> Page.upgrade Navigation_Pagination_Top_Model Navigation_Pagination_Top_Msg
@@ -208,6 +223,9 @@ init route =
         
         Route.Layout_Top ->
             pages.layout_top.init ()
+        
+        Route.Misc_Top ->
+            pages.misc_top.init ()
         
         Route.Navigation_Top ->
             pages.navigation_top.init ()
@@ -266,6 +284,12 @@ init route =
         Route.Layout_StickyHeader_Top ->
             pages.layout_stickyHeader_top.init ()
         
+        Route.Misc_StickyColumnsTable_Top ->
+            pages.misc_stickyColumnsTable_top.init ()
+        
+        Route.Misc_StickyHeadersTable_Top ->
+            pages.misc_stickyHeadersTable_top.init ()
+        
         Route.Navigation_Breadcrumb_Top ->
             pages.navigation_breadcrumb_top.init ()
         
@@ -303,6 +327,9 @@ update bigMsg bigModel =
         
         ( Layout_Top_Msg msg, Layout_Top_Model model ) ->
             pages.layout_top.update msg model
+        
+        ( Misc_Top_Msg msg, Misc_Top_Model model ) ->
+            pages.misc_top.update msg model
         
         ( Navigation_Top_Msg msg, Navigation_Top_Model model ) ->
             pages.navigation_top.update msg model
@@ -361,6 +388,12 @@ update bigMsg bigModel =
         ( Layout_StickyHeader_Top_Msg msg, Layout_StickyHeader_Top_Model model ) ->
             pages.layout_stickyHeader_top.update msg model
         
+        ( Misc_StickyColumnsTable_Top_Msg msg, Misc_StickyColumnsTable_Top_Model model ) ->
+            pages.misc_stickyColumnsTable_top.update msg model
+        
+        ( Misc_StickyHeadersTable_Top_Msg msg, Misc_StickyHeadersTable_Top_Model model ) ->
+            pages.misc_stickyHeadersTable_top.update msg model
+        
         ( Navigation_Breadcrumb_Top_Msg msg, Navigation_Breadcrumb_Top_Model model ) ->
             pages.navigation_breadcrumb_top.update msg model
         
@@ -401,6 +434,9 @@ bundle bigModel =
         
         Layout_Top_Model model ->
             pages.layout_top.bundle model
+        
+        Misc_Top_Model model ->
+            pages.misc_top.bundle model
         
         Navigation_Top_Model model ->
             pages.navigation_top.bundle model
@@ -458,6 +494,12 @@ bundle bigModel =
         
         Layout_StickyHeader_Top_Model model ->
             pages.layout_stickyHeader_top.bundle model
+        
+        Misc_StickyColumnsTable_Top_Model model ->
+            pages.misc_stickyColumnsTable_top.bundle model
+        
+        Misc_StickyHeadersTable_Top_Model model ->
+            pages.misc_stickyHeadersTable_top.bundle model
         
         Navigation_Breadcrumb_Top_Model model ->
             pages.navigation_breadcrumb_top.bundle model

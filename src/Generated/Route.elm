@@ -14,6 +14,7 @@ type Route
     | Feedback_Top
     | Input_Top
     | Layout_Top
+    | Misc_Top
     | Navigation_Top
     | Feedback_Loader_Top
     | Feedback_ProgressBar_Top
@@ -33,6 +34,8 @@ type Route
     | Layout_SplitScreen_Top
     | Layout_StickyFooter_Top
     | Layout_StickyHeader_Top
+    | Misc_StickyColumnsTable_Top
+    | Misc_StickyHeadersTable_Top
     | Navigation_Breadcrumb_Top
     | Navigation_Drawer_Top
     | Navigation_Pagination_Top
@@ -53,6 +56,7 @@ routes =
         , Parser.map Feedback_Top (Parser.s "feedback")
         , Parser.map Input_Top (Parser.s "input")
         , Parser.map Layout_Top (Parser.s "layout")
+        , Parser.map Misc_Top (Parser.s "misc")
         , Parser.map Navigation_Top (Parser.s "navigation")
         , Parser.map Feedback_Loader_Top (Parser.s "feedback" </> Parser.s "loader")
         , Parser.map Feedback_ProgressBar_Top (Parser.s "feedback" </> Parser.s "progress-bar")
@@ -72,6 +76,8 @@ routes =
         , Parser.map Layout_SplitScreen_Top (Parser.s "layout" </> Parser.s "split-screen")
         , Parser.map Layout_StickyFooter_Top (Parser.s "layout" </> Parser.s "sticky-footer")
         , Parser.map Layout_StickyHeader_Top (Parser.s "layout" </> Parser.s "sticky-header")
+        , Parser.map Misc_StickyColumnsTable_Top (Parser.s "misc" </> Parser.s "sticky-columns-table")
+        , Parser.map Misc_StickyHeadersTable_Top (Parser.s "misc" </> Parser.s "sticky-headers-table")
         , Parser.map Navigation_Breadcrumb_Top (Parser.s "navigation" </> Parser.s "breadcrumb")
         , Parser.map Navigation_Drawer_Top (Parser.s "navigation" </> Parser.s "drawer")
         , Parser.map Navigation_Pagination_Top (Parser.s "navigation" </> Parser.s "pagination")
@@ -100,6 +106,9 @@ toHref route =
                 
                 Layout_Top ->
                     [ "layout" ]
+                
+                Misc_Top ->
+                    [ "misc" ]
                 
                 Navigation_Top ->
                     [ "navigation" ]
@@ -157,6 +166,12 @@ toHref route =
                 
                 Layout_StickyHeader_Top ->
                     [ "layout", "sticky-header" ]
+                
+                Misc_StickyColumnsTable_Top ->
+                    [ "misc", "sticky-columns-table" ]
+                
+                Misc_StickyHeadersTable_Top ->
+                    [ "misc", "sticky-headers-table" ]
                 
                 Navigation_Breadcrumb_Top ->
                     [ "navigation", "breadcrumb" ]
