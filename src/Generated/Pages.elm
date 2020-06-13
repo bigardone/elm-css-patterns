@@ -37,6 +37,7 @@ import Pages.Layout.StickyFooter.Top
 import Pages.Layout.StickyHeader.Top
 import Pages.Misc.StickyColumnsTable.Top
 import Pages.Misc.StickyHeadersTable.Top
+import Pages.Misc.Timeline.Top
 import Pages.Navigation.Breadcrumb.Top
 import Pages.Navigation.Drawer.Top
 import Pages.Navigation.Pagination.Top
@@ -76,6 +77,7 @@ type Model
     | Layout_StickyHeader_Top_Model Pages.Layout.StickyHeader.Top.Model
     | Misc_StickyColumnsTable_Top_Model Pages.Misc.StickyColumnsTable.Top.Model
     | Misc_StickyHeadersTable_Top_Model Pages.Misc.StickyHeadersTable.Top.Model
+    | Misc_Timeline_Top_Model Pages.Misc.Timeline.Top.Model
     | Navigation_Breadcrumb_Top_Model Pages.Navigation.Breadcrumb.Top.Model
     | Navigation_Drawer_Top_Model Pages.Navigation.Drawer.Top.Model
     | Navigation_Pagination_Top_Model Pages.Navigation.Pagination.Top.Model
@@ -111,6 +113,7 @@ type Msg
     | Layout_StickyHeader_Top_Msg Pages.Layout.StickyHeader.Top.Msg
     | Misc_StickyColumnsTable_Top_Msg Pages.Misc.StickyColumnsTable.Top.Msg
     | Misc_StickyHeadersTable_Top_Msg Pages.Misc.StickyHeadersTable.Top.Msg
+    | Misc_Timeline_Top_Msg Pages.Misc.Timeline.Top.Msg
     | Navigation_Breadcrumb_Top_Msg Pages.Navigation.Breadcrumb.Top.Msg
     | Navigation_Drawer_Top_Msg Pages.Navigation.Drawer.Top.Msg
     | Navigation_Pagination_Top_Msg Pages.Navigation.Pagination.Top.Msg
@@ -157,6 +160,7 @@ type alias UpgradedPages =
     , layout_stickyHeader_top : UpgradedPage Pages.Layout.StickyHeader.Top.Flags Pages.Layout.StickyHeader.Top.Model Pages.Layout.StickyHeader.Top.Msg
     , misc_stickyColumnsTable_top : UpgradedPage Pages.Misc.StickyColumnsTable.Top.Flags Pages.Misc.StickyColumnsTable.Top.Model Pages.Misc.StickyColumnsTable.Top.Msg
     , misc_stickyHeadersTable_top : UpgradedPage Pages.Misc.StickyHeadersTable.Top.Flags Pages.Misc.StickyHeadersTable.Top.Model Pages.Misc.StickyHeadersTable.Top.Msg
+    , misc_timeline_top : UpgradedPage Pages.Misc.Timeline.Top.Flags Pages.Misc.Timeline.Top.Model Pages.Misc.Timeline.Top.Msg
     , navigation_breadcrumb_top : UpgradedPage Pages.Navigation.Breadcrumb.Top.Flags Pages.Navigation.Breadcrumb.Top.Model Pages.Navigation.Breadcrumb.Top.Msg
     , navigation_drawer_top : UpgradedPage Pages.Navigation.Drawer.Top.Flags Pages.Navigation.Drawer.Top.Model Pages.Navigation.Drawer.Top.Msg
     , navigation_pagination_top : UpgradedPage Pages.Navigation.Pagination.Top.Flags Pages.Navigation.Pagination.Top.Model Pages.Navigation.Pagination.Top.Msg
@@ -194,6 +198,7 @@ pages =
     , layout_stickyHeader_top = Pages.Layout.StickyHeader.Top.page |> Page.upgrade Layout_StickyHeader_Top_Model Layout_StickyHeader_Top_Msg
     , misc_stickyColumnsTable_top = Pages.Misc.StickyColumnsTable.Top.page |> Page.upgrade Misc_StickyColumnsTable_Top_Model Misc_StickyColumnsTable_Top_Msg
     , misc_stickyHeadersTable_top = Pages.Misc.StickyHeadersTable.Top.page |> Page.upgrade Misc_StickyHeadersTable_Top_Model Misc_StickyHeadersTable_Top_Msg
+    , misc_timeline_top = Pages.Misc.Timeline.Top.page |> Page.upgrade Misc_Timeline_Top_Model Misc_Timeline_Top_Msg
     , navigation_breadcrumb_top = Pages.Navigation.Breadcrumb.Top.page |> Page.upgrade Navigation_Breadcrumb_Top_Model Navigation_Breadcrumb_Top_Msg
     , navigation_drawer_top = Pages.Navigation.Drawer.Top.page |> Page.upgrade Navigation_Drawer_Top_Model Navigation_Drawer_Top_Msg
     , navigation_pagination_top = Pages.Navigation.Pagination.Top.page |> Page.upgrade Navigation_Pagination_Top_Model Navigation_Pagination_Top_Msg
@@ -289,6 +294,9 @@ init route =
         
         Route.Misc_StickyHeadersTable_Top ->
             pages.misc_stickyHeadersTable_top.init ()
+        
+        Route.Misc_Timeline_Top ->
+            pages.misc_timeline_top.init ()
         
         Route.Navigation_Breadcrumb_Top ->
             pages.navigation_breadcrumb_top.init ()
@@ -393,6 +401,9 @@ update bigMsg bigModel =
         
         ( Misc_StickyHeadersTable_Top_Msg msg, Misc_StickyHeadersTable_Top_Model model ) ->
             pages.misc_stickyHeadersTable_top.update msg model
+        
+        ( Misc_Timeline_Top_Msg msg, Misc_Timeline_Top_Model model ) ->
+            pages.misc_timeline_top.update msg model
         
         ( Navigation_Breadcrumb_Top_Msg msg, Navigation_Breadcrumb_Top_Model model ) ->
             pages.navigation_breadcrumb_top.update msg model
@@ -500,6 +511,9 @@ bundle bigModel =
         
         Misc_StickyHeadersTable_Top_Model model ->
             pages.misc_stickyHeadersTable_top.bundle model
+        
+        Misc_Timeline_Top_Model model ->
+            pages.misc_timeline_top.bundle model
         
         Navigation_Breadcrumb_Top_Model model ->
             pages.navigation_breadcrumb_top.bundle model

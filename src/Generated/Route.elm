@@ -36,6 +36,7 @@ type Route
     | Layout_StickyHeader_Top
     | Misc_StickyColumnsTable_Top
     | Misc_StickyHeadersTable_Top
+    | Misc_Timeline_Top
     | Navigation_Breadcrumb_Top
     | Navigation_Drawer_Top
     | Navigation_Pagination_Top
@@ -78,6 +79,7 @@ routes =
         , Parser.map Layout_StickyHeader_Top (Parser.s "layout" </> Parser.s "sticky-header")
         , Parser.map Misc_StickyColumnsTable_Top (Parser.s "misc" </> Parser.s "sticky-columns-table")
         , Parser.map Misc_StickyHeadersTable_Top (Parser.s "misc" </> Parser.s "sticky-headers-table")
+        , Parser.map Misc_Timeline_Top (Parser.s "misc" </> Parser.s "timeline")
         , Parser.map Navigation_Breadcrumb_Top (Parser.s "navigation" </> Parser.s "breadcrumb")
         , Parser.map Navigation_Drawer_Top (Parser.s "navigation" </> Parser.s "drawer")
         , Parser.map Navigation_Pagination_Top (Parser.s "navigation" </> Parser.s "pagination")
@@ -172,6 +174,9 @@ toHref route =
                 
                 Misc_StickyHeadersTable_Top ->
                     [ "misc", "sticky-headers-table" ]
+                
+                Misc_Timeline_Top ->
+                    [ "misc", "timeline" ]
                 
                 Navigation_Breadcrumb_Top ->
                     [ "navigation", "breadcrumb" ]

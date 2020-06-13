@@ -282,4 +282,5 @@ miscNavItems : List ( Route, String )
 miscNavItems =
     [ ( Route.Misc_StickyColumnsTable_Top, "Sticky columns table" )
     , ( Route.Misc_StickyHeadersTable_Top, "Sticky headers table" )
+    , ( Route.Misc_Timeline_Top, "Timeline" )
     ]
