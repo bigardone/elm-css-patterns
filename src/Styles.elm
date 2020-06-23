@@ -61,6 +61,7 @@ mainContent =
             , Css.fontWeight <| Css.int 700
             , Css.color Colors.black
             ]
+        , Css.Global.selector ".gallery" gallery
         ]
     ]
 
@@ -90,15 +91,9 @@ mainTop =
                 [ Css.fontSize <| Css.rem 1.4 ]
             ]
         , Css.Global.selector ".patterns"
-            [ Css.displayFlex
-            , Css.width <| Css.pct 85
-            , Css.margin2 Css.zero Css.auto
-            , Css.justifyContent Css.spaceBetween
-            , Css.alignItems Css.flexStart
+            [ Css.margin2 Css.zero Css.auto
             , Css.Global.descendants
-                [ Css.Global.selector ".patterns__section"
-                    [ Css.flex <| Css.int 1 ]
-                , Css.Global.selector ".patterns__header"
+                [ Css.Global.selector ".patterns__header"
                     [ Css.marginBottom <| Css.rem 1 ]
                 ]
             , Breakpoints.small
@@ -334,3 +329,28 @@ mainContentFooter =
 inner : List Css.Style
 inner =
     [ Css.flex <| Css.int 1 ]
+
+
+gallery : List Css.Style
+gallery =
+    [ Css.displayFlex
+    , Css.flexWrap Css.wrap
+    , Css.margin2 Css.zero (Css.px -8)
+    , Css.width <| Css.pct 100
+    , Css.paddingTop <| Css.rem 1
+    , Css.Global.descendants
+        [ Css.Global.selector "> div"
+            [ Css.flexBasis <| Css.pct 25
+            , Css.padding2 Css.zero (Css.px 8)
+            , Css.marginBottom <| Css.rem 1
+            ]
+        , Css.Global.selector "> div > div"
+            [ Css.width <| Css.pct 100 ]
+        , Css.Global.selector ".component"
+            [ Css.height <| Css.px 157
+            , Css.border3 (Css.px 1) Css.solid Colors.grey
+            , Css.borderRadius <| Css.px 4
+            , Css.padding <| Css.rem 1
+            ]
+        ]
+    ]

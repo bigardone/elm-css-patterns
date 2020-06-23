@@ -9,6 +9,32 @@ module Components exposing
     )
 
 import Assets
+import Components.Feedback.Loader
+import Components.Feedback.ProgressBar
+import Components.Feedback.RadialProgressBar
+import Components.Feedback.Tooltip
+import Components.Input.CustomCheckbox
+import Components.Input.CustomRadio
+import Components.Input.Dropdown
+import Components.Input.FloatingLabel
+import Components.Input.RadioButtonGroup
+import Components.Input.Rating
+import Components.Input.SearchBox
+import Components.Layout.Card
+import Components.Layout.HolyGrail
+import Components.Layout.SameHeightColumns
+import Components.Layout.Sidebar
+import Components.Layout.SplitScreen
+import Components.Layout.StickyFooter
+import Components.Layout.StickyHeader
+import Components.Misc.StickyColumnsTable
+import Components.Misc.StickyHeadersTable
+import Components.Misc.Timeline
+import Components.Navigation.Breadcrumb
+import Components.Navigation.Drawer
+import Components.Navigation.Pagination
+import Components.Navigation.Split
+import Components.Navigation.Tab
 import Document exposing (Document)
 import Generated.Route as Route exposing (Route)
 import Html.Styled as Html exposing (Html)
@@ -154,7 +180,7 @@ sidebar onShowSidebarClick showSidebar url =
         ]
 
 
-mainNavSection : String -> List ( Route, String ) -> Route -> Url -> Html msg
+mainNavSection : String -> List ( Route, String, Html msg ) -> Route -> Url -> Html msg
 mainNavSection title navItems route url =
     Html.div
         [ Html.class "main-nav__section" ]
@@ -168,15 +194,15 @@ mainNavSection title navItems route url =
         ]
 
 
-nav : List ( Route, String ) -> Url -> Html msg
+nav : List ( Route, String, Html msg ) -> Url -> Html msg
 nav items url =
     items
         |> List.map (navItem url)
         |> HtmlKeyed.ul [ Html.class "list" ]
 
 
-navItem : Url -> ( Route, String ) -> ( String, Html msg )
-navItem url ( route, text ) =
+navItem : Url -> ( Route, String, Html msg ) -> ( String, Html msg )
+navItem url ( route, text, _ ) =
     let
         active =
             Route.fromUrl url == Just route
@@ -235,52 +261,54 @@ pageBody { header, content, code, componentUrl } =
     ]
 
 
-layoutNavItems : List ( Route, String )
+layoutNavItems : List ( Route, String, Html msg )
 layoutNavItems =
-    [ ( Route.Layout_Card_Top, "Card" )
-    , ( Route.Layout_HolyGrail_Top, "Holy grail" )
-    , ( Route.Layout_SameHeightColumns_Top, "Same height columns" )
-    , ( Route.Layout_Sidebar_Top, "Sidebar" )
-    , ( Route.Layout_SplitScreen_Top, "Split screen" )
-    , ( Route.Layout_StickyFooter_Top, "Sticky footer" )
-    , ( Route.Layout_StickyHeader_Top, "Sticky header" )
+    [ ( Route.Layout_Card_Top, "Card", Components.Layout.Card.view Components.Layout.Card.init )
+    , ( Route.Layout_HolyGrail_Top, "Holy grail", Components.Layout.HolyGrail.view Components.Layout.HolyGrail.init )
+    , ( Route.Layout_SameHeightColumns_Top, "Same height columns", Components.Layout.SameHeightColumns.view Components.Layout.SameHeightColumns.init )
+    , ( Route.Layout_Sidebar_Top, "Sidebar", Components.Layout.Sidebar.view Components.Layout.Sidebar.init )
+    , ( Route.Layout_SplitScreen_Top, "Split screen", Components.Layout.SplitScreen.view Components.Layout.SplitScreen.init )
+    , ( Route.Layout_StickyFooter_Top, "Sticky footer", Components.Layout.StickyFooter.view Components.Layout.StickyFooter.init )
+    , ( Route.Layout_StickyHeader_Top, "Sticky header", Components.Layout.StickyHeader.view Components.Layout.StickyHeader.init )
     ]
 
 
-navigationNavItems : List ( Route, String )
+navigationNavItems : List ( Route, String, Html msg )
 navigationNavItems =
-    [ ( Route.Navigation_Breadcrumb_Top, "Breadcrumb" )
-    , ( Route.Navigation_Drawer_Top, "Drawer" )
-    , ( Route.Navigation_Pagination_Top, "Pagination" )
-    , ( Route.Navigation_Split_Top, "Split navigation" )
-    , ( Route.Navigation_Tab_Top, "Tab" )
+    [ ( Route.Navigation_Breadcrumb_Top, "Breadcrumb", Components.Navigation.Breadcrumb.view Components.Navigation.Breadcrumb.init )
+    , ( Route.Navigation_Drawer_Top, "Drawer", Components.Navigation.Drawer.view Components.Navigation.Drawer.init )
+    , ( Route.Navigation_Pagination_Top, "Pagination", Components.Navigation.Pagination.view Components.Navigation.Pagination.init )
+    , ( Route.Navigation_Split_Top, "Split navigation", Components.Navigation.Split.view Components.Navigation.Split.init )
+
+    -- , ( Route.Navigation_Tab_Top, "Tab", Components.Navigation.Tab.view Components.Navigation.Tab.init )
     ]
 
 
-inputNavItems : List ( Route, String )
+inputNavItems : List ( Route, String, Html msg )
 inputNavItems =
-    [ ( Route.Input_CustomCheckbox_Top, "Custom checkbox" )
-    , ( Route.Input_CustomRadio_Top, "Custom radio" )
-    , ( Route.Input_Dropdown_Top, "Dropdown" )
-    , ( Route.Input_FloatingLabel_Top, "Floating label" )
-    , ( Route.Input_RadioButtonGroup_Top, "Radio button group" )
-    , ( Route.Input_Rating_Top, "Rating" )
-    , ( Route.Input_SearchBox_Top, "Search box" )
+    [ ( Route.Input_CustomCheckbox_Top, "Custom checkbox", Components.Input.CustomCheckbox.view Components.Input.CustomCheckbox.init )
+    , ( Route.Input_CustomRadio_Top, "Custom radio", Components.Input.CustomRadio.view Components.Input.CustomRadio.init )
+    , ( Route.Input_Dropdown_Top, "Dropdown", Components.Input.Dropdown.view Components.Input.Dropdown.init )
+    , ( Route.Input_FloatingLabel_Top, "Floating label", Components.Input.FloatingLabel.view Components.Input.FloatingLabel.init )
+    , ( Route.Input_RadioButtonGroup_Top, "Radio button group", Components.Input.RadioButtonGroup.view Components.Input.RadioButtonGroup.init )
+
+    -- , ( Route.Input_Rating_Top, "Rating", Components.Input.Rating.view Components.Input.Rating.init )
+    , ( Route.Input_SearchBox_Top, "Search box", Components.Input.SearchBox.view Components.Input.SearchBox.init )
     ]
 
 
-feedbackNavItems : List ( Route, String )
+feedbackNavItems : List ( Route, String, Html msg )
 feedbackNavItems =
-    [ ( Route.Feedback_Loader_Top, "Loader" )
-    , ( Route.Feedback_Tooltip_Top, "Tooltip" )
-    , ( Route.Feedback_ProgressBar_Top, "Progress bar" )
-    , ( Route.Feedback_RadialProgressBar_Top, "Radial progress bar" )
+    [ ( Route.Feedback_Loader_Top, "Loader", Components.Feedback.Loader.view Components.Feedback.Loader.init )
+    , ( Route.Feedback_Tooltip_Top, "Tooltip", Components.Feedback.Tooltip.view Components.Feedback.Tooltip.init )
+    , ( Route.Feedback_ProgressBar_Top, "Progress bar", Components.Feedback.ProgressBar.view <| Components.Feedback.ProgressBar.init 80 )
+    , ( Route.Feedback_RadialProgressBar_Top, "Radial progress bar", Components.Feedback.RadialProgressBar.view <| Components.Feedback.RadialProgressBar.init 80 )
     ]
 
 
-miscNavItems : List ( Route, String )
+miscNavItems : List ( Route, String, Html msg )
 miscNavItems =
-    [ ( Route.Misc_StickyColumnsTable_Top, "Sticky columns table" )
-    , ( Route.Misc_StickyHeadersTable_Top, "Sticky headers table" )
-    , ( Route.Misc_Timeline_Top, "Timeline" )
+    [ ( Route.Misc_StickyColumnsTable_Top, "Sticky columns table", Components.Misc.StickyColumnsTable.view Components.Misc.StickyColumnsTable.init )
+    , ( Route.Misc_StickyHeadersTable_Top, "Sticky headers table", Components.Misc.StickyHeadersTable.view Components.Misc.StickyHeadersTable.init )
+    , ( Route.Misc_Timeline_Top, "Timeline", Components.Misc.Timeline.view Components.Misc.Timeline.init )
     ]

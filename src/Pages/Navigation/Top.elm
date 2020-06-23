@@ -39,19 +39,23 @@ view =
             ]
         , Components.navigationNavItems
             |> List.map navItem
-            |> Html.Styled.Keyed.ul [ Html.class "list" ]
+            |> Html.Styled.Keyed.node "div" [ Html.class "gallery" ]
         ]
     }
 
 
-navItem : ( Route, String ) -> ( String, Html msg )
-navItem ( route, text ) =
+navItem : ( Route, String, Html msg ) -> ( String, Html msg )
+navItem ( route, text, content ) =
     ( text
-    , Html.li
+    , Html.div
         []
-        [ Html.a
-            [ Html.href <| Route.toHref route ]
-            [ Html.text text ]
+        [ Html.div
+            []
+            [ Html.a
+                [ Html.href <| Route.toHref route ]
+                [ Html.text text
+                , content
+                ]
+            ]
         ]
     )
-

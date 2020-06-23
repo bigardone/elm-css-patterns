@@ -44,7 +44,9 @@ init =
 view : Model -> Html msg
 view { block, rectangle } =
     Html.div
-        [ Html.css css ]
+        [ Html.css css
+        , Html.class "component"
+        ]
         [ Html.header
             []
             [ Placeholders.Rectangle.view rectangle ]

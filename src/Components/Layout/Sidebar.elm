@@ -42,7 +42,9 @@ init =
 view : Model -> Html msg
 view { block, singleBlock } =
     Html.div
-        [ Html.css css ]
+        [ Html.css css
+        , Html.class "component"
+        ]
         [ Html.aside
             []
             [ Html.div

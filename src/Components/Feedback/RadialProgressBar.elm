@@ -31,7 +31,9 @@ init percentage =
 view : Model -> Html msg
 view { percentage } =
     Html.div
-        [ Html.css css ]
+        [ Html.class "component"
+        , Html.css css
+        ]
         [ Html.div
             [ Html.class "progress-bar" ]
             [ Html.div

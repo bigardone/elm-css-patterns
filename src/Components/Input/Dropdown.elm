@@ -56,7 +56,8 @@ init =
 view : Model -> Html msg
 view { rectangle, triangle, block, smallBlock } =
     Html.div
-        [ Html.css css
+        [ Html.class "component"
+        , Html.css css
         ]
         [ Html.div
             [ Html.class "dropdown" ]

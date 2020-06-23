@@ -46,7 +46,9 @@ init =
 view : Model -> Html msg
 view { block, smallBlock, largeBlock } =
     Html.div
-        [ Html.css css ]
+        [ Html.css css
+        , Html.class "component"
+        ]
         [ Html.div
             [ Html.class "equal-height" ]
             [ Html.div

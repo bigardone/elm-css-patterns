@@ -66,7 +66,9 @@ update msg model =
 view : Model -> Html Msg
 view { rectangle, selectedItem } =
     Html.div
-        [ Html.css css ]
+        [ Html.css css
+        , Html.class "component"
+        ]
         [ [ FirstItem, SecondItem, ThirdItem ]
             |> List.indexedMap (itemView rectangle selectedItem)
             |> Html.Styled.Keyed.node "div"

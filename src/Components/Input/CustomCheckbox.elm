@@ -39,7 +39,8 @@ init =
 view : Model -> Html msg
 view { rectangle } =
     Html.div
-        [ Html.css css
+        [ Html.class "component"
+        , Html.css css
         ]
         [ List.range 1 3
             |> List.map (checkBoxView rectangle)

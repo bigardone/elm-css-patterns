@@ -55,6 +55,7 @@ view : Model -> Html msg
 view { leftBlock, rightBlock, mainBlock, rectangle } =
     Html.div
         [ Html.css css
+        , Html.class "component"
         ]
         [ Html.header
             []

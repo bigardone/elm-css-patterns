@@ -50,7 +50,8 @@ update msg model =
 view : Model -> Html Msg
 view { score } =
     Html.div
-        [ Html.css css
+        [ Html.class "component"
+        , Html.css css
         ]
         [ List.range 1 5
             |> List.reverse

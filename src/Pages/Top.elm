@@ -72,7 +72,7 @@ view =
     }
 
 
-patternSection : String -> List ( Route, String ) -> Html msg
+patternSection : String -> List ( Route, String, Html msg ) -> Html msg
 patternSection title items =
     Html.div
         [ Html.class "patterns__section" ]
@@ -84,17 +84,22 @@ patternSection title items =
             ]
         , items
             |> List.map navItem
-            |> Html.Styled.Keyed.ul [ Html.class "list" ]
+            |> Html.Styled.Keyed.node "div" [ Html.class "gallery list" ]
         ]
 
 
-navItem : ( Route, String ) -> ( String, Html msg )
-navItem ( route, text ) =
+navItem : ( Route, String, Html msg ) -> ( String, Html msg )
+navItem ( route, text, content ) =
     ( text
-    , Html.li
+    , Html.div
         []
-        [ Html.a
-            [ Html.href <| Route.toHref route ]
-            [ Html.text text ]
+        [ Html.div
+            []
+            [ Html.a
+                [ Html.href <| Route.toHref route ]
+                [ Html.text text
+                , content
+                ]
+            ]
         ]
     )

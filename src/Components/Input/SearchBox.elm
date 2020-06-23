@@ -36,7 +36,9 @@ init =
 view : Model -> Html msg
 view { circle } =
     Html.div
-        [ Html.css css ]
+        [ Html.class "component"
+        , Html.css css
+        ]
         [ Html.div
             [ Html.class "search-box" ]
             [ Placeholders.Circle.view circle

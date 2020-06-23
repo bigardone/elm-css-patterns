@@ -51,7 +51,9 @@ init =
 view : Model -> Html msg
 view { block, circle, rectangle } =
     Html.div
-        [ Html.css css ]
+        [ Html.css css
+        , Html.class "component"
+        ]
         [ Html.div
             [ Html.class "timeline" ]
             [ Html.div

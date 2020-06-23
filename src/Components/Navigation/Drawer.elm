@@ -37,7 +37,9 @@ init =
 view : Model -> Html msg
 view { block } =
     Html.div
-        [ Html.css css ]
+        [ Html.css css
+        , Html.class "component"
+        ]
         [ Html.div
             [ Html.class "drawer__overlay" ]
             []

@@ -1,5 +1,6 @@
 module Components.Layout.Card exposing
     ( Model
+    , css
     , init
     , view
     )
@@ -39,7 +40,9 @@ view { square } =
     List.range 1 12
         |> List.map (cardView square)
         |> Html.Styled.Keyed.node "div"
-            [ Html.css css ]
+            [ Html.css css
+            , Html.class "component"
+            ]
 
 
 cardView : Square -> Int -> ( String, Html msg )

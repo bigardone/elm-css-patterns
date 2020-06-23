@@ -1,6 +1,7 @@
 module Pages.Feedback.Top exposing (Flags, Model, Msg, page)
 
 import Components
+import Components.Layout.Card
 import Generated.Route as Route exposing (Route)
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
@@ -39,19 +40,23 @@ view =
             ]
         , Components.feedbackNavItems
             |> List.map navItem
-            |> Html.Styled.Keyed.ul [ Html.class "list" ]
+            |> Html.Styled.Keyed.node "div" [ Html.class "gallery" ]
         ]
     }
 
 
-navItem : ( Route, String ) -> ( String, Html msg )
-navItem ( route, text ) =
+navItem : ( Route, String, Html msg ) -> ( String, Html msg )
+navItem ( route, text, content ) =
     ( text
-    , Html.li
+    , Html.div
         []
-        [ Html.a
-            [ Html.href <| Route.toHref route ]
-            [ Html.text text ]
+        [ Html.div
+            []
+            [ Html.a
+                [ Html.href <| Route.toHref route ]
+                [ Html.text text
+                , content
+                ]
+            ]
         ]
     )
-

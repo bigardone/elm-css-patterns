@@ -37,7 +37,9 @@ init =
 view : Model -> Html msg
 view { rectangle } =
     Html.div
-        [ Html.css css ]
+        [ Html.css css
+        , Html.class "component"
+        ]
         [ Html.ul
             [ Html.class "navigation" ]
             [ Html.li

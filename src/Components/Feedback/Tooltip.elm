@@ -43,7 +43,8 @@ init =
 view : Model -> Html msg
 view { rectangle, block } =
     Html.div
-        [ Html.css css
+        [ Html.class "component"
+        , Html.css css
         ]
         [ Html.div
             [ Html.class "tooltip" ]

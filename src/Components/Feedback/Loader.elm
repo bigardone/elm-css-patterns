@@ -32,7 +32,8 @@ init =
 view : Model -> Html msg
 view _ =
     Html.div
-        [ Html.css css
+        [ Html.class "component"
+        , Html.css css
         ]
         [ Html.div
             [ Html.class "loader" ]
