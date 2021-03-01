@@ -26,6 +26,6 @@
   },
   "dependencies": {
     "@webcomponents/custom-elements": "^1.4.1",
-    "prismjs": "^1.20.0"
+    "prismjs": "^1.23.0"
   }
 }
