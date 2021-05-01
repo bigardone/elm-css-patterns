@@ -1,6 +1,10 @@
 /node_modules
 /dist
 .cache
+/elm-stuff
+/public
+.elm-spa/
+package-lock.json
 
 # Local Netlify folder
 .netlify

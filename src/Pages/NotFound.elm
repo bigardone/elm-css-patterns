@@ -1,30 +1,11 @@
-module Pages.NotFound exposing (Flags, Model, Msg, page)
+module Pages.NotFound exposing (view)
 
 import Html.Styled as Html
 import Html.Styled.Attributes as Html
-import Page exposing (Document, Page)
+import View exposing (View)
 
 
-type alias Flags =
-    ()
-
-
-type alias Model =
-    ()
-
-
-type alias Msg =
-    Never
-
-
-page : Page Flags Model Msg
-page =
-    Page.static
-        { view = view
-        }
-
-
-view : Document Msg
+view : View msg
 view =
     { title = "Page not found"
     , body =

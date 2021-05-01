@@ -2,24 +2,25 @@ module Main exposing (main)
 
 import Browser
 import Browser.Navigation as Nav exposing (Key)
-import Document
-import Generated.Pages as Pages
-import Generated.Route as Route exposing (Route)
-import Global exposing (Flags)
-import SmoothScroll
-import Task
+import Effect
+import Gen.Model
+import Gen.Pages as Pages
+import Gen.Route as Route
+import Request
+import Shared
 import Url exposing (Url)
+import View
 
 
-main : Program Flags Model Msg
+main : Program Shared.Flags Model Msg
 main =
     Browser.application
         { init = init
-        , view = view
         , update = update
+        , view = view
         , subscriptions = subscriptions
-        , onUrlRequest = LinkClicked
-        , onUrlChange = UrlChanged
+        , onUrlChange = ChangedUrl
+        , onUrlRequest = ClickedLink
         }
 
 
@@ -27,116 +28,139 @@ main =
 -- INIT
 
 
-type alias Flags =
-    ()
-
-
 type alias Model =
-    { key : Key
-    , url : Url
-    , global : Global.Model
+    { url : Url
+    , key : Key
+    , shared : Shared.Model
     , page : Pages.Model
+    , showSidebar : Bool
     }
 
 
-init : Flags -> Url -> Key -> ( Model, Cmd Msg )
+init : Shared.Flags -> Url -> Key -> ( Model, Cmd Msg )
 init flags url key =
     let
-        ( global, globalCmd ) =
-            Global.init flags url key
+        ( shared, sharedCmd ) =
+            Shared.init (Request.create () url key) flags
 
-        ( page, pageCmd, pageGlobalCmd ) =
-            Pages.init (fromUrl url) global
+        ( page, effect ) =
+            Pages.init (Route.fromUrl url) shared url key
     in
-    ( Model key url global page
+    ( Model url key shared page False
     , Cmd.batch
-        [ Cmd.map Global globalCmd
-        , Cmd.map Global pageGlobalCmd
-        , Cmd.map Page pageCmd
+        [ Cmd.map Shared sharedCmd
+        , Effect.toCmd ( Shared, Page ) effect
         ]
     )
 
 
+
+-- UPDATE
+
+
 type Msg
-    = LinkClicked Browser.UrlRequest
-    | UrlChanged Url
-    | Global Global.Msg
+    = ChangedUrl Url
+    | ClickedLink Browser.UrlRequest
+    | Shared Shared.Msg
     | Page Pages.Msg
-    | NoOp
+    | ShowSidebar
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
-update msg model =
+update msg ({ shared } as model) =
     case msg of
-        NoOp ->
-            ( model, Cmd.none )
-
-        LinkClicked (Browser.Internal url) ->
-            ( model, Nav.pushUrl model.key (Url.toString url) )
-
-        LinkClicked (Browser.External href) ->
-            ( model, Nav.load href )
-
-        UrlChanged url ->
-            let
-                global =
-                    model.global
-
-                ( page, pageCmd, globalCmd ) =
-                    Pages.init (fromUrl url) model.global
-            in
-            ( { model | url = url, page = page, global = { global | url = url, showSidebar = False } }
-            , Cmd.batch
-                [ Cmd.map Page pageCmd
-                , Cmd.map Global globalCmd
-                , Task.attempt (always NoOp) (SmoothScroll.scrollTo "main")
-                ]
+        ClickedLink (Browser.Internal url) ->
+            ( model
+            , Nav.pushUrl model.key (Url.toString url)
             )
 
-        Global globalMsg ->
-            let
-                ( global, globalCmd ) =
-                    Global.update globalMsg model.global
-            in
-            ( { model | global = global }
-            , Cmd.map Global globalCmd
+        ClickedLink (Browser.External url) ->
+            ( model
+            , Nav.load url
             )
+
+        ChangedUrl url ->
+            if url.path /= model.url.path then
+                let
+                    route =
+                        Route.fromUrl url
+
+                    ( page, effect ) =
+                        Pages.init route model.shared url model.key
+                in
+                ( { model
+                    | url = url
+                    , page = page
+                    , showSidebar = False
+                  }
+                , Effect.toCmd ( Shared, Page ) effect
+                )
+
+            else
+                ( { model
+                    | url = url
+                    , showSidebar = False
+                  }
+                , Cmd.none
+                )
+
+        Shared sharedMsg ->
+            let
+                ( newShared, sharedCmd ) =
+                    Shared.update (Request.create () model.url model.key) sharedMsg shared
+
+                ( page, effect ) =
+                    Pages.init (Route.fromUrl model.url) newShared model.url model.key
+            in
+            if page == Gen.Model.Redirecting_ then
+                ( { model | shared = newShared, page = page }
+                , Cmd.batch
+                    [ Cmd.map Shared sharedCmd
+                    , Effect.toCmd ( Shared, Page ) effect
+                    ]
+                )
+
+            else
+                ( { model | shared = shared }
+                , Cmd.map Shared sharedCmd
+                )
 
         Page pageMsg ->
             let
-                ( page, pageCmd, globalCmd ) =
-                    Pages.update pageMsg model.page model.global
+                ( page, effect ) =
+                    Pages.update pageMsg model.page model.shared model.url model.key
             in
             ( { model | page = page }
-            , Cmd.batch
-                [ Cmd.map Page pageCmd
-                , Cmd.map Global globalCmd
-                ]
+            , Effect.toCmd ( Shared, Page ) effect
             )
+
+        ShowSidebar ->
+            ( { model | showSidebar = not model.showSidebar }, Cmd.none )
+
+
+
+-- VIEW
+
+
+view : Model -> Browser.Document Msg
+view model =
+    Pages.view model.page model.shared model.url model.key
+        |> View.map Page
+        |> View.toBrowserDocument
+            { isHomeRoute = Route.fromUrl model.url == Route.Home_
+            , showSidebar = model.showSidebar
+            , onShowSidebarClick = ShowSidebar
+            , url = model.url
+            }
+
+
+
+-- SUBSCRIPTIONS
 
 
 subscriptions : Model -> Sub Msg
 subscriptions model =
     Sub.batch
-        [ model.global
-            |> Global.subscriptions
-            |> Sub.map Global
-        , model.page
-            |> (\page -> Pages.subscriptions page model.global)
-            |> Sub.map Page
+        [ Pages.subscriptions model.page model.shared model.url model.key |> Sub.map Page
+        , Shared.subscriptions (Request.create () model.url model.key) model.shared |> Sub.map Shared
         ]
-
-
-view : Model -> Browser.Document Msg
-view model =
-    Document.toBrowserDocument <|
-        Global.view
-            { page = Pages.view model.page model.global |> Document.map Page
-            , global = model.global
-            , toMsg = Global
-            }
-
-
-fromUrl : Url -> Route
-fromUrl =
-    Route.fromUrl >> Maybe.withDefault Route.NotFound

@@ -1,5 +1,28 @@
-# elm-css patterns
+# my new project
+> 🌳  built with [elm-spa](https://elm-spa.dev)
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/e783ee87-62d1-4e5f-8b83-c3f88341ff7f/deploy-status)](https://app.netlify.com/sites/elm-css-patterns/deploys)
+## dependencies
 
-Common CSS patterns done in [elm](https://elm-lang.org/) and [elm-css](https://github.com/rtfeldman/elm-css). Powered by [elm-spa](https://github.com/ryannhg/elm-spa). Inspired by [csslayout](https://github.com/phuoc-ng/csslayout).
+This project requires the latest LTS version of [Node.js](https://nodejs.org/)
+
+```bash
+npm install -g elm elm-spa
+```
+
+## running locally
+
+```bash
+elm-spa server  # starts this app at http:/localhost:1234
+```
+
+### other commands
+
+```bash
+elm-spa add    # add a new page to the application
+elm-spa build  # production build
+elm-spa watch  # runs build as you code (without the server)
+```
+
+## learn more
+
+You can learn more at [elm-spa.dev](https://elm-spa.dev)

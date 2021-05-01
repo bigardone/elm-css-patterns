@@ -1,22 +1,16 @@
 module Styles.Colors exposing
     ( black
     , blackLight
-    , blackLighter
     , blackLightest
     , blue
     , blueDark
     , blueDarker
     , blueLight
     , blueLighter
-    , green
     , grey
     , greyLight
     , greyLighter
-    , orange
-    , purple
-    , red
     , white
-    , yellow
     )
 
 import Css
@@ -30,11 +24,6 @@ black =
 blackLight : Css.Color
 blackLight =
     Css.hex "3b4252"
-
-
-blackLighter : Css.Color
-blackLighter =
-    Css.hex "434c5e"
 
 
 blackLightest : Css.Color
@@ -80,31 +69,6 @@ blueDark =
 blueDarker : Css.Color
 blueDarker =
     Css.hex "5e81ac"
-
-
-red : Css.Color
-red =
-    Css.hex "bf616a"
-
-
-orange : Css.Color
-orange =
-    Css.hex "d08770"
-
-
-yellow : Css.Color
-yellow =
-    Css.hex "ebcb8b"
-
-
-green : Css.Color
-green =
-    Css.hex "a3be8c"
-
-
-purple : Css.Color
-purple =
-    Css.hex "b48ead"
 
 
 white : Css.Color
