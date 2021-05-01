@@ -9,7 +9,6 @@ import Css.Global
 import Html.Styled as Html exposing (Html)
 import Html.Styled.Attributes as Html
 import Placeholders.Block exposing (Block)
-import Placeholders.Circle exposing (Circle)
 import Placeholders.Rectangle exposing (Rectangle)
 import Styles.Colors as Colors
 
