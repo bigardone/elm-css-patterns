@@ -51,7 +51,7 @@ tab =
             ]
         ]
 
-        -- Actice tab
+        -- Active tab
 
         [ Html.div
             [ Html.css
